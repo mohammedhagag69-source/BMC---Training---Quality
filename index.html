@@ -657,7 +657,12 @@ const quizQuestions = [
   {ar:"الإصدار الثامن من معايير JCI يولي اهتماماً مباشراً للأمن السيبراني وترشيد استهلاك المضادات (AMS).", en:"The 8th edition emphasizes cybersecurity and Antimicrobial Stewardship (AMS).", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
   {ar:"ما هي أداة التواصل المنظمة المعتمدة في IPSG 2 للتسليم والتسلم؟", en:"Which structured tool is recognized under IPSG 2 for handovers?", optionsAr:["SWOT","SBAR","PDCA","FMEA"], optionsEn:["SWOT","SBAR","PDCA","FMEA"], correct:1},
   {ar:"رقم الغرفة أو رقم السرير يُعتبر معرفاً مقبولاً لتحديد هوية المريض وفق IPSG 1.", en:"Room or bed number is an acceptable patient identifier under IPSG 1.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
-  {ar:"منهجية التتبع (Tracer Methodology) تعتمد على تتبع رحلة مريض حقيقي في المستشفى.", en:"Tracer Methodology follows an actual patient journey across hospital systems.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
+  {ar:"منهجية التتبع (Tracer Methodology) تعتمد على تتبع رحلة مريض حقيقي في المستشفى.", en:"Tracer Methodology follows an actual patient journey across hospital systems.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+  {ar:"حزم الرعاية الموحدة (Care Bundles) تهدف إلى الحد من التباين السريري بين الممارسين.", en:"Standardized Care Bundles aim to reduce clinical variation between practitioners.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+  {ar:"أي نوع من الوثائق يجيب على سؤال 'كيف' ضمن الهرم التوثيقي؟", en:"Which document type answers 'How' within the documentation hierarchy?", optionsAr:["السياسة (Policy)","الإجراء (Procedure)","الدليل الإرشادي (Guideline)","البروتوكول"], optionsEn:["Policy","Procedure","Guideline","Protocol"], correct:1},
+  {ar:"البروتوكول (Protocol) يمثل إطاراً استشارياً مرناً يتيح الاجتهاد السريري الكامل.", en:"A Protocol is a flexible advisory framework allowing full clinical discretion.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+  {ar:"كيف يُسجَّل العنصر القابل للقياس (ME) في حال التطبيق غير المتسق؟", en:"How is a Measurable Element (ME) scored when implementation is inconsistent?", optionsAr:["مستوفى بالكامل","مستوفى جزئياً","غير مستوفى","لا يُسجل"], optionsEn:["Fully Met","Partially Met","Not Met","Not scored"], correct:1},
+  {ar:"مفهوم تكلفة الجودة (Cost of Quality) يهدف إلى خفض تكاليف الجودة الرديئة عبر الاستثمار في الوقاية الاستباقية.", en:"The Cost of Quality (CoQ) concept aims to cut the costs of poor quality by investing in proactive prevention.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
 ];
 
 /* UI & LOCALIZATION */
@@ -688,7 +693,9 @@ const UI = {
     refreshBtn:"🔄 تحديث", exportBtn:"⬇️ تصدير Excel / CSV",
     emptyDash:"لا توجد نتائج مسجلة حتى الآن.",
     revealBtn:"👁️ إظهار الإجابة", hideBtn:"🙈 إخفاء الإجابة",
-    modelAnswer:"إجابة نموذجية:", letters:["أ","ب","ج","د"]
+    modelAnswer:"إجابة نموذجية:", letters:["أ","ب","ج","د"],
+    oneAttemptOnly:"يُسمح بمحاولة واحدة فقط لكل متدرب. لقد سبق أن أدّيت هذا الاختبار بهذا البريد الإلكتروني.",
+    needBoth:"يرجى كتابة الاسم والبريد الإلكتروني"
   },
   en:{
     gridHeading:"Track Lectures",
@@ -716,7 +723,9 @@ const UI = {
     refreshBtn:"🔄 Refresh", exportBtn:"⬇️ Export Excel / CSV",
     emptyDash:"No attempts recorded yet.",
     revealBtn:"👁️ Show Answer", hideBtn:"🙈 Hide Answer",
-    modelAnswer:"Model Answer:", letters:["A","B","C","D"]
+    modelAnswer:"Model Answer:", letters:["A","B","C","D"],
+    oneAttemptOnly:"Only one attempt is allowed per trainee. This email has already completed the assessment.",
+    needBoth:"Enter name and email"
   }
 };
 
@@ -954,9 +963,17 @@ document.getElementById('start-quiz-btn').addEventListener('click', ()=>{
   const email = document.getElementById('stu-email').value.trim();
   const err = document.getElementById('gate-error');
   if(!name || !email){
-    err.textContent = currentLang==='ar' ? 'يرجى كتابة الاسم والبريد الإلكتروني' : 'Enter name and email';
+    err.textContent = UI[currentLang].needBoth;
     return;
   }
+
+  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const alreadyDone = records.some(r => (r.email || '').trim().toLowerCase() === email.toLowerCase());
+  if(alreadyDone){
+    err.textContent = UI[currentLang].oneAttemptOnly;
+    return;
+  }
+
   err.textContent = '';
   currentStudent = {name, email};
   quizAnswers = new Array(quizQuestions.length).fill(null);
