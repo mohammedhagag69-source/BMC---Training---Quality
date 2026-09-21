@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Quality & Patient Safety Learning Platform</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --navy:#0d2b4e;
+  --navy-deep:#081b33;
+  --maroon:#7a1230;
+  --gold:#c9a24b;
+  --gold-soft:#f3e6c8;
+  --gold-light:#fbf1dc;
+  --paper:#f6f7fa;
+  --card:#ffffff;
+  --ink:#182436;
+  --muted:#5f6c7b;
+  --line:#e2e6ec;
+  --available:#1e7a4c;
+  --coming:#8a8f99;
+  --success:#1e7a4c;
+  --danger:#b23a3a;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Cairo', Tahoma, Arial, sans-serif;
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+}
+[dir="rtl"] body{direction:rtl;}
+[dir="ltr"] body{direction:ltr;}
+
+/* Language toggle */
+.lang-toggle{
+  position:fixed;
+  top:16px;
+  inset-inline-end:16px;
+  z-index:50;
+  background:var(--navy-deep);
+  border-radius:999px;
+  padding:4px;
+  display:flex;
+  gap:2px;
+  box-shadow:0 4px 14px rgba(8,27,51,.25);
+}
+.lang-toggle button{
+  border:none;
+  background:transparent;
+  color:#c7d3e0;
+  font-family:inherit;
+  font-weight:700;
+  font-size:.82rem;
+  padding:7px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  letter-spacing:.5px;
+}
+.lang-toggle button.active{
+  background:var(--gold);
+  color:var(--navy-deep);
+}
+
+/* Header */
+header.masthead{
+  background:#ffffff;
+  border-bottom:1px solid var(--line);
+  padding:34px 20px 26px 20px;
+}
+.logo-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:26px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+.logo-row img{
+  height:72px;
+  width:auto;
+  object-fit:contain;
+}
+.logo-divider{
+  width:1px;
+  height:52px;
+  background:var(--line);
+}
+.brand-titles{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto;
+}
+.brand-titles .ar-title{
+  font-size:1.55rem;
+  font-weight:800;
+  color:var(--navy);
+  margin:0 0 6px 0;
+}
+.title-rule{
+  width:64px;
+  height:3px;
+  background:var(--gold);
+  margin:10px auto;
+  border-radius:2px;
+}
+.brand-titles .en-title{
+  font-size:1.05rem;
+  font-weight:600;
+  color:var(--maroon);
+  margin:0;
+  letter-spacing:.2px;
+}
+.org-line{
+  text-align:center;
+  color:var(--muted);
+  font-size:.85rem;
+  margin-top:14px;
+}
+
+/* Track banner */
+.track-banner{
+  max-width:1000px;
+  margin:28px auto 0 auto;
+  padding:0 20px;
+}
+.track-banner .inner{
+  background:linear-gradient(120deg, var(--navy-deep), var(--navy) 65%, var(--maroon));
+  border-radius:12px;
+  padding:22px 26px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  color:#fff;
+  box-shadow:0 6px 18px rgba(8,27,51,.18);
+}
+.track-banner .icon{font-size:2rem;}
+.track-banner .label-ar{font-weight:800;font-size:1.15rem;display:block;}
+.track-banner .label-en{font-weight:500;font-size:.85rem;color:#dbe6f0;display:block;margin-top:3px;}
+
+/* Lecture grid */
+main{max-width:1000px;margin:0 auto;padding:32px 20px 10px 20px;}
+.grid-heading{
+  font-size:1.15rem;
+  font-weight:800;
+  color:var(--navy);
+  margin-bottom:4px;
+}
+.grid-subheading{
+  color:var(--muted);
+  font-size:.88rem;
+  margin-bottom:20px;
+}
+.lecture-grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:18px;
+}
+@media (max-width:680px){
+  .lecture-grid{grid-template-columns:1fr;}
+}
+.lecture-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:20px 22px;
+  position:relative;
+  border-inline-start:5px solid var(--coming);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.lecture-card.available{border-inline-start-color:var(--navy);}
+.lecture-card.unannounced{
+  background:#fbfcfd;
+  opacity:0.85;
+}
+.lecture-card .card-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:10px;
+}
+.lecture-num{
+  font-size:.78rem;
+  font-weight:800;
+  color:var(--gold);
+  letter-spacing:.4px;
+}
+.lecture-title-ar{
+  font-size:1.05rem;
+  font-weight:800;
+  color:var(--navy);
+  margin:2px 0 2px 0;
+}
+.lecture-title-en{
+  font-size:.86rem;
+  font-weight:600;
+  color:var(--maroon);
+  margin:0 0 10px 0;
+}
+.badge{
+  font-size:.72rem;
+  font-weight:700;
+  padding:4px 11px;
+  border-radius:999px;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.badge.available{background:#e5f4ec;color:var(--available);}
+.badge.coming{background:#eef0f2;color:var(--coming);}
+.lecture-desc{
+  font-size:.87rem;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+.unannounced-desc{
+  font-size:.85rem;
+  color:var(--muted);
+  font-style:italic;
+  margin-bottom:14px;
+}
+.lecture-meta{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  font-size:.78rem;
+  color:var(--muted);
+  margin-bottom:16px;
+  border-top:1px dashed var(--line);
+  padding-top:10px;
+}
+.lecture-meta span b{color:var(--ink);}
+.launch-btn{
+  display:inline-block;
+  width:100%;
+  text-align:center;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:.88rem;
+  text-decoration:none;
+  font-family:inherit;
+  border:none;
+  cursor:pointer;
+  transition:background .2s ease;
+}
+.launch-btn.available{background:var(--navy);color:#fff;}
+.launch-btn.available:hover{background:var(--navy-deep);}
+.launch-btn.coming{background:#eef0f2;color:var(--coming);cursor:not-allowed;}
+
+/* Lecture View */
+#view-lecture{display:none;}
+.lec-top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+  background:var(--navy-deep);
+  border-radius:12px;
+  margin-bottom:20px;
+}
+.back-hub-btn{
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.3);
+  padding:8px 18px;
+  border-radius:999px;
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:700;
+  font-size:.88rem;
+}
+.back-hub-btn:hover{background:rgba(255,255,255,.25);}
+
+nav.lec-tabs{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:22px;
+}
+nav.lec-tabs button{
+  background:#fff;border:2px solid var(--line);color:var(--navy);
+  padding:10px 18px;border-radius:12px;cursor:pointer;
+  font-family:inherit;font-weight:700;font-size:.9rem;
+}
+nav.lec-tabs button.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+.lec-page{display:none;}
+.lec-page.active{display:block;}
+
+.card{
+  background:var(--card);border-radius:var(--radius);border:1px solid var(--line);
+  box-shadow:0 2px 10px rgba(20,60,80,.06);margin-bottom:18px;overflow:hidden;
+}
+.module-header{
+  padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:12px;
+  background:linear-gradient(90deg, var(--navy) 0%, var(--maroon) 100%);
+  color:#fff;font-weight:700;font-size:1.02rem;
+}
+.module-header .arrow{margin-inline-start:auto;transition:.25s;}
+.module-header.open .arrow{transform:rotate(180deg);}
+.module-body{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .35s ease, padding .35s ease;}
+.module-body.open{padding:16px 20px 22px 20px;max-height:4000px;}
+.subsection{margin-bottom:16px;}
+.subsection h4{
+  display:flex;align-items:center;gap:8px;color:var(--navy);margin:0 0 8px 0;font-size:.98rem;
+  border-bottom:2px solid var(--gold-light);padding-bottom:6px;
+}
+.subsection ul{margin:0;padding-inline-start:22px;}
+.subsection li{margin-bottom:7px;font-size:.94rem;}
+.subsection li b{color:var(--navy);}
+table.doc-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.85rem;}
+table.doc-table th, table.doc-table td{border:1px solid var(--line);padding:8px 10px;text-align:start;vertical-align:top;}
+table.doc-table th{background:var(--navy);color:#fff;}
+table.doc-table tr:nth-child(even){background:#f7fbfc;}
+
+.section-title{font-size:1.25rem;font-weight:800;color:var(--navy);margin:6px 0 18px 0;}
+.subtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.subtabs button{
+  border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:8px 16px;
+  border-radius:20px;cursor:pointer;font-family:inherit;font-weight:700;font-size:.85rem;
+}
+.subtabs button.active{background:var(--maroon);color:#fff;}
+
+.q-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+.q-card .q-text{font-weight:700;margin-bottom:8px;}
+.q-card .q-num{color:var(--gold);font-weight:800;}
+.q-card .options{margin:8px 0;padding-inline-start:20px;color:var(--muted);}
+.q-card .options li{margin-bottom:4px;}
+.reveal-btn{background:var(--navy);color:#fff;border:none;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:.85rem;}
+.reveal-btn:hover{background:var(--navy-deep);}
+.answer-box{display:none;margin-top:10px;background:var(--gold-light);border-inline-start:4px solid var(--gold);padding:10px 14px;border-radius:8px;font-size:.9rem;}
+.answer-box.show{display:block;}
+
+.gate-card{max-width:480px;margin:20px auto;background:var(--card);border-radius:var(--radius);padding:28px 26px;box-shadow:0 4px 18px rgba(20,60,80,.1);text-align:center;}
+.gate-card h3{color:var(--navy);margin-top:0;}
+.gate-card input{width:100%;padding:11px 14px;margin:8px 0;border:1.5px solid var(--line);border-radius:8px;font-family:inherit;font-size:.95rem;}
+.gate-card input:focus{outline:none;border-color:var(--maroon);}
+.btn{background:var(--maroon);color:#fff;border:none;padding:11px 26px;border-radius:8px;font-family:inherit;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:8px;}
+.btn:hover{background:#5c0e24;}
+.btn.secondary{background:#fff;color:var(--navy);border:2px solid var(--navy);}
+.error-text{color:var(--danger);font-size:.85rem;min-height:18px;}
+
+.quiz-q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;}
+.quiz-q .q-text{font-weight:700;margin-bottom:10px;}
+.quiz-q label{display:block;background:#f7fbfc;border:1.5px solid var(--line);border-radius:8px;padding:9px 14px;margin-bottom:8px;cursor:pointer;font-size:.93rem;}
+.quiz-q label:hover{border-color:var(--maroon);}
+.quiz-q input[type=radio]{margin-inline-end:8px;}
+
+.result-box{background:linear-gradient(120deg, var(--navy-deep), var(--maroon));color:#fff;border-radius:var(--radius);padding:26px;text-align:center;margin-bottom:20px;}
+.result-box .score{font-size:2.6rem;font-weight:800;}
+.result-box .pct{font-size:1.15rem;color:var(--gold-light);}
+.review-item{background:#fff;border-radius:10px;border:1px solid var(--line);padding:12px 16px;margin-bottom:10px;}
+.review-item.correct{border-inline-start:5px solid var(--success);}
+.review-item.wrong{border-inline-start:5px solid var(--danger);}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.78rem;font-weight:700;color:#fff;}
+.tag.correct{background:var(--success);}
+.tag.wrong{background:var(--danger);}
+
+.dash-table-wrap{overflow-x:auto;}
+table.dash{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff;border-radius:10px;overflow:hidden;}
+table.dash th{background:var(--navy-deep);color:#fff;padding:10px;}
+table.dash td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:center;}
+table.dash tr:nth-child(even){background:#f7fbfc;}
+.toolbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+.stat-pill{background:var(--gold-light);color:var(--navy);padding:8px 16px;border-radius:20px;font-weight:700;font-size:.85rem;}
+.empty-state{text-align:center;color:var(--muted);padding:40px 10px;}
+
+/* Footer */
+footer.portal-footer{
+  margin-top:44px;
+  background:var(--navy-deep);
+  color:#dfe7f0;
+  padding:26px 20px 30px 20px;
+}
+.footer-inner{max-width:1000px;margin:0 auto;}
+.footer-inner h4{
+  color:#fff;
+  margin:0 0 12px 0;
+  font-size:.98rem;
+  font-weight:800;
+  display:flex;align-items:center;gap:8px;
+}
+.footer-list{
+  margin:0;
+  padding-inline-start:20px;
+  font-size:.84rem;
+  color:#c3ceda;
+}
+.footer-list li{margin-bottom:6px;}
+.footer-bottom{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.12);
+  font-size:.76rem;
+  color:#8fa0b3;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button id="btn-ar" class="active" onclick="setLang('ar')">AR</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<header class="masthead">
+  <div class="logo-row">
+    <!-- شعار مركز بنغازي الطبي -->
+    <img src="data:image/jpeg;base64,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" alt="Benghazi Medical Center">
+    <div class="logo-divider"></div>
+    <!-- شعار Hospital Healthcare Holdings - Gruppo GKSD -->
+    <img src="data:image/jpeg;base64,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" alt="Hospital Healthcare Holdings - Gruppo GKSD">
+  </div>
+  <div class="brand-titles">
+    <p class="ar-title">منصة الجودة و تجربة المريض للتعليم و التدريب</p>
+    <div class="title-rule"></div>
+    <p class="en-title">Healthcare Quality &amp; Patient Experience Learning &amp; Training Portal</p>
+  </div>
+  <p class="org-line">مركز بنغازي الطبي · Benghazi Medical Center &nbsp;|&nbsp; Hospital Healthcare Holdings · Gruppo GKSD</p>
+</header>
+
+<!-- VIEW 1: PORTAL (HUB) -->
+<div id="view-portal">
+  <div class="track-banner">
+    <div class="inner">
+      <span class="icon">🩺</span>
+      <span>
+        <span class="label-ar">الجودة وسلامة المرضى</span>
+        <span class="label-en">Healthcare Quality &amp; Safety Track</span>
+      </span>
+    </div>
+  </div>
+
+  <main>
+    <div class="grid-heading" id="grid-heading-ar">محاضرات المسار</div>
+    <div class="grid-subheading" id="grid-heading-en">Track Lectures</div>
+    <div class="lecture-grid" id="lecture-grid"></div>
+  </main>
+</div>
+
+<!-- VIEW 2: LECTURE 1 (INTEGRATED) -->
+<div id="view-lecture">
+  <main style="padding-top:20px;">
+    <div class="lec-top-bar">
+      <button class="back-hub-btn" onclick="closeLecture()">⟵ <span id="back-hub-label">العودة إلى قائمة المحاضرات</span></button>
+      <span style="color:#fff;font-weight:700;font-size:.9rem;" id="lec-bar-title">المحاضرة 01</span>
+    </div>
+
+    <nav class="lec-tabs">
+      <button class="tab-btn active" data-page="explain" id="tab-explain">📘 الشرح</button>
+      <button class="tab-btn" data-page="review" id="tab-review">⚡ المراجعة</button>
+      <button class="tab-btn" data-page="quiz" id="tab-quiz">📝 الاختبار</button>
+      <button class="tab-btn" data-page="admin" id="tab-admin">🔐 لوحة المدرب</button>
+    </nav>
+
+    <!-- EXPLAIN -->
+    <div id="page-explain" class="lec-page active">
+      <div class="section-title" id="explain-heading">📘 الشرح الشامل للمحاضرة</div>
+      <div id="modules-container"></div>
+    </div>
+
+    <!-- REVIEW -->
+    <div id="page-review" class="lec-page">
+      <div class="section-title" id="review-heading">⚡ بنك أسئلة المراجعة السريعة</div>
+      <div class="subtabs">
+        <button class="rev-tab active" data-type="tf" id="rt-tf">✔️✖️ صواب وخطأ</button>
+        <button class="rev-tab" data-type="mcq" id="rt-mcq">🔘 اختيار من متعدد</button>
+        <button class="rev-tab" data-type="fill" id="rt-fill">✏️ إكمال الفراغ</button>
+        <button class="rev-tab" data-type="short" id="rt-short">📝 إجابة قصيرة</button>
+      </div>
+      <div id="review-container"></div>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="page-quiz" class="lec-page">
+      <div class="section-title" id="quiz-heading">📝 الاختبار التفاعلي المقيّم</div>
+      <div id="quiz-gate" class="gate-card">
+        <h3 id="gate-title">🎓 بيانات المتدرب</h3>
+        <p style="color:var(--muted);font-size:.88rem;" id="gate-sub">يرجى إدخال بياناتك لبدء الاختبار</p>
+        <input type="text" id="stu-name" placeholder="الاسم الكامل">
+        <input type="email" id="stu-email" placeholder="البريد الإلكتروني">
+        <div class="error-text" id="gate-error"></div>
+        <button class="btn" id="start-quiz-btn">🚀 بدء الاختبار</button>
+      </div>
+
+      <div id="quiz-body" style="display:none;">
+        <div id="quiz-questions"></div>
+        <button class="btn" id="submit-quiz-btn">✅ إنهاء الاختبار</button>
+      </div>
+
+      <div id="quiz-result" style="display:none;">
+        <div class="result-box">
+          <div><span id="res-label">نتيجة:</span> <span id="res-name"></span></div>
+          <div class="score" id="res-score"></div>
+          <div class="pct" id="res-pct"></div>
+        </div>
+        <div id="quiz-review"></div>
+        <button class="btn secondary" id="retry-btn">🔄 اختبار جديد</button>
+      </div>
+    </div>
+
+    <!-- ADMIN -->
+    <div id="page-admin" class="lec-page">
+      <div class="section-title" id="admin-heading">🔐 لوحة المدرب</div>
+      <div id="admin-gate" class="gate-card">
+        <h3 id="admin-login-title">دخول المدرب</h3>
+        <input type="password" id="admin-pass" placeholder="كلمة المرور">
+        <div class="error-text" id="admin-error"></div>
+        <button class="btn" id="admin-login-btn">دخول</button>
+      </div>
+
+      <div id="admin-body" style="display:none;">
+        <div class="toolbar">
+          <button class="btn secondary" id="refresh-btn">🔄 تحديث القائمة</button>
+          <button class="btn" id="export-btn">⬇️ تصدير Excel / CSV</button>
+          <span class="stat-pill" id="count-pill">0</span>
+          <span class="stat-pill" id="avg-pill">—</span>
+        </div>
+        <div class="dash-table-wrap">
+          <table class="dash" id="dash-table">
+            <thead>
+              <tr id="dash-thead-row"></tr>
+            </thead>
+            <tbody id="dash-tbody"></tbody>
+          </table>
+        </div>
+        <div id="dash-empty" class="empty-state"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer class="portal-footer">
+  <div class="footer-inner">
+    <h4 id="footer-title">📋 إرشادات سريعة للمتدربين</h4>
+    <ul class="footer-list" id="footer-list"></ul>
+    <div class="footer-bottom" id="footer-bottom">
+      © Quality Management &amp; Patient Safety Office — Benghazi Medical Center | Gruppo GKSD
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   PORTAL DATA (25 Lectures)
+   ============================================================ */
+const lectures = [
+  {
+    status: "available",
+    isBuiltIn: true,
+    titleAr: "المحاضرة الأولى: المقدمة، التكليف، وتطور معايير JCI حتى الإصدار الثامن",
+    titleEn: "Lecture 1: Introduction, Mandate & Evolution to the 8th Edition",
+    descAr: "برنامج تدريبي شامل يغطي هيكلية JCI، تطور المعايير حتى الإصدار الثامن، حزم الرعاية والحد من التباين السريري، هيكل المعايير ومنهجية التتبع، والتسلسل الهرمي للوثائق المؤسسية.",
+    descEn: "A comprehensive module covering JCI architecture, evolution to the 8th edition, clinical variation mitigation, standard mechanics & tracer methodology, and healthcare documentation hierarchy.",
+    durationAr: "ساعتان تدريبيتان", durationEn: "2 Training Hours",
+    sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
+    sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
+  }
+];
+
+// المحاضرات من 2 إلى 25: محجوبة العناوين والمرفقات
+for(let i = 2; i <= 25; i++){
+  lectures.push({
+    status: "coming",
+    titleAr: "", titleEn: "", descAr: "", descEn: "",
+    durationAr: "—", durationEn: "—", sectionsAr: "—", sectionsEn: "—"
+  });
+}
+
+/* ============================================================
+   LECTURE 1 DATA (Explanation, Review, Quiz)
+   ============================================================ */
+const modules = [
+  {
+    icon:"1️⃣",
+    title:{ar:"المقدمة، التكليف، وتطور المعايير وصولاً للإصدار الثامن", en:"Introduction, Mandate & the Evolution to the 8th Edition"},
+    sections:[
+      {icon:"🏛️", heading:{ar:"ما هي JCI؟", en:"What is JCI?"}, points:[
+        {ar:"<b>الهيكلية التنظيمية:</b> اللجنة الدولية المشتركة (JCI) هي الذراع الدولي للجنة المشتركة الأمريكية (The Joint Commission)، وتعمل كمنظمة مستقلة غير ربحية تضع معايير دولية قائمة على الإجماع.", en:"<b>Organizational architecture:</b> JCI is the international division of The Joint Commission (US) — an independent, non-profit body setting consensus standards."},
+        {ar:"<b>الفلسفة الأساسية:</b> لا تُقيّم JCI المؤسسات بناءً على القدرات الإنشائية فقط (كعدد الأسرّة)، بل تركز على <b>العمليات</b> و<b>النتائج القابلة للقياس</b> لدى المرضى.", en:"<b>Philosophy:</b> JCI focuses heavily on clinical and managerial <b>processes</b> and measurable patient <b>outcomes</b>, not merely capacity."},
+        {ar:"<b>الختم الذهبي:</b> دليل عالمي على الامتثال لأعلى مستويات السلامة وجودة الرعاية.", en:"<b>The Gold Seal:</b> universal proof of compliance with premier safety and quality tiers."}
+      ]},
+      {icon:"📈", heading:{ar:"تطور المعايير (الإصدارات 1–8)", en:"Evolution (Editions 1–8)"}, points:[
+        {ar:"<b>المرحلة التأسيسية (2000–2007):</b> إرساء الاتساق والبروتوكولات المكتوبة.", en:"<b>Formative Era (2000–2007):</b> establishing written protocols and consistency."},
+        {ar:"<b>مرحلة حوكمة الجودة (2011–2017):</b> إدخال RCA وFMEA والأهداف الدولية (IPSGs).", en:"<b>Quality Governance Era (2011–2017):</b> mandated RCA, FMEA, and IPSGs."},
+        {ar:"<b>الإصدار الثامن (ساري من 2025):</b> التحول الرقمي، الأمن السيبراني للأجهزة الطبية، ترشيد مضادات الميكروبات (AMS)، وسلامة ورفاه الكوادر الصحية.", en:"<b>8th Edition (effective 2025):</b> digital health, medical device cybersecurity, AMS, and workforce well-being."}
+      ]}
+    ]
+  },
+  {
+    icon:"2️⃣",
+    title:{ar:"الأثر السريري والتشغيلي وتكلفة الجودة", en:"Clinical & Operational Impact & Cost of Quality"},
+    sections:[
+      {icon:"🩺", heading:{ar:"الحد من الأضرار والتباين السريري", en:"Harm Reduction & Standardized Care"}, points:[
+        {ar:"<b>حزم الرعاية الموحدة:</b> استبدال الممارسة الفردية بحزم موحدة (Care Bundles) لتقليل عدوى العمليات وتعفن الدم.", en:"<b>Care Bundles:</b> eliminating clinical variation via evidence-based bundles."},
+        {ar:"<b>سلامة الأدوية:</b> ضبط الأدوية عالية الخطورة (HAMs) وتطبيق التحقق المزدوج.", en:"<b>Medication Safety:</b> High-Alert Medications safeguards and double-checking."},
+        {ar:"<b>تكلفة الجودة (CoQ):</b> تقليل تكاليف الجودة الرديئة عبر الاستثمار في الوقاية الاستباقية.", en:"<b>Cost of Quality:</b> mitigating poor-quality costs through proactive prevention."}
+      ]}
+    ]
+  },
+  {
+    icon:"3️⃣",
+    title:{ar:"تسلسل الوثائق ومنهجية التتبع (Tracer Methodology)", en:"Documentation Hierarchy & Tracer Methodology"},
+    sections:[
+      {icon:"🔍", heading:{ar:"منهجية التتبع ومستويات التدقيق", en:"Tracer Methodology & Scoring"}, points:[
+        {ar:"<b>منهجية التتبع:</b> تتبع مسار مريض حقيقي في المستشفى لتقييم تفاعل الأنظمة بالوقت الفعلي.", en:"<b>Tracer Methodology:</b> following real patients on-site to observe real-time system interactions."},
+        {ar:"<b>تقييم العناصر (MEs):</b> تسجل كمستوفى بالكامل، أو مستوفى جزئياً، أو غير مستوفى.", en:"<b>ME Scoring:</b> scored as Fully Met, Partially Met, or Not Met."}
+      ]},
+      {icon:"📚", heading:{ar:"الهرم التوثيقي", en:"Document Hierarchy"}, table:{
+        headers:{ar:["النوع","يجيب عن","التعريف"], en:["Type","Answers","Definition"]},
+        rows:[
+          {ar:["السياسة (Policy)","ماذا ولماذا","موقف مؤسسي ملزم يحدد المبادئ والتوجيهات."], en:["Policy","What & Why","Formal institutional stance guiding decisions."]},
+          {ar:["الإجراء (Procedure)","كيف","خطوات تسلسلية مرحلية لتنفيذ السياسة."], en:["Procedure","How","Step-by-step instructions for executing a policy."]},
+          {ar:["البروتوكول (Protocol)","متى وكيف سريرياً","خوارزمية سريرية دقيقة لحالة طبية محددة."], en:["Protocol","When & How (Clinical)","Rigid clinical algorithm for a defined condition."]},
+          {ar:["الدليل الإرشادي (Guideline)","توصيات","إطار استشاري لأفضل الممارسات يتيح التقدير السريري."], en:["Guideline","Recommendations","Advisory best practice framework allowing clinical discretion."]},
+          {ar:["إجراء التشغيل القياسي (SOP)","تفاصيل التنفيذ بدقة","خطوات تشغيلية وفنية صارمة بتفاوت صفري."], en:["SOP","Exact Steps","Detailed technical steps with zero tolerated variance."]}
+        ]
+      }}
+    ]
+  }
+];
+
+const reviewBank = {
+  tf: [
+    {ar:"JCI هي الذراع الدولي للجنة المشتركة الأمريكية (The Joint Commission).", en:"JCI is the international division of The Joint Commission (US).", a:true, expAr:"صحيح تماماً.", expEn:"True."},
+    {ar:"تقيّم JCI المؤسسات فقط على عدد الأسرّة وتجهيز المبنى.", en:"JCI evaluates organizations only on bed capacity and structural size.", a:false, expAr:"خطأ — تركز على العمليات والنتائج السريرية.", expEn:"False — it focuses on processes and outcomes."},
+    {ar:"الإصدار الثامن من معايير JCI يركز على الأمن السيبراني وسلامة الكوادر الطبية.", en:"The 8th Edition addresses cybersecurity and workforce well-being.", a:true, expAr:"صحيح — هذه من أهم إضافات الإصدار الثامن.", expEn:"True — key additions of the 8th Edition."}
+  ],
+  mcq: [
+    {ar:"ما هو المتطلب الأساسي في الهدف الأول لسلامة المرضى (IPSG 1)؟", en:"What is required under IPSG 1?",
+     optionsAr:["معرف واحد فقط","معرفان اثنان على الأقل باستثناء رقم الغرفة أو السرير","رقم الغرفة فقط","سؤال المريض شفهياً فقط"],
+     optionsEn:["One identifier","At least two distinct identifiers excluding room/bed","Room number only","Verbal recall only"],
+     correct:1, expAr:"يتطلب معرفين مستقلين على الأقل.", expEn:"Requires at least two independent identifiers."},
+    {ar:"أي وثيقة تجيب عن تساؤل 'كيف' بخطوات إجرائية متسلسلة؟", en:"Which document answers 'How' through step-by-step instructions?",
+     optionsAr:["السياسة (Policy)","الإجراء (Procedure)","الدليل الإرشادي (Guideline)","النموذج"],
+     optionsEn:["Policy","Procedure","Guideline","Form"],
+     correct:1, expAr:"الإجراء يحدد الخطوات التسلسلية.", expEn:"Procedures provide step-by-step sequence."}
+  ],
+  fill: [
+    {ar:"الأداة المنظمة للتسليم والتسلم في IPSG 2 تسمى ______.", en:"The structured communication handover tool in IPSG 2 is ______.", a:"SBAR"},
+    {ar:"الوقفة الجراحية الأخيرة قبل فتح الشق الجراحي تسمى ______.", en:"The final verification pause before surgery is called ______.", a:"Time-Out / وقفة الأمان الجراحية"}
+  ],
+  short: [
+    {ar:"ما الفرق الجوهري بين السياسة (Policy) والإجراء (Procedure)؟", en:"What is the key difference between a Policy and a Procedure?",
+     aAr:"السياسة توضح ماذا يجب فعله ولماذا (موقف مؤسسي)، بينما الإجراء يوضح خطوات التنفيذ التسلسلية (كيف).",
+     aEn:"Policy explains What & Why (institutional stance); Procedure explains How (step-by-step)."}
+  ]
+};
+
+const quizQuestions = [
+  {ar:"JCI منظمة دولية تركز فقط على التفتيش الإنشائي للمستشفيات.", en:"JCI focuses solely on hospital physical infrastructure inspections.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+  {ar:"الإصدار الثامن من معايير JCI يولي اهتماماً مباشراً للأمن السيبراني وترشيد استهلاك المضادات (AMS).", en:"The 8th edition emphasizes cybersecurity and Antimicrobial Stewardship (AMS).", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+  {ar:"ما هي أداة التواصل المنظمة المعتمدة في IPSG 2 للتسليم والتسلم؟", en:"Which structured tool is recognized under IPSG 2 for handovers?", optionsAr:["SWOT","SBAR","PDCA","FMEA"], optionsEn:["SWOT","SBAR","PDCA","FMEA"], correct:1},
+  {ar:"رقم الغرفة أو رقم السرير يُعتبر معرفاً مقبولاً لتحديد هوية المريض وفق IPSG 1.", en:"Room or bed number is an acceptable patient identifier under IPSG 1.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+  {ar:"منهجية التتبع (Tracer Methodology) تعتمد على تتبع رحلة مريض حقيقي في المستشفى.", en:"Tracer Methodology follows an actual patient journey across hospital systems.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
+];
+
+/* UI & LOCALIZATION */
+const UI = {
+  ar:{
+    gridHeading:"محاضرات المسار",
+    available:"متاح الآن", coming:"قريباً", launch:"ابدأ المحاضرة",
+    unannouncedTitle:"المحتوى قيد الإعداد والمراجعة الأكاديمية",
+    unannouncedDesc:"سيتم إعلان عنوان هذه المحاضرة وتفعيل محتواها ومرفقاتها التفاعلية فور اعتمادها من مكتب الجودة.",
+    duration:"المدة:", sections:"المحتوى والتقييم:",
+    footerTitle:"📋 إرشادات سريعة للمتدربين",
+    footerItems:[
+      "أكمل دراسة المحاضرة المتاحة واجتز الاختبار النهائي لتسجيل نتيجتك.",
+      "تُعلن عناوين ومحتويات المحاضرات تباعاً فور اعتمادها وفق الخطة التدريبية.",
+      "لأي استفسار تواصل مع مكتب إدارة الجودة وسلامة المرضى — مركز بنغازي الطبي."
+    ],
+    footerBottom:"© مكتب إدارة الجودة وسلامة المرضى — مركز بنغازي الطبي | Gruppo GKSD",
+    backHub:"⟵ العودة إلى قائمة المحاضرات",
+    tabs:{explain:"📘 الشرح", review:"⚡ المراجعة", quiz:"📝 الاختبار", admin:"🔐 لوحة المدرب"},
+    explainHeading:"📘 الشرح الشامل للمحاضرة", reviewHeading:"⚡ بنك أسئلة المراجعة السريعة",
+    quizHeading:"📝 الاختبار التفاعلي المقيّم", gateTitle:"🎓 بيانات المتدرب",
+    gateSub:"يرجى إدخال اسمك وبريدك الإلكتروني لبدء الاختبار",
+    namePh:"الاسم الكامل", emailPh:"البريد الإلكتروني", startBtn:"🚀 بدء الاختبار",
+    submitBtn:"✅ إنهاء الاختبار", retryBtn:"🔄 اختبار جديد",
+    resLabel:"نتيجة:", pctLabel:"النسبة المئوية:", yourAnswer:"إجابتك:",
+    correctAnsLabel:"الإجابة الصحيحة:", correctLabel:"صحيحة ✔️", wrongLabel:"خاطئة ✖️",
+    adminHeading:"🔐 لوحة المدرب", passPh:"كلمة المرور", loginBtn:"دخول",
+    refreshBtn:"🔄 تحديث", exportBtn:"⬇️ تصدير Excel / CSV",
+    emptyDash:"لا توجد نتائج مسجلة حتى الآن.",
+    revealBtn:"👁️ إظهار الإجابة", hideBtn:"🙈 إخفاء الإجابة",
+    modelAnswer:"إجابة نموذجية:", letters:["أ","ب","ج","د"]
+  },
+  en:{
+    gridHeading:"Track Lectures",
+    available:"Available", coming:"Coming Soon", launch:"Launch Lecture",
+    unannouncedTitle:"Module Under Academic Preparation",
+    unannouncedDesc:"Lecture title and learning attachments will be announced upon quality committee sign-off.",
+    duration:"Duration:", sections:"Content & Assessment:",
+    footerTitle:"📋 Quick Trainee Guidelines",
+    footerItems:[
+      "Study available lectures and pass the final quiz to log your score.",
+      "Module titles and resources are revealed progressively as accredited.",
+      "For support, contact the Quality & Patient Safety Office — BMC."
+    ],
+    footerBottom:"© Quality Management & Patient Safety Office — Benghazi Medical Center | Gruppo GKSD",
+    backHub:"⟵ Back to Lectures List",
+    tabs:{explain:"📘 Explanation", review:"⚡ Quick Review", quiz:"📝 Assessment", admin:"🔐 Admin Dashboard"},
+    explainHeading:"📘 Lecture Content", reviewHeading:"⚡ Interactive Question Bank",
+    quizHeading:"📝 Final Graded Assessment", gateTitle:"🎓 Trainee Info",
+    gateSub:"Enter your name and email to start the quiz",
+    namePh:"Full Name", emailPh:"Email Address", startBtn:"🚀 Start Quiz",
+    submitBtn:"✅ Submit Quiz", retryBtn:"🔄 New Attempt",
+    resLabel:"Result:", pctLabel:"Percentage:", yourAnswer:"Your answer:",
+    correctAnsLabel:"Correct answer:", correctLabel:"Correct ✔️", wrongLabel:"Incorrect ✖️",
+    adminHeading:"🔐 Admin Dashboard", passPh:"Password", loginBtn:"Login",
+    refreshBtn:"🔄 Refresh", exportBtn:"⬇️ Export Excel / CSV",
+    emptyDash:"No attempts recorded yet.",
+    revealBtn:"👁️ Show Answer", hideBtn:"🙈 Hide Answer",
+    modelAnswer:"Model Answer:", letters:["A","B","C","D"]
+  }
+};
+
+let currentLang = 'ar';
+let quizAnswers = new Array(quizQuestions.length).fill(null);
+let currentStudent = {name:'', email:''};
+let currentRevType = 'tf';
+const ADMIN_PASS = 'Admin123';
+const STORAGE_KEY = 'bmc_jci_lec1_records';
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('htmlRoot').setAttribute('lang', lang);
+  document.getElementById('htmlRoot').setAttribute('dir', lang==='ar' ? 'rtl':'ltr');
+  document.getElementById('btn-ar').classList.toggle('active', lang==='ar');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  applyStatic();
+  renderLectures();
+  renderModules();
+  renderReview(currentRevType);
+  renderQuiz();
+}
+
+function applyStatic(){
+  const t = UI[currentLang];
+  document.getElementById('grid-heading-ar').textContent = currentLang==='ar' ? 'الجودة وسلامة المرضى' : 'Healthcare Quality & Safety Track';
+  document.getElementById('grid-heading-en').textContent = currentLang==='ar' ? 'محاضرات المسار' : 'Track Lectures';
+  document.getElementById('footer-title').textContent = t.footerTitle;
+  document.getElementById('footer-bottom').textContent = t.footerBottom;
+  document.getElementById('footer-list').innerHTML = t.footerItems.map(i=>`<li>${i}</li>`).join('');
+  document.getElementById('back-hub-label').textContent = t.backHub;
+
+  document.getElementById('tab-explain').textContent = t.tabs.explain;
+  document.getElementById('tab-review').textContent = t.tabs.review;
+  document.getElementById('tab-quiz').textContent = t.tabs.quiz;
+  document.getElementById('tab-admin').textContent = t.tabs.admin;
+
+  document.getElementById('explain-heading').textContent = t.explainHeading;
+  document.getElementById('review-heading').textContent = t.reviewHeading;
+  document.getElementById('quiz-heading').textContent = t.quizHeading;
+  document.getElementById('gate-title').textContent = t.gateTitle;
+  document.getElementById('gate-sub').textContent = t.gateSub;
+  document.getElementById('stu-name').placeholder = t.namePh;
+  document.getElementById('stu-email').placeholder = t.emailPh;
+  document.getElementById('start-quiz-btn').textContent = t.startBtn;
+  document.getElementById('submit-quiz-btn').textContent = t.submitBtn;
+  document.getElementById('retry-btn').textContent = t.retryBtn;
+
+  document.getElementById('admin-heading').textContent = t.adminHeading;
+  document.getElementById('admin-pass').placeholder = t.passPh;
+  document.getElementById('admin-login-btn').textContent = t.loginBtn;
+  document.getElementById('refresh-btn').textContent = t.refreshBtn;
+  document.getElementById('export-btn').textContent = t.exportBtn;
+}
+
+/* VIEW SWITCHING */
+function openLecture(index){
+  if(index === 0){
+    document.getElementById('view-portal').style.display = 'none';
+    document.getElementById('view-lecture').style.display = 'block';
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+
+function closeLecture(){
+  document.getElementById('view-lecture').style.display = 'none';
+  document.getElementById('view-portal').style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RENDER GRID */
+function renderLectures(){
+  const t = UI[currentLang];
+  const grid = document.getElementById('lecture-grid');
+  grid.innerHTML = lectures.map((lec, i)=>{
+    const isAvailable = lec.status==='available';
+    const num = String(i+1).padStart(2,'0');
+
+    if(isAvailable){
+      const mainTitle = currentLang==='ar' ? lec.titleAr : lec.titleEn;
+      const subTitle = currentLang==='ar' ? lec.titleEn : lec.titleAr;
+      const desc = currentLang==='ar' ? lec.descAr : lec.descEn;
+      const duration = currentLang==='ar' ? lec.durationAr : lec.durationEn;
+      const sections = currentLang==='ar' ? lec.sectionsAr : lec.sectionsEn;
+
+      return `
+        <div class="lecture-card available">
+          <div class="card-top">
+            <div>
+              <div class="lecture-num">${currentLang==='ar'?'المحاضرة':'Lecture'} ${num}</div>
+              <div class="lecture-title-ar">${mainTitle}</div>
+              <div class="lecture-title-en">${subTitle}</div>
+            </div>
+            <span class="badge available">${t.available}</span>
+          </div>
+          <div class="lecture-desc">${desc}</div>
+          <div class="lecture-meta">
+            <span>${t.duration} <b>${duration}</b></span>
+            <span>${t.sections} <b>${sections}</b></span>
+          </div>
+          <button onclick="openLecture(${i})" class="launch-btn available">${t.launch}</button>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="lecture-card unannounced">
+          <div class="card-top">
+            <div>
+              <div class="lecture-num">${currentLang==='ar'?'المحاضرة':'Lecture'} ${num}</div>
+              <div class="lecture-title-ar" style="color:var(--muted);">${t.unannouncedTitle}</div>
+            </div>
+            <span class="badge coming">${t.coming}</span>
+          </div>
+          <div class="unannounced-desc">${t.unannouncedDesc}</div>
+          <div class="lecture-meta" style="opacity:0.6;">
+            <span>${t.duration} <b>—</b></span>
+            <span>${t.sections} <b>—</b></span>
+          </div>
+          <button class="launch-btn coming" disabled>${t.coming}</button>
+        </div>
+      `;
+    }
+  }).join('');
+}
+
+/* LECTURE 1 LOGIC */
+function renderModules(){
+  const container = document.getElementById('modules-container');
+  container.innerHTML = '';
+  modules.forEach((mod, mi)=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    let secHtml = mod.sections.map(sec=>{
+      let inner = '';
+      if(sec.points){
+        inner = `<ul>${sec.points.map(p=>`<li>${currentLang==='ar'?p.ar:p.en}</li>`).join('')}</ul>`;
+      }
+      if(sec.table){
+        const h = currentLang==='ar' ? sec.table.headers.ar : sec.table.headers.en;
+        inner = `<div style="overflow-x:auto;"><table class="doc-table"><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${
+          sec.table.rows.map(r=>{
+            const row = currentLang==='ar' ? r.ar : r.en;
+            return `<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`;
+          }).join('')
+        }</tbody></table></div>`;
+      }
+      const heading = currentLang==='ar' ? sec.heading.ar : sec.heading.en;
+      return `<div class="subsection"><h4>${sec.icon} ${heading}</h4>${inner}</div>`;
+    }).join('');
+
+    const title = currentLang==='ar' ? mod.title.ar : mod.title.en;
+    card.innerHTML = `
+      <div class="module-header ${mi===0?'open':''}" onclick="toggleMod(this, ${mi})">
+        <span>${mod.icon}</span> <span>${title}</span> <span class="arrow">▼</span>
+      </div>
+      <div class="module-body ${mi===0?'open':''}" id="mb-${mi}">${secHtml}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function toggleMod(header, idx){
+  header.classList.toggle('open');
+  document.getElementById('mb-'+idx).classList.toggle('open');
+}
+
+function renderReview(type){
+  currentRevType = type;
+  document.querySelectorAll('.rev-tab').forEach(b=>b.classList.toggle('active', b.getAttribute('data-type')===type));
+  const t = UI[currentLang];
+  const container = document.getElementById('review-container');
+  container.innerHTML = '';
+  const items = reviewBank[type];
+
+  items.forEach((item, i)=>{
+    const div = document.createElement('div');
+    div.className = 'q-card';
+    const qText = currentLang==='ar' ? item.ar : item.en;
+    let body = `<div class="q-text"><span class="q-num">${i+1}.</span> ${qText}</div>`;
+    let ans = '';
+
+    if(type==='tf'){
+      const exp = currentLang==='ar' ? item.expAr : item.expEn;
+      ans = `${t.correctAnsLabel} <b>${item.a ? (currentLang==='ar'?'صواب':'True') : (currentLang==='ar'?'خطأ':'False')}</b><br>${exp}`;
+    } else if(type==='mcq'){
+      const opts = currentLang==='ar' ? item.optionsAr : item.optionsEn;
+      const exp = currentLang==='ar' ? item.expAr : item.expEn;
+      body += `<ul class="options">${opts.map((o,oi)=>`<li>${t.letters[oi]})${o}</li>`).join('')}</ul>`;
+      ans = `${t.correctAnsLabel} <b>${t.letters[item.correct]}) ${opts[item.correct]}</b><br>${exp}`;
+    } else if(type==='fill'){
+      ans = `${t.correctAnsLabel} <b>${item.a}</b>`;
+    } else if(type==='short'){
+      ans = `${t.modelAnswer} ${currentLang==='ar'?item.aAr:item.aEn}`;
+    }
+
+    div.innerHTML = `${body}
+      <button class="reveal-btn" onclick="toggleAns(this)">${t.revealBtn}</button>
+      <div class="answer-box">${ans}</div>`;
+    container.appendChild(div);
+  });
+}
+
+function toggleAns(btn){
+  const box = btn.nextElementSibling;
+  box.classList.toggle('show');
+  btn.textContent = box.classList.contains('show') ? UI[currentLang].hideBtn : UI[currentLang].revealBtn;
+}
+
+document.querySelectorAll('.rev-tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>renderReview(btn.getAttribute('data-type')));
+});
+
+/* QUIZ */
+function renderQuiz(){
+  const container = document.getElementById('quiz-questions');
+  container.innerHTML = '';
+  quizQuestions.forEach((q, qi)=>{
+    const text = currentLang==='ar' ? q.ar : q.en;
+    const opts = currentLang==='ar' ? q.optionsAr : q.optionsEn;
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.innerHTML = `<div class="q-text">${qi+1}. ${text}</div>
+      ${opts.map((opt, oi)=>`
+        <label>
+          <input type="radio" name="qz_${qi}" value="${oi}" ${quizAnswers[qi]===oi?'checked':''} onchange="quizAnswers[${qi}]=${oi}">
+          ${opt}
+        </label>
+      `).join('')}`;
+    container.appendChild(div);
+  });
+}
+
+document.getElementById('start-quiz-btn').addEventListener('click', ()=>{
+  const name = document.getElementById('stu-name').value.trim();
+  const email = document.getElementById('stu-email').value.trim();
+  const err = document.getElementById('gate-error');
+  if(!name || !email){
+    err.textContent = currentLang==='ar' ? 'يرجى كتابة الاسم والبريد الإلكتروني' : 'Enter name and email';
+    return;
+  }
+  err.textContent = '';
+  currentStudent = {name, email};
+  quizAnswers = new Array(quizQuestions.length).fill(null);
+  document.getElementById('quiz-gate').style.display = 'none';
+  document.getElementById('quiz-body').style.display = 'block';
+  renderQuiz();
+});
+
+document.getElementById('submit-quiz-btn').addEventListener('click', ()=>{
+  let score = 0;
+  const detail = quizQuestions.map((q, qi)=>{
+    const isCorrect = quizAnswers[qi] === q.correct;
+    if(isCorrect) score++;
+    const opts = currentLang==='ar' ? q.optionsAr : q.optionsEn;
+    return {
+      q: currentLang==='ar' ? q.ar : q.en,
+      ans: quizAnswers[qi]!==null ? opts[quizAnswers[qi]] : (currentLang==='ar'?'بدون إجابة':'No answer'),
+      correct: opts[q.correct],
+      isCorrect
+    };
+  });
+
+  const total = quizQuestions.length;
+  const pct = Math.round((score/total)*100);
+
+  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  records.push({
+    name: currentStudent.name, email: currentStudent.email,
+    score, total, pct, date: new Date().toLocaleString()
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+
+  document.getElementById('quiz-body').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'block';
+  document.getElementById('res-name').textContent = currentStudent.name;
+  document.getElementById('res-score').textContent = `${score} / ${total}`;
+  document.getElementById('res-pct').textContent = `${UI[currentLang].pctLabel} ${pct}%`;
+
+  document.getElementById('quiz-review').innerHTML = detail.map((d, i)=>`
+    <div class="review-item ${d.isCorrect?'correct':'wrong'}">
+      <div><b>${i+1}. ${d.q}</b></div>
+      <div>${UI[currentLang].yourAnswer} ${d.ans} <span class="tag ${d.isCorrect?'correct':'wrong'}">${d.isCorrect?UI[currentLang].correctLabel:UI[currentLang].wrongLabel}</span></div>
+      ${!d.isCorrect?`<div>${UI[currentLang].correctAnsLabel} <b>${d.correct}</b></div>`:''}
+    </div>
+  `).join('');
+});
+
+document.getElementById('retry-btn').addEventListener('click', ()=>{
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-gate').style.display = 'block';
+  document.getElementById('stu-name').value = '';
+  document.getElementById('stu-email').value = '';
+});
+
+/* ADMIN DASHBOARD */
+document.getElementById('admin-login-btn').addEventListener('click', ()=>{
+  const pass = document.getElementById('admin-pass').value;
+  const err = document.getElementById('admin-error');
+  if(pass === ADMIN_PASS){
+    err.textContent = '';
+    document.getElementById('admin-gate').style.display = 'none';
+    document.getElementById('admin-body').style.display = 'block';
+    loadDashboard();
+  } else {
+    err.textContent = currentLang==='ar'?'كلمة المرور غير صحيحة':'Incorrect password';
+  }
+});
+
+function loadDashboard(){
+  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const thead = document.getElementById('dash-thead-row');
+  const tbody = document.getElementById('dash-tbody');
+  const empty = document.getElementById('dash-empty');
+
+  const headers = currentLang==='ar'
+    ? ["اسم المتدرب","البريد","الدرجة","من","النسبة","التاريخ"]
+    : ["Name","Email","Score","Out of","%","Date"];
+  thead.innerHTML = headers.map(h=>`<th>${h}</th>`).join('');
+  tbody.innerHTML = '';
+
+  if(records.length === 0){
+    empty.textContent = UI[currentLang].emptyDash;
+    empty.style.display = 'block';
+    document.getElementById('dash-table').style.display = 'none';
+  } else {
+    empty.style.display = 'none';
+    document.getElementById('dash-table').style.display = 'table';
+    records.slice().reverse().forEach(r=>{
+      tbody.innerHTML += `<tr>
+        <td>${r.name}</td><td>${r.email}</td><td>${r.score}</td><td>${r.total}</td>
+        <td>${r.pct}%</td><td>${r.date}</td>
+      </tr>`;
+    });
+  }
+
+  document.getElementById('count-pill').textContent = `${records.length} ${currentLang==='ar'?'متدرب':'trainee(s)'}`;
+  const avg = records.length ? Math.round(records.reduce((s,r)=>s+r.pct,0)/records.length) : 0;
+  document.getElementById('avg-pill').textContent = `${currentLang==='ar'?'المتوسط':'Avg'}: ${avg}%`;
+}
+
+document.getElementById('refresh-btn').addEventListener('click', loadDashboard);
+
+document.getElementById('export-btn').addEventListener('click', ()=>{
+  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if(!records.length){ alert(UI[currentLang].emptyDash); return; }
+  let csv = '\uFEFFName,Email,Score,Total,Percentage,Date\n';
+  records.forEach(r=>{
+    csv += `"${r.name}","${r.email}",${r.score},${r.total},"${r.pct}%","${r.date}"\n`;
+  });
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'BMC_JCI_Lec1_Scores.csv';
+  a.click();
+});
+
+/* SUB TABS (Lecture View) */
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const target = b.getAttribute('data-page');
+    document.querySelectorAll('.lec-page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-'+target).classList.add('active');
+  });
+});
+
+/* INIT */
+applyStatic();
+renderLectures();
+renderModules();
+renderReview('tf');
+renderQuiz();
+</script>
+</body>
+</html>
