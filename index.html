@@ -736,6 +736,103 @@ let currentRevType = 'tf';
 const ADMIN_PASS = 'Admin123';
 const STORAGE_KEY = 'bmc_jci_lec1_records';
 
+/* ---------- CONFIGURE THIS FOR GITHUB / SELF-HOSTED USE ----------
+   1) LECTURE_ID must be UNIQUE for every lecture page on the site. It is
+      what keeps each lecture's results in its own place (its own tab in
+      the same Google Sheet) so results never mix between lectures.
+      When you build the next lecture's HTML file, just change this one
+      value (e.g. 'Lecture2_RiskManagement') — nothing else needs to change,
+      and no new Sheet or Apps Script deployment is required.
+   2) SHEET_API_URL is the SAME Google Apps Script Web App URL for every
+      lecture page on the site (deploy it once, reuse everywhere).
+      Leave it empty ('') only if you are NOT self-hosting (e.g. running
+      purely inside a published Claude artifact, which uses the db
+      capability instead).
+------------------------------------------------------------------- */
+const LECTURE_ID = 'Lecture1_JCI_8th_Edition';
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyNwRkY8rTFCvtQGpdzUDx-sJJtgtwz3n87IcFhAhCTe_bZgOu3ntiTLHPQ8Fg4e3XdeA/exec';
+
+/* ---------- Shared results store ----------
+   Tries, in order:
+   1) Claude's built-in shared "db" capability (works only when this page is
+      opened as a published Claude artifact — not on GitHub Pages).
+   2) The Google Sheet backend configured above (works on GitHub Pages or
+      any static host, as long as SHEET_API_URL is filled in). Every request
+      is scoped to LECTURE_ID so multiple lectures share one backend safely.
+   3) Local per-device storage as a last-resort fallback.
+------------------------------------------------------------------- */
+let _dbPromise = null;
+function getDb(){
+  if(_dbPromise) return _dbPromise;
+  _dbPromise = (async ()=>{
+    try{
+      if(window.claude && typeof window.claude.use === 'function'){
+        return await window.claude.use('db');
+      }
+    }catch(e){ /* fall through */ }
+    return null;
+  })();
+  return _dbPromise;
+}
+
+async function saveResultRecord(record){
+  const db = await getDb();
+  if(db){
+    await db.collection('results').add({...record, lecture: LECTURE_ID});
+    return;
+  }
+  if(SHEET_API_URL){
+    try{
+      await fetch(SHEET_API_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'text/plain;charset=utf-8'}, // avoids CORS preflight with Apps Script
+        body: JSON.stringify({...record, lecture: LECTURE_ID})
+      });
+      return;
+    }catch(e){ /* fall through to local storage */ }
+  }
+  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  records.push(record);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+}
+
+async function fetchAllResults(){
+  const db = await getDb();
+  if(db){
+    const snap = await db.collection('results').where('lecture','==', LECTURE_ID).orderBy('createdAt','desc').limit(1000).get();
+    return snap.docs.map(d=>d.data());
+  }
+  if(SHEET_API_URL){
+    try{
+      const res = await fetch(SHEET_API_URL + '?lecture=' + encodeURIComponent(LECTURE_ID), {method:'GET'});
+      const rows = await res.json();
+      return rows.map(r=>({
+        name: r.name, email: r.email,
+        score: r.score, total: r.total, pct: r.pct, date: r.date,
+        createdAt: r.timestamp ? new Date(r.timestamp).getTime() : 0
+      }));
+    }catch(e){ /* fall through */ }
+  }
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+}
+
+async function emailHasResult(email){
+  const target = email.trim().toLowerCase();
+  const db = await getDb();
+  if(db){
+    const snap = await db.collection('results').where('lecture','==', LECTURE_ID).where('emailLower','==', target).limit(1).get();
+    return !snap.empty;
+  }
+  if(SHEET_API_URL){
+    try{
+      const all = await fetchAllResults();
+      return all.some(r => (r.email||'').trim().toLowerCase() === target);
+    }catch(e){ /* fall through */ }
+  }
+  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  return records.some(r => (r.email || '').trim().toLowerCase() === target);
+}
+
 function setLang(lang){
   currentLang = lang;
   document.getElementById('htmlRoot').setAttribute('lang', lang);
@@ -958,7 +1055,7 @@ function renderQuiz(){
   });
 }
 
-document.getElementById('start-quiz-btn').addEventListener('click', ()=>{
+document.getElementById('start-quiz-btn').addEventListener('click', async ()=>{
   const name = document.getElementById('stu-name').value.trim();
   const email = document.getElementById('stu-email').value.trim();
   const err = document.getElementById('gate-error');
@@ -967,8 +1064,8 @@ document.getElementById('start-quiz-btn').addEventListener('click', ()=>{
     return;
   }
 
-  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  const alreadyDone = records.some(r => (r.email || '').trim().toLowerCase() === email.toLowerCase());
+  err.textContent = currentLang==='ar' ? 'جارِ التحقق...' : 'Checking...';
+  const alreadyDone = await emailHasResult(email);
   if(alreadyDone){
     err.textContent = UI[currentLang].oneAttemptOnly;
     return;
@@ -982,7 +1079,7 @@ document.getElementById('start-quiz-btn').addEventListener('click', ()=>{
   renderQuiz();
 });
 
-document.getElementById('submit-quiz-btn').addEventListener('click', ()=>{
+document.getElementById('submit-quiz-btn').addEventListener('click', async ()=>{
   let score = 0;
   const detail = quizQuestions.map((q, qi)=>{
     const isCorrect = quizAnswers[qi] === q.correct;
@@ -999,12 +1096,23 @@ document.getElementById('submit-quiz-btn').addEventListener('click', ()=>{
   const total = quizQuestions.length;
   const pct = Math.round((score/total)*100);
 
-  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  records.push({
-    name: currentStudent.name, email: currentStudent.email,
-    score, total, pct, date: new Date().toLocaleString()
-  });
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  const submitBtn = document.getElementById('submit-quiz-btn');
+  submitBtn.disabled = true;
+  try{
+    await saveResultRecord({
+      name: currentStudent.name,
+      email: currentStudent.email,
+      emailLower: currentStudent.email.trim().toLowerCase(),
+      score, total, pct,
+      date: new Date().toLocaleString(),
+      createdAt: Date.now()
+    });
+  }catch(e){
+    alert(currentLang==='ar' ? 'تعذّر حفظ النتيجة، يرجى المحاولة مرة أخرى.' : 'Could not save the result, please try again.');
+    submitBtn.disabled = false;
+    return;
+  }
+  submitBtn.disabled = false;
 
   document.getElementById('quiz-body').style.display = 'none';
   document.getElementById('quiz-result').style.display = 'block';
@@ -1029,21 +1137,20 @@ document.getElementById('retry-btn').addEventListener('click', ()=>{
 });
 
 /* ADMIN DASHBOARD */
-document.getElementById('admin-login-btn').addEventListener('click', ()=>{
+document.getElementById('admin-login-btn').addEventListener('click', async ()=>{
   const pass = document.getElementById('admin-pass').value;
   const err = document.getElementById('admin-error');
   if(pass === ADMIN_PASS){
     err.textContent = '';
     document.getElementById('admin-gate').style.display = 'none';
     document.getElementById('admin-body').style.display = 'block';
-    loadDashboard();
+    await loadDashboard();
   } else {
     err.textContent = currentLang==='ar'?'كلمة المرور غير صحيحة':'Incorrect password';
   }
 });
 
-function loadDashboard(){
-  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+async function loadDashboard(){
   const thead = document.getElementById('dash-thead-row');
   const tbody = document.getElementById('dash-tbody');
   const empty = document.getElementById('dash-empty');
@@ -1052,8 +1159,22 @@ function loadDashboard(){
     ? ["اسم المتدرب","البريد","الدرجة","من","النسبة","التاريخ"]
     : ["Name","Email","Score","Out of","%","Date"];
   thead.innerHTML = headers.map(h=>`<th>${h}</th>`).join('');
-  tbody.innerHTML = '';
+  tbody.innerHTML = `<tr><td colspan="6">${currentLang==='ar'?'جارِ التحميل...':'Loading...'}</td></tr>`;
+  empty.style.display = 'none';
+  document.getElementById('dash-table').style.display = 'table';
 
+  let records = [];
+  try{
+    records = await fetchAllResults();
+  }catch(e){
+    tbody.innerHTML = '';
+    empty.textContent = currentLang==='ar' ? 'تعذّر تحميل النتائج.' : 'Could not load results.';
+    empty.style.display = 'block';
+    document.getElementById('dash-table').style.display = 'none';
+    return;
+  }
+
+  tbody.innerHTML = '';
   if(records.length === 0){
     empty.textContent = UI[currentLang].emptyDash;
     empty.style.display = 'block';
@@ -1061,7 +1182,7 @@ function loadDashboard(){
   } else {
     empty.style.display = 'none';
     document.getElementById('dash-table').style.display = 'table';
-    records.slice().reverse().forEach(r=>{
+    records.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).forEach(r=>{
       tbody.innerHTML += `<tr>
         <td>${r.name}</td><td>${r.email}</td><td>${r.score}</td><td>${r.total}</td>
         <td>${r.pct}%</td><td>${r.date}</td>
@@ -1076,17 +1197,27 @@ function loadDashboard(){
 
 document.getElementById('refresh-btn').addEventListener('click', loadDashboard);
 
-document.getElementById('export-btn').addEventListener('click', ()=>{
-  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+document.getElementById('export-btn').addEventListener('click', async ()=>{
+  const records = await fetchAllResults();
   if(!records.length){ alert(UI[currentLang].emptyDash); return; }
   let csv = '\uFEFFName,Email,Score,Total,Percentage,Date\n';
   records.forEach(r=>{
     csv += `"${r.name}","${r.email}",${r.score},${r.total},"${r.pct}%","${r.date}"\n`;
   });
+  const filename = 'BMC_JCI_Lec1_Scores.csv';
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+
+  try{
+    const downloads = (window.claude && typeof window.claude.use === 'function') ? await window.claude.use('downloads') : null;
+    if(downloads){
+      await downloads.save({filename, data: blob});
+      return;
+    }
+  }catch(e){ /* fall through to classic download */ }
+
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'BMC_JCI_Lec1_Scores.csv';
+  a.download = filename;
   a.click();
 });
 
