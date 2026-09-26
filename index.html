@@ -560,11 +560,22 @@ const lectures = [
     durationAr: "ساعتان تدريبيتان", durationEn: "2 Training Hours",
     sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
     sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
+  },
+  {
+    status: "available",
+    isBuiltIn: true,
+    titleAr: "المحاضرة الثانية: أساسيات منهجية التتبع وطرح الأسئلة الصحيحة",
+    titleEn: "Lecture 2: Tracer Methodology Basics & Asking the Right Questions",
+    descAr: "وحدة تدريبية تغطي تعريف منهجية التتبع وتطورها التاريخي، مزاياها، أنواعها الأربعة، مراحل تنفيذها، أداة الـ5Ps، مهارة طرح الأسئلة المفتوحة، وتقييم الامتثال عبر مصفوفة SAFER.",
+    descEn: "A training module covering Tracer Methodology's definition and history, its advantages, four types, implementation phases, the 5 Ps tool, open-ended questioning, and compliance evaluation via the SAFER Matrix.",
+    durationAr: "ساعتان تدريبيتان", durationEn: "2 Training Hours",
+    sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
+    sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
   }
 ];
 
-// المحاضرات من 2 إلى 25: محجوبة العناوين والمرفقات
-for(let i = 2; i <= 25; i++){
+// المحاضرات من 3 إلى 25: محجوبة العناوين والمرفقات
+for(let i = 3; i <= 25; i++){
   lectures.push({
     status: "coming",
     titleAr: "", titleEn: "", descAr: "", descEn: "",
@@ -573,97 +584,292 @@ for(let i = 2; i <= 25; i++){
 }
 
 /* ============================================================
-   LECTURE 1 DATA (Explanation, Review, Quiz)
+   PER-LECTURE CONTENT (Explanation, Review, Quiz, Sheet tab id)
+   Keyed by index into the `lectures` array above.
    ============================================================ */
-const modules = [
-  {
-    icon:"1️⃣",
-    title:{ar:"المقدمة، التكليف، وتطور المعايير وصولاً للإصدار الثامن", en:"Introduction, Mandate & the Evolution to the 8th Edition"},
-    sections:[
-      {icon:"🏛️", heading:{ar:"ما هي JCI؟", en:"What is JCI?"}, points:[
-        {ar:"<b>الهيكلية التنظيمية:</b> اللجنة الدولية المشتركة (JCI) هي الذراع الدولي للجنة المشتركة الأمريكية (The Joint Commission)، وتعمل كمنظمة مستقلة غير ربحية تضع معايير دولية قائمة على الإجماع.", en:"<b>Organizational architecture:</b> JCI is the international division of The Joint Commission (US) — an independent, non-profit body setting consensus standards."},
-        {ar:"<b>الفلسفة الأساسية:</b> لا تُقيّم JCI المؤسسات بناءً على القدرات الإنشائية فقط (كعدد الأسرّة)، بل تركز على <b>العمليات</b> و<b>النتائج القابلة للقياس</b> لدى المرضى.", en:"<b>Philosophy:</b> JCI focuses heavily on clinical and managerial <b>processes</b> and measurable patient <b>outcomes</b>, not merely capacity."},
-        {ar:"<b>الختم الذهبي:</b> دليل عالمي على الامتثال لأعلى مستويات السلامة وجودة الرعاية.", en:"<b>The Gold Seal:</b> universal proof of compliance with premier safety and quality tiers."}
-      ]},
-      {icon:"📈", heading:{ar:"تطور المعايير (الإصدارات 1–8)", en:"Evolution (Editions 1–8)"}, points:[
-        {ar:"<b>المرحلة التأسيسية (2000–2007):</b> إرساء الاتساق والبروتوكولات المكتوبة.", en:"<b>Formative Era (2000–2007):</b> establishing written protocols and consistency."},
-        {ar:"<b>مرحلة حوكمة الجودة (2011–2017):</b> إدخال RCA وFMEA والأهداف الدولية (IPSGs).", en:"<b>Quality Governance Era (2011–2017):</b> mandated RCA, FMEA, and IPSGs."},
-        {ar:"<b>الإصدار الثامن (ساري من 2025):</b> التحول الرقمي، الأمن السيبراني للأجهزة الطبية، ترشيد مضادات الميكروبات (AMS)، وسلامة ورفاه الكوادر الصحية.", en:"<b>8th Edition (effective 2025):</b> digital health, medical device cybersecurity, AMS, and workforce well-being."}
-      ]}
-    ]
-  },
-  {
-    icon:"2️⃣",
-    title:{ar:"الأثر السريري والتشغيلي وتكلفة الجودة", en:"Clinical & Operational Impact & Cost of Quality"},
-    sections:[
-      {icon:"🩺", heading:{ar:"الحد من الأضرار والتباين السريري", en:"Harm Reduction & Standardized Care"}, points:[
-        {ar:"<b>حزم الرعاية الموحدة:</b> استبدال الممارسة الفردية بحزم موحدة (Care Bundles) لتقليل عدوى العمليات وتعفن الدم.", en:"<b>Care Bundles:</b> eliminating clinical variation via evidence-based bundles."},
-        {ar:"<b>سلامة الأدوية:</b> ضبط الأدوية عالية الخطورة (HAMs) وتطبيق التحقق المزدوج.", en:"<b>Medication Safety:</b> High-Alert Medications safeguards and double-checking."},
-        {ar:"<b>تكلفة الجودة (CoQ):</b> تقليل تكاليف الجودة الرديئة عبر الاستثمار في الوقاية الاستباقية.", en:"<b>Cost of Quality:</b> mitigating poor-quality costs through proactive prevention."}
-      ]}
-    ]
-  },
-  {
-    icon:"3️⃣",
-    title:{ar:"تسلسل الوثائق ومنهجية التتبع (Tracer Methodology)", en:"Documentation Hierarchy & Tracer Methodology"},
-    sections:[
-      {icon:"🔍", heading:{ar:"منهجية التتبع ومستويات التدقيق", en:"Tracer Methodology & Scoring"}, points:[
-        {ar:"<b>منهجية التتبع:</b> تتبع مسار مريض حقيقي في المستشفى لتقييم تفاعل الأنظمة بالوقت الفعلي.", en:"<b>Tracer Methodology:</b> following real patients on-site to observe real-time system interactions."},
-        {ar:"<b>تقييم العناصر (MEs):</b> تسجل كمستوفى بالكامل، أو غير مستوفى.", en:"<b>ME Scoring:</b> scored as Fully Met or Not Met."}
-      ]},
-      {icon:"📚", heading:{ar:"الهرم التوثيقي", en:"Document Hierarchy"}, table:{
-        headers:{ar:["النوع","يجيب عن","التعريف"], en:["Type","Answers","Definition"]},
-        rows:[
-          {ar:["السياسة (Policy)","ماذا ولماذا","موقف مؤسسي ملزم يحدد المبادئ والتوجيهات."], en:["Policy","What & Why","Formal institutional stance guiding decisions."]},
-          {ar:["الإجراء (Procedure)","كيف","خطوات تسلسلية مرحلية لتنفيذ السياسة."], en:["Procedure","How","Step-by-step instructions for executing a policy."]},
-          {ar:["البروتوكول (Protocol)","متى وكيف سريرياً","خوارزمية سريرية دقيقة لحالة طبية محددة."], en:["Protocol","When & How (Clinical)","Rigid clinical algorithm for a defined condition."]},
-          {ar:["الدليل الإرشادي (Guideline)","توصيات","إطار استشاري لأفضل الممارسات يتيح التقدير السريري."], en:["Guideline","Recommendations","Advisory best practice framework allowing clinical discretion."]},
-          {ar:["إجراء التشغيل القياسي (SOP)","تفاصيل التنفيذ بدقة","خطوات تشغيلية وفنية صارمة بتفاوت صفري."], en:["SOP","Exact Steps","Detailed technical steps with zero tolerated variance."]}
-        ]
-      }}
-    ]
-  }
-];
+const lectureContent = {
 
-const reviewBank = {
-  tf: [
-    {ar:"JCI هي الذراع الدولي للجنة المشتركة الأمريكية (The Joint Commission).", en:"JCI is the international division of The Joint Commission (US).", a:true, expAr:"صحيح تماماً.", expEn:"True."},
-    {ar:"تقيّم JCI المؤسسات فقط على عدد الأسرّة وتجهيز المبنى.", en:"JCI evaluates organizations only on bed capacity and structural size.", a:false, expAr:"خطأ — تركز على العمليات والنتائج السريرية.", expEn:"False — it focuses on processes and outcomes."},
-    {ar:"الإصدار الثامن من معايير JCI يركز على الأمن السيبراني وسلامة الكوادر الطبية.", en:"The 8th Edition addresses cybersecurity and workforce well-being.", a:true, expAr:"صحيح — هذه من أهم إضافات الإصدار الثامن.", expEn:"True — key additions of the 8th Edition."}
+/* ---------------- LECTURE 1 ---------------- */
+0: {
+  lectureId: 'Lecture1_JCI_8th_Edition',
+  modules: [
+    {
+      icon:"1️⃣",
+      title:{ar:"المقدمة، التكليف، وتطور المعايير وصولاً للإصدار الثامن", en:"Introduction, Mandate & the Evolution to the 8th Edition"},
+      sections:[
+        {icon:"🏛️", heading:{ar:"ما هي JCI؟", en:"What is JCI?"}, points:[
+          {ar:"<b>الهيكلية التنظيمية:</b> اللجنة الدولية المشتركة (JCI) هي الذراع الدولي للجنة المشتركة الأمريكية (The Joint Commission)، وتعمل كمنظمة مستقلة غير ربحية تضع معايير دولية قائمة على الإجماع.", en:"<b>Organizational architecture:</b> JCI is the international division of The Joint Commission (US) — an independent, non-profit body setting consensus standards."},
+          {ar:"<b>الفلسفة الأساسية:</b> لا تُقيّم JCI المؤسسات بناءً على القدرات الإنشائية فقط (كعدد الأسرّة)، بل تركز على <b>العمليات</b> و<b>النتائج القابلة للقياس</b> لدى المرضى.", en:"<b>Philosophy:</b> JCI focuses heavily on clinical and managerial <b>processes</b> and measurable patient <b>outcomes</b>, not merely capacity."},
+          {ar:"<b>الختم الذهبي:</b> دليل عالمي على الامتثال لأعلى مستويات السلامة وجودة الرعاية.", en:"<b>The Gold Seal:</b> universal proof of compliance with premier safety and quality tiers."}
+        ]},
+        {icon:"📈", heading:{ar:"تطور المعايير (الإصدارات 1–8)", en:"Evolution (Editions 1–8)"}, points:[
+          {ar:"<b>المرحلة التأسيسية (2000–2007):</b> إرساء الاتساق والبروتوكولات المكتوبة.", en:"<b>Formative Era (2000–2007):</b> establishing written protocols and consistency."},
+          {ar:"<b>مرحلة حوكمة الجودة (2011–2017):</b> إدخال RCA وFMEA والأهداف الدولية (IPSGs).", en:"<b>Quality Governance Era (2011–2017):</b> mandated RCA, FMEA, and IPSGs."},
+          {ar:"<b>الإصدار الثامن (ساري من 2025):</b> التحول الرقمي، الأمن السيبراني للأجهزة الطبية، ترشيد مضادات الميكروبات (AMS)، وسلامة ورفاه الكوادر الصحية.", en:"<b>8th Edition (effective 2025):</b> digital health, medical device cybersecurity, AMS, and workforce well-being."}
+        ]}
+      ]
+    },
+    {
+      icon:"2️⃣",
+      title:{ar:"الأثر السريري والتشغيلي وتكلفة الجودة", en:"Clinical & Operational Impact & Cost of Quality"},
+      sections:[
+        {icon:"🩺", heading:{ar:"الحد من الأضرار والتباين السريري", en:"Harm Reduction & Standardized Care"}, points:[
+          {ar:"<b>حزم الرعاية الموحدة:</b> استبدال الممارسة الفردية بحزم موحدة (Care Bundles) لتقليل عدوى العمليات وتعفن الدم.", en:"<b>Care Bundles:</b> eliminating clinical variation via evidence-based bundles."},
+          {ar:"<b>سلامة الأدوية:</b> ضبط الأدوية عالية الخطورة (HAMs) وتطبيق التحقق المزدوج.", en:"<b>Medication Safety:</b> High-Alert Medications safeguards and double-checking."},
+          {ar:"<b>تكلفة الجودة (CoQ):</b> تقليل تكاليف الجودة الرديئة عبر الاستثمار في الوقاية الاستباقية.", en:"<b>Cost of Quality:</b> mitigating poor-quality costs through proactive prevention."}
+        ]}
+      ]
+    },
+    {
+      icon:"3️⃣",
+      title:{ar:"تسلسل الوثائق ومنهجية التتبع (Tracer Methodology)", en:"Documentation Hierarchy & Tracer Methodology"},
+      sections:[
+        {icon:"🔍", heading:{ar:"منهجية التتبع ومستويات التدقيق", en:"Tracer Methodology & Scoring"}, points:[
+          {ar:"<b>منهجية التتبع:</b> تتبع مسار مريض حقيقي في المستشفى لتقييم تفاعل الأنظمة بالوقت الفعلي.", en:"<b>Tracer Methodology:</b> following real patients on-site to observe real-time system interactions."},
+          {ar:"<b>تقييم العناصر (MEs):</b> تسجل كمستوفى بالكامل، أو غير مستوفى.", en:"<b>ME Scoring:</b> scored as Fully Met or Not Met."}
+        ]},
+        {icon:"📚", heading:{ar:"الهرم التوثيقي", en:"Document Hierarchy"}, table:{
+          headers:{ar:["النوع","يجيب عن","التعريف"], en:["Type","Answers","Definition"]},
+          rows:[
+            {ar:["السياسة (Policy)","ماذا ولماذا","موقف مؤسسي ملزم يحدد المبادئ والتوجيهات."], en:["Policy","What & Why","Formal institutional stance guiding decisions."]},
+            {ar:["الإجراء (Procedure)","كيف","خطوات تسلسلية مرحلية لتنفيذ السياسة."], en:["Procedure","How","Step-by-step instructions for executing a policy."]},
+            {ar:["البروتوكول (Protocol)","متى وكيف سريرياً","خوارزمية سريرية دقيقة لحالة طبية محددة."], en:["Protocol","When & How (Clinical)","Rigid clinical algorithm for a defined condition."]},
+            {ar:["الدليل الإرشادي (Guideline)","توصيات","إطار استشاري لأفضل الممارسات يتيح التقدير السريري."], en:["Guideline","Recommendations","Advisory best practice framework allowing clinical discretion."]},
+            {ar:["إجراء التشغيل القياسي (SOP)","تفاصيل التنفيذ بدقة","خطوات تشغيلية وفنية صارمة بتفاوت صفري."], en:["SOP","Exact Steps","Detailed technical steps with zero tolerated variance."]}
+          ]
+        }}
+      ]
+    }
   ],
-  mcq: [
-    {ar:"ما هو المتطلب الأساسي في الهدف الأول لسلامة المرضى (IPSG 1)؟", en:"What is required under IPSG 1?",
-     optionsAr:["معرف واحد فقط","معرفان اثنان على الأقل باستثناء رقم الغرفة أو السرير","رقم الغرفة فقط","سؤال المريض شفهياً فقط"],
-     optionsEn:["One identifier","At least two distinct identifiers excluding room/bed","Room number only","Verbal recall only"],
-     correct:1, expAr:"يتطلب معرفين مستقلين على الأقل.", expEn:"Requires at least two independent identifiers."},
-    {ar:"أي وثيقة تجيب عن تساؤل 'كيف' بخطوات إجرائية متسلسلة؟", en:"Which document answers 'How' through step-by-step instructions?",
-     optionsAr:["السياسة (Policy)","الإجراء (Procedure)","الدليل الإرشادي (Guideline)","النموذج"],
-     optionsEn:["Policy","Procedure","Guideline","Form"],
-     correct:1, expAr:"الإجراء يحدد الخطوات التسلسلية.", expEn:"Procedures provide step-by-step sequence."}
-  ],
-  fill: [
-    {ar:"الأداة المنظمة للتسليم والتسلم في IPSG 2 تسمى ______.", en:"The structured communication handover tool in IPSG 2 is ______.", a:"SBAR"},
-    {ar:"الوقفة الجراحية الأخيرة قبل فتح الشق الجراحي تسمى ______.", en:"The final verification pause before surgery is called ______.", a:"Time-Out / وقفة الأمان الجراحية"}
-  ],
-  short: [
-    {ar:"ما الفرق الجوهري بين السياسة (Policy) والإجراء (Procedure)؟", en:"What is the key difference between a Policy and a Procedure?",
-     aAr:"السياسة توضح ماذا يجب فعله ولماذا (موقف مؤسسي)، بينما الإجراء يوضح خطوات التنفيذ التسلسلية (كيف).",
-     aEn:"Policy explains What & Why (institutional stance); Procedure explains How (step-by-step)."}
+  reviewBank: {
+    tf: [
+      {ar:"JCI هي الذراع الدولي للجنة المشتركة الأمريكية (The Joint Commission).", en:"JCI is the international division of The Joint Commission (US).", a:true, expAr:"صحيح تماماً.", expEn:"True."},
+      {ar:"تقيّم JCI المؤسسات فقط على عدد الأسرّة وتجهيز المبنى.", en:"JCI evaluates organizations only on bed capacity and structural size.", a:false, expAr:"خطأ — تركز على العمليات والنتائج السريرية.", expEn:"False — it focuses on processes and outcomes."},
+      {ar:"الإصدار الثامن من معايير JCI يركز على الأمن السيبراني وسلامة الكوادر الطبية.", en:"The 8th Edition addresses cybersecurity and workforce well-being.", a:true, expAr:"صحيح — هذه من أهم إضافات الإصدار الثامن.", expEn:"True — key additions of the 8th Edition."}
+    ],
+    mcq: [
+      {ar:"ما هو المتطلب الأساسي في الهدف الأول لسلامة المرضى (IPSG 1)؟", en:"What is required under IPSG 1?",
+       optionsAr:["معرف واحد فقط","معرفان اثنان على الأقل باستثناء رقم الغرفة أو السرير","رقم الغرفة فقط","سؤال المريض شفهياً فقط"],
+       optionsEn:["One identifier","At least two distinct identifiers excluding room/bed","Room number only","Verbal recall only"],
+       correct:1, expAr:"يتطلب معرفين مستقلين على الأقل.", expEn:"Requires at least two independent identifiers."},
+      {ar:"أي وثيقة تجيب عن تساؤل 'كيف' بخطوات إجرائية متسلسلة؟", en:"Which document answers 'How' through step-by-step instructions?",
+       optionsAr:["السياسة (Policy)","الإجراء (Procedure)","الدليل الإرشادي (Guideline)","النموذج"],
+       optionsEn:["Policy","Procedure","Guideline","Form"],
+       correct:1, expAr:"الإجراء يحدد الخطوات التسلسلية.", expEn:"Procedures provide step-by-step sequence."}
+    ],
+    fill: [
+      {ar:"الأداة المنظمة للتسليم والتسلم في IPSG 2 تسمى ______.", en:"The structured communication handover tool in IPSG 2 is ______.", a:"SBAR"},
+      {ar:"الوقفة الجراحية الأخيرة قبل فتح الشق الجراحي تسمى ______.", en:"The final verification pause before surgery is called ______.", a:"Time-Out / وقفة الأمان الجراحية"}
+    ],
+    short: [
+      {ar:"ما الفرق الجوهري بين السياسة (Policy) والإجراء (Procedure)؟", en:"What is the key difference between a Policy and a Procedure?",
+       aAr:"السياسة توضح ماذا يجب فعله ولماذا (موقف مؤسسي)، بينما الإجراء يوضح خطوات التنفيذ التسلسلية (كيف).",
+       aEn:"Policy explains What & Why (institutional stance); Procedure explains How (step-by-step)."}
+    ]
+  },
+  quizQuestions: [
+    {ar:"JCI منظمة دولية تركز فقط على التفتيش الإنشائي للمستشفيات.", en:"JCI focuses solely on hospital physical infrastructure inspections.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"الإصدار الثامن من معايير JCI يولي اهتماماً مباشراً للأمن السيبراني وترشيد استهلاك المضادات (AMS).", en:"The 8th edition emphasizes cybersecurity and Antimicrobial Stewardship (AMS).", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"ما هي أداة التواصل المنظمة المعتمدة في IPSG 2 للتسليم والتسلم؟", en:"Which structured tool is recognized under IPSG 2 for handovers?", optionsAr:["SWOT","SBAR","PDCA","FMEA"], optionsEn:["SWOT","SBAR","PDCA","FMEA"], correct:1},
+    {ar:"رقم الغرفة أو رقم السرير يُعتبر معرفاً مقبولاً لتحديد هوية المريض وفق IPSG 1.", en:"Room or bed number is an acceptable patient identifier under IPSG 1.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"منهجية التتبع (Tracer Methodology) تعتمد على تتبع رحلة مريض حقيقي في المستشفى.", en:"Tracer Methodology follows an actual patient journey across hospital systems.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"حزم الرعاية الموحدة (Care Bundles) تهدف إلى الحد من التباين السريري بين الممارسين.", en:"Standardized Care Bundles aim to reduce clinical variation between practitioners.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"أي نوع من الوثائق يجيب على سؤال 'كيف' ضمن الهرم التوثيقي؟", en:"Which document type answers 'How' within the documentation hierarchy?", optionsAr:["السياسة (Policy)","الإجراء (Procedure)","الدليل الإرشادي (Guideline)","البروتوكول"], optionsEn:["Policy","Procedure","Guideline","Protocol"], correct:1},
+    {ar:"البروتوكول (Protocol) يمثل إطاراً استشارياً مرناً يتيح الاجتهاد السريري الكامل.", en:"A Protocol is a flexible advisory framework allowing full clinical discretion.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"كيف يُسجَّل العنصر القابل للقياس (ME) وفق منهجية التدقيق؟", en:"How is a Measurable Element (ME) scored under the survey methodology?", optionsAr:["مستوفى بالكامل، أو غير مستوفى","ناجح أو راسب","ممتاز أو ضعيف","لا يُسجل نهائياً"], optionsEn:["Fully Met, or Not Met","Pass or Fail","Excellent or Poor","Not scored at all"], correct:0},
+    {ar:"مفهوم تكلفة الجودة (Cost of Quality) يهدف إلى خفض تكاليف الجودة الرديئة عبر الاستثمار في الوقاية الاستباقية.", en:"The Cost of Quality (CoQ) concept aims to cut the costs of poor quality by investing in proactive prevention.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
   ]
-};
+},
 
-const quizQuestions = [
-  {ar:"JCI منظمة دولية تركز فقط على التفتيش الإنشائي للمستشفيات.", en:"JCI focuses solely on hospital physical infrastructure inspections.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
-  {ar:"الإصدار الثامن من معايير JCI يولي اهتماماً مباشراً للأمن السيبراني وترشيد استهلاك المضادات (AMS).", en:"The 8th edition emphasizes cybersecurity and Antimicrobial Stewardship (AMS).", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
-  {ar:"ما هي أداة التواصل المنظمة المعتمدة في IPSG 2 للتسليم والتسلم؟", en:"Which structured tool is recognized under IPSG 2 for handovers?", optionsAr:["SWOT","SBAR","PDCA","FMEA"], optionsEn:["SWOT","SBAR","PDCA","FMEA"], correct:1},
-  {ar:"رقم الغرفة أو رقم السرير يُعتبر معرفاً مقبولاً لتحديد هوية المريض وفق IPSG 1.", en:"Room or bed number is an acceptable patient identifier under IPSG 1.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
-  {ar:"منهجية التتبع (Tracer Methodology) تعتمد على تتبع رحلة مريض حقيقي في المستشفى.", en:"Tracer Methodology follows an actual patient journey across hospital systems.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
-  {ar:"حزم الرعاية الموحدة (Care Bundles) تهدف إلى الحد من التباين السريري بين الممارسين.", en:"Standardized Care Bundles aim to reduce clinical variation between practitioners.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
-  {ar:"أي نوع من الوثائق يجيب على سؤال 'كيف' ضمن الهرم التوثيقي؟", en:"Which document type answers 'How' within the documentation hierarchy?", optionsAr:["السياسة (Policy)","الإجراء (Procedure)","الدليل الإرشادي (Guideline)","البروتوكول"], optionsEn:["Policy","Procedure","Guideline","Protocol"], correct:1},
-  {ar:"البروتوكول (Protocol) يمثل إطاراً استشارياً مرناً يتيح الاجتهاد السريري الكامل.", en:"A Protocol is a flexible advisory framework allowing full clinical discretion.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
-  {ar:"كيف يُسجَّل العنصر القابل للقياس (ME) وفق منهجية التدقيق؟", en:"How is a Measurable Element (ME) scored under the survey methodology?", optionsAr:["مستوفى بالكامل، أو غير مستوفى","ناجح أو راسب","ممتاز أو ضعيف","لا يُسجل نهائياً"], optionsEn:["Fully Met, or Not Met","Pass or Fail","Excellent or Poor","Not scored at all"], correct:0},
-  {ar:"مفهوم تكلفة الجودة (Cost of Quality) يهدف إلى خفض تكاليف الجودة الرديئة عبر الاستثمار في الوقاية الاستباقية.", en:"The Cost of Quality (CoQ) concept aims to cut the costs of poor quality by investing in proactive prevention.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
-];
+/* ---------------- LECTURE 2 ---------------- */
+1: {
+  lectureId: 'Lecture2_TracerMethodology',
+  modules: [
+    {
+      icon:"1️⃣",
+      title:{ar:"تعريف منهجية التتبع وتطورها التاريخي", en:"Definition & Historical Evolution of Tracer Methodology"},
+      sections:[
+        {icon:"📖", heading:{ar:"ما هو التتبع؟", en:"What Is a Tracer?"}, points:[
+          {ar:"<b>الأصل اللغوي:</b> كلمة \"Trace\" تعني في أصلها مساراً أو أثراً تركه شيء قد مرّ من هنا، أو كفعل: متابعة مسار خطوة بخطوة واكتشاف الأدلة بالرجوع إلى الوراء.", en:"<b>Origin:</b> \"Trace\" originally means a path or mark left by something that passed, or as a verb, following a course step by step to discover evidence."},
+          {ar:"<b>التعريف الاصطلاحي:</b> منهجية التتبع (Tracer Methodology) هي أسلوب تقييم يستخدم فيه المُقيّمون معلومات من المنشأة الصحية لمتابعة تجربة الرعاية أو العلاج المقدَّمة لمريض (أو لنظام) عبر كامل عملية تقديم الرعاية، بهدف تقييم الامتثال لمعايير مختارة.", en:"<b>Formal definition:</b> Tracer Methodology is an evaluation method where surveyors use organizational information to follow a patient's (or a system's) care experience across the entire care-delivery process, to assess compliance with selected standards."}
+        ]},
+        {icon:"🕰️", heading:{ar:"الجذور التاريخية والتطور نحو الاعتماد", en:"Historical Roots & Evolution into Accreditation"}, points:[
+          {ar:"دخلت فكرة \"التتبع\" العلمية إلى تقييم جودة الرعاية الصحية عام 1973 على يد كسنر وكالك (Kessner & Kalk)، لغرضين: تقييم جودة الرعاية وتحديد مجالات التحسين.", en:"The tracing concept entered healthcare quality assessment in 1973 via Kessner & Kalk, for two purposes: assessing care quality and identifying improvement areas."},
+          {ar:"أُدخلت منهجية التتبع إلى اعتماد المستشفيات من قِبل هيئة JCAHO عام 2002، واعتُمدت رسمياً في المسوحات الميدانية عبر مبادرة \"Shared Visions – New Pathways\" ابتداءً من عام 2004.", en:"JCAHO introduced tracer methodology into hospital accreditation in 2002, formally adopting it in on-site surveys via the \"Shared Visions – New Pathways\" initiative starting 2004."},
+          {ar:"بدأت الهيئة الدولية المشتركة (JCI) استخدام منهجية التتبع دولياً ابتداءً من عام 2007، ثم تبنّتها هيئات أخرى مثل CBAHI وCA، حتى أصبحت تمثّل اليوم أكثر من 60٪ من عملية المسح الميداني في معظم أطر الاعتماد.", en:"JCI began using tracer methodology internationally from 2007; CBAHI, CA and others later adopted it too — it now represents over 60% of the on-site survey process in most accreditation frameworks."}
+        ]}
+      ]
+    },
+    {
+      icon:"2️⃣",
+      title:{ar:"مزايا منهجية التتبع", en:"Advantages of Tracer Methodology"},
+      sections:[
+        {icon:"💡", heading:{ar:"لماذا يمثّل التتبع تغييراً إيجابياً؟", en:"Why Tracing Is a Positive Change"}, points:[
+          {ar:"عبارة شهيرة بين المُقيّمين: \"يمكنك أن تتعلّم من 8 ساعات من التتبع أكثر مما تتعلّمه من 20 ساعة من مراجعة الملفات الطبية.\"", en:"A widely cited surveyor principle: \"You can learn in 8 hours of tracing more than in 20 hours of chart review.\""},
+          {ar:"<b>مرن:</b> يتيح الجمع بين مراجعة المستندات ومقابلة الموظفين والملاحظة المباشرة ضمن نفس الجلسة.", en:"<b>Flexible:</b> combines document review, staff interviews, and direct observation in one session."},
+          {ar:"<b>ديناميكي:</b> يعطي صورة حقيقية ومتحركة لتقديم الرعاية بدلاً من لقطة ثابتة واحدة.", en:"<b>Dynamic:</b> gives a real, moving picture of care delivery rather than a single static snapshot."},
+          {ar:"<b>تفاعلي:</b> يُشرك موظفي الخطوط الأمامية مباشرة، وليس فقط القادة والمديرين.", en:"<b>Interactive:</b> engages front-line staff directly, not only leaders and managers."},
+          {ar:"<b>فعّال وبسيط:</b> يعمل كأداة تعليمية وتوجيهية للموظفين أيضاً، ويتطلب أعمالاً تحضيرية أقل نسبياً من المنشأة والمُقيّمين.", en:"<b>Effective & simple:</b> also functions as a coaching tool for staff, and requires relatively little advance preparation."}
+        ]}
+      ]
+    },
+    {
+      icon:"3️⃣",
+      title:{ar:"أنواع التتبع الأربعة", en:"The Four Types of Tracers"},
+      sections:[
+        {icon:"🧍", heading:{ar:"تتبع الأفراد (المرضى) — Individual Tracer", en:"Individual (Patient) Tracer"}, points:[
+          {ar:"يتابع التجربة الفعلية لمريض واحد تلقّى الرعاية داخل المنشأة، من نقطة إلى أخرى عبر كامل عملية تقديم الرعاية، ويُختار المرضى وفق مجالات التركيز ذات الأولوية (PFAs). تستغرق الجلسة عادة من ساعة إلى ساعتين.", en:"Follows one patient's actual care journey point-to-point across the entire delivery process; patients are selected via Priority Focus Areas (PFAs). Sessions typically run 1–2 hours."},
+          {ar:"<b>مثال توضيحي من المادة:</b> مريض ذكر وصل للطوارئ فاقداً للوعي وبصدمة شديدة إثر حادث سير، أُجريت له عملية جراحية فورية بعد كشف تجمّع داخل البطن إشعاعياً، ثم نُقل للعناية المركزة 48 ساعة قبل الجناح الجراحي — يتتبع المُقيّم المسار: الطوارئ ← الأشعة ← العمليات ← العناية المركزة ← الجناح الجراحي، مع مراجعة دور الصيدلية والمختبر.", en:"<b>Illustrative example:</b> a male patient arrived at the ER unconscious with severe shock after a road accident; imaging revealed an intra-abdominal collection and he was operated on immediately, then spent 48 hours in ICU before the surgical ward — the surveyor traces ER → Radiology → OR → ICU → Surgical Ward, reviewing pharmacy and lab involvement along the way."}
+        ]},
+        {icon:"🧩", heading:{ar:"التتبع القائم على الأنظمة، والبرامجي، وبيئة الرعاية", en:"System-Based, Program-Specific & Environment of Care Tracers"}, points:[
+          {ar:"<b>التتبع القائم على الأنظمة (System-Based):</b> يراقب الوظائف عالية الخطورة من بدايتها إلى نهايتها عبر الأقسام، ويركّز حالياً على ثلاثة أنظمة: إدارة الأدوية، مكافحة العدوى، وإدارة البيانات (الجودة وسلامة المرضى). يعمل على مستويين: مناقشة جماعية مع اللجنة المعنية لمراجعة بيانات النظام (كتقارير الأحداث والأخطاء القريبة والعدوى المكتسبة)، وتتبع مركّز لحالة عالية الخطورة مختارة من تلك المناقشة.", en:"<b>System-Based Tracer:</b> examines high-risk, cross-department functions end-to-end, currently focused on Medication Management, Infection Prevention & Control, and Data Management. It runs on two levels — a committee-level group discussion of system data (OVRs, near misses, HAIs), and a focused tracer of a specific high-risk case drawn from that discussion."},
+          {ar:"<b>التتبع الخاص بالبرامج (Program-Specific):</b> يركّز على موضوعات خاصة ببرنامج اعتماد معيّن، مثل تتبع تدفق المرضى في مستشفيات الرعاية الحادة، أو استمرارية الرعاية في المنشآت العيادية، أو الوقاية من الانتحار في برامج الإقامة.", en:"<b>Program-Specific Tracer:</b> focuses on topics tied to a specific accreditation program — e.g. patient-flow in acute care, continuity-of-care in ambulatory settings, or suicide prevention in residential programs."},
+          {ar:"<b>تتبع بيئة الرعاية (Environment of Care):</b> يُعرف دولياً بتتبع إدارة المرافق والسلامة، ويفحص البيئة المادية وإدارة الطوارئ وسلامة الحياة.", en:"<b>Environment of Care Tracer:</b> internationally known as the Facility Management & Safety tracer, examining the physical environment, emergency management, and life safety."}
+        ]}
+      ]
+    },
+    {
+      icon:"4️⃣",
+      title:{ar:"مراحل تنفيذ التتبع الأربع", en:"The Four Implementation Phases of a Tracer"},
+      sections:[
+        {icon:"🗂️", heading:{ar:"التخطيط والتنفيذ وإعداد التقارير واتخاذ الإجراءات", en:"Planning, Conducting, Reporting & Acting"}, points:[
+          {ar:"<b>التخطيط (Planning):</b> تحديد الغرض والنطاق، فهم تفسير المعايير ذات الصلة، اختيار مواضيع التتبع وفق مجالات التركيز ذات الأولوية (PFAs)، ووضع جدول زمني.", en:"<b>Planning:</b> determine purpose and scope, understand relevant standard interpretations, select topics via Priority Focus Areas (PFAs), and set a schedule."},
+          {ar:"<b>استراتيجيات اختيار مجالات التتبع الشائعة:</b> أكثر خمسة تشخيصات شيوعاً، أكثر خمسة إجراءات جراحية شيوعاً، الأدلة الإرشادية السريرية المعتمدة (CPGs)، المرضى ذوو الخطورة العالية، تقارير الأحداث والانحرافات (OVRs) والأخطاء الطبية، ومجالات التحسين المحددة مسبقاً.", en:"<b>Common tracer-selection strategies:</b> top-5 diagnoses, top-5 surgical procedures, active Clinical Practice Guidelines (CPGs), high-risk/complex patients, Occurrence Variance Reports (OVRs) and medical errors, and previously identified improvement areas."},
+          {ar:"<b>التنفيذ (Conducting):</b> مراجعة السجلات والمستندات، التفاعل المباشر مع الموظفين ومتلقي الرعاية، ملاحظة كل ما يجري أثناء الجولة، تسجيل البيانات آنياً، وتقديم إحاطة موجزة بالنتائج عند الانتهاء.", en:"<b>Conducting:</b> review records/documents, interact directly with staff and care recipients, observe throughout the tour, record data in real time, and give a debrief at the end."},
+          {ar:"<b>إعداد التقارير (Reporting):</b> التحقق من صحة البيانات، تقييم الامتثال للمعايير، إعداد تقرير رسمي، وتحليل البيانات لاستخلاص معلومات قابلة للتنفيذ.", en:"<b>Reporting:</b> validate collected data, evaluate compliance, produce a formal report, and analyze data into actionable findings."},
+          {ar:"<b>اتخاذ الإجراءات (Acting):</b> تحديد فرص التحسين، إعداد خطط تحسين الأداء، وإعادة التتبع لاحقاً للتحقق من أثر الإجراءات التصحيحية.", en:"<b>Acting:</b> identify improvement opportunities, prepare performance-improvement plans, and re-trace later to verify the impact of corrective actions."}
+        ]},
+        {icon:"🎯", heading:{ar:"مجالات التركيز ذات الأولوية (PFAs)", en:"Priority Focus Areas (PFAs)"}, points:[
+          {ar:"<b>مجالات التركيز ذات الأولوية (14 مجالاً):</b> التقييم والرعاية، التواصل، الممارسون المعتمدون، استخدام الأجهزة والمعدات، مكافحة العدوى، إدارة المعلومات، التوظيف والملاك الوظيفي، إدارة الأدوية، الهيكل التنظيمي، التوجيه والتدريب، البيئة المادية، الحقوق والأخلاقيات، أنشطة تحسين الجودة، وسلامة المرضى.", en:"<b>The 14 Priority Focus Areas:</b> Assessment & care, Communication, Credentialed practitioners, Equipment use, Infection control, Information management, Staffing, Medication management, Organizational structure, Orientation & training, Physical environment, Rights & ethics, Quality-improvement activities, and Patient safety."}
+        ]}
+      ]
+    },
+    {
+      icon:"5️⃣",
+      title:{ar:"أداة الـ 5Ps", en:"The 5 Ps Tool"},
+      sections:[
+        {icon:"🔎", heading:{ar:"العناصر الخمسة التي يفحصها المُقيّمون", en:"The Five Elements Surveyors Examine"}, table:{
+          headers:{ar:["العنصر","ما يفحصه المُقيّمون"], en:["Element","What Surveyors Look At"]},
+          rows:[
+            {ar:["العمليات (Processes)","مثل: إدارة الأدوية، تقييم المريض، برنامج الوقاية من السقوط، التواصل، استخدام الدم ومنتجاته، سلامة الجراحة."], en:["Processes","e.g., medication management, patient assessment, fall prevention, communication, blood/blood-product use, surgical safety."]},
+            {ar:["السياسات (Policies)","مثل: سياسة تقييم/إعادة تقييم المريض، سياسة فرز الطوارئ، بروتوكول سلامة الجراحة، سياسة المضادات الوقائية، سياسة تسليم المناوبة، سياسة الأوامر الشفهية والهاتفية."], en:["Policies","e.g., patient assessment/reassessment policy, ER triage policy, surgical safety protocol, prophylactic antibiotic policy, hand-over policy, verbal/telephone order policy."]},
+            {ar:["الأوراق - السجلات والنماذج (Papers)","مثل: التقييم الأولي، ملاحظات العمليات، تقييم خطر السقوط، ملخص الخروج، سجلات غرفة العمليات والولادة والعيادات الخارجية والتعقيم، قائمة تدقيق سلامة الجراحة."], en:["Papers (Records/Forms)","e.g., initial assessment, operative notes, fall-risk assessment, discharge summary, OR/delivery-room/OPD/CSSD logbooks, surgical safety checklist."]},
+            {ar:["الأشخاص - الموظفون (Persons)","الأطباء، الممرضون، الصيادلة، الفنيون، أخصائيو التغذية، موظفو الاستقبال، أخصائيو العلاج التنفسي والطبيعي — وكل من له دور في رحلة المريض."], en:["Persons (Staff)","Physicians, nurses, pharmacists, technicians, dietitians, receptionists, respiratory/physiotherapists — anyone touching the patient's journey."]},
+            {ar:["الأماكن (Places)","الطوارئ، سيارة الإسعاف، غرفة العمليات، العناية المركزة، الصيدلية، المختبر، وحدة العلاج الطبيعي، أجنحة المرضى، وأي منطقة أخرى مرّ بها المريض."], en:["Places","ER, ambulance, OR, ICU, pharmacy, laboratory, physiotherapy unit, patient wards, and any other area the patient passed through."]}
+          ]
+        }}
+      ]
+    },
+    {
+      icon:"6️⃣",
+      title:{ar:"طرح الأسئلة الصحيحة — جوهر عملية التتبع", en:"Asking the Right Questions — The Core of Tracing"},
+      sections:[
+        {icon:"❓", heading:{ar:"الأسئلة المغلقة مقابل الأسئلة المفتوحة", en:"Closed vs. Open-Ended Questions"}, points:[
+          {ar:"أهم مهارة حاسمة في منهجية التتبع هي التواصل — وتحديداً طرح أسئلة مفتوحة بدلاً من مغلقة أو موجِّهة؛ وموظفو الخطوط الأمامية هم المصدر الأساسي للرؤية أثناء التتبع.", en:"The single most decisive skill in tracing is communication — specifically asking open-ended rather than closed or leading questions; front-line staff are the primary source of insight."},
+          {ar:"<b>أمثلة على أسئلة مغلقة (غير مُفضَّلة):</b> \"هل تستخدم نموذج ISBAR في تسليم المناوبة؟\"، \"هل ترتدي كمامة قبل دخول غرفة العزل؟\" — تستدعي إجابة بنعم أو لا ولا تكشف الممارسة الفعلية.", en:"<b>Closed-question examples (not recommended):</b> \"Do you use ISBAR at handover?\", \"Do you wear a mask before entering the isolation room?\" — invite a yes/no answer and reveal little about real practice."},
+          {ar:"<b>أمثلة على أسئلة مفتوحة (أفضل بكثير):</b> \"كيف تقوم بتسليم مناوبتك؟\"، \"ماذا تفعل قبل دخول هذه الغرفة المعزولة؟\" — تكشف الممارسة الحقيقية بما فيها الفجوات وأوجه عدم الاتساق.", en:"<b>Open-ended examples (much better):</b> \"How do you do your hand-over?\", \"What do you do before entering this isolation room?\" — expose real practice including gaps and inconsistencies."}
+        ]},
+        {icon:"✅", heading:{ar:"عشر نصائح لتتبع فعّال", en:"Ten Tips for Effective Tracing"}, points:[
+          {ar:"التدرّب المستمر، وجدولة جيدة لتجنّب تعطيل العمل، والتحضير المسبق لموضوع التتبع وطريقته، مع الحفاظ على المرونة لأن التتبع قد يقود لمناطق غير متوقعة.", en:"Continuous practice, good scheduling to avoid disrupting work, advance preparation of the topic and method, and staying flexible since tracing may lead to unexpected areas."},
+          {ar:"مراجعة السجل الطبي مع الموظف وليس بمفردك، والتركيز على موظفي الخطوط الأمامية، واستخدام الأسئلة المفتوحة حصراً.", en:"Review the medical record together with staff (not alone), focus on front-line staff, and use open-ended questions exclusively."},
+          {ar:"التحلي بالمهنية واللباقة والتحكم في ردود الأفعال، والالتزام الصارم بالمعايير دون أحكام شخصية مع مراقبة الوقت، واستخدام أداة الـ 5Ps لتنظيم الملاحظة.", en:"Maintain professionalism, courtesy, and composure; stick strictly to the standards without personal judgment while watching the time; and use the 5 Ps tool to structure observation."}
+        ]}
+      ]
+    },
+    {
+      icon:"7️⃣",
+      title:{ar:"تقييم الامتثال ومصفوفة SAFER", en:"Evaluating Compliance & the SAFER Matrix"},
+      sections:[
+        {icon:"📊", heading:{ar:"نظام تقييم الامتثال الحالي لدى JCI", en:"JCI's Current Compliance Rating System"}, table:{
+          headers:{ar:["التقييم","التعريف"], en:["Rating","Definition"]},
+          rows:[
+            {ar:["مستوفى بالكامل (Fully Met)","استيفاء 80٪ أو أكثر من الملاحظات أو السجلات (مثال: 8 من 10) لمعايير الامتثال."], en:["Fully Met","80% or more of observations/records (e.g., 8 of 10) demonstrate compliance."]},
+            {ar:["غير مستوفى (Not Met)","استيفاء 79٪ أو أقل من الملاحظات أو السجلات؛ أو وجود 79٪ أو أقل من المتطلبات المتعددة داخل عنصر القياس؛ أو وجود سياسة/عملية مطوَّرة لكنها غير مطبَّقة."], en:["Not Met","79% or fewer observations/records show compliance; or 79% or fewer of an element's multiple requirements are present; or a policy/process is developed but not implemented."]}
+          ]
+        }, points:[
+          {ar:"بموجب النظام الحالي، أصبح التقييم على مقياس مبسّط من مستويين فقط (مستوفى بالكامل / غير مستوفى)، بينما كانت الإصدارات السابقة تستخدم أيضاً مستوى وسطياً هو \"مستوفى جزئياً\".", en:"Under the current system, compliance uses a simplified two-tier scale only (Fully Met / Not Met); earlier editions also included a middle \"Partially Met\" tier."}
+        ]},
+        {icon:"🧭", heading:{ar:"مصفوفة SAFER وتوثيق التتبع", en:"The SAFER Matrix & Tracer Documentation"}, points:[
+          {ar:"<b>مصفوفة SAFER (Survey Analysis For Evaluating Risk):</b> أداة بصرية تحدد موقع كل ملاحظة امتثال غير كافٍ وفق بُعدين: احتمالية الضرر (عالية/متوسطة/منخفضة) ونطاق الملاحظة (محدود/نمطي/واسع الانتشار).", en:"<b>The SAFER Matrix:</b> a visual tool plotting each insufficient-compliance finding along two axes — Likelihood to Harm (High/Moderate/Low) and Scope (Limited/Pattern/Widespread)."},
+          {ar:"الملاحظات ذات الاحتمالية العالية، أو المتوسطة مع نطاق نمطي أو واسع الانتشار، تُلزم المنشأة بتقديم خطة تحسين استراتيجية (SIP) خلال 60 يوماً من استلام التقرير النهائي. الملاحظة: المصفوفة لا تُغيّر قواعد قرار الاعتماد بحد ذاتها، بل تساعد على ترتيب أولويات التصحيح.", en:"High-likelihood findings, or moderate-likelihood findings with a pattern/widespread scope, require a Strategic Improvement Plan (SIP) within 60 days of the final report. Note: the matrix itself doesn't change accreditation decision rules — it helps prioritize corrective action."},
+          {ar:"<b>توثيق التتبع:</b> يشمل نموذج التتبع القياسي: المنشأة والقسم، التاريخ والوقت، موضوع ونوع التتبع، فريق التتبع، رقم ملف المريض (إن وُجد)، المستندات المُراجعة، الأسئلة المطروحة وإلى من، المعايير ذات الصلة، تقييم الامتثال، دليل الامتثال، وخطة العمل مع تاريخ الاستحقاق عند اللزوم.", en:"<b>Tracer documentation:</b> a standard tracer form captures the organization/department, date & time, tracer topic & type, the tracer team, patient record number (if any), documents reviewed, questions asked and to whom, relevant standards, compliance rating, evidence of compliance, and an action plan with due date where applicable."}
+        ]}
+      ]
+    }
+  ],
+  reviewBank: {
+    tf: [
+      {ar:"دخلت منهجية التتبع إلى اعتماد المستشفيات عبر JCAHO عام 2002.", en:"Tracer methodology entered hospital accreditation via JCAHO in 2002.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"بدأت JCI استخدام منهجية التتبع دولياً اعتباراً من عام 2010.", en:"JCI began using tracer methodology internationally starting in 2010.", a:false, expAr:"خطأ — بدأت عام 2007.", expEn:"False — it began in 2007."},
+      {ar:"التتبع الفردي (Individual Tracer) يستغرق عادة من ساعة إلى ساعتين.", en:"An Individual Tracer typically takes 1 to 2 hours.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"التتبع القائم على الأنظمة يركّز حالياً على أربعة أنظمة رئيسية.", en:"The System-Based Tracer currently focuses on four main systems.", a:false, expAr:"خطأ — يركّز على ثلاثة أنظمة: الأدوية، مكافحة العدوى، إدارة البيانات.", expEn:"False — it focuses on three: Medication Management, Infection Control, and Data Management."},
+      {ar:"الأسئلة المفتوحة أفضل من الأسئلة المغلقة أثناء التتبع لأنها تكشف الممارسة الفعلية.", en:"Open-ended questions are better than closed questions during tracing because they reveal real practice.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"وفق النظام الحالي لدى JCI، يشمل تقييم الامتثال ثلاثة مستويات: مستوفى بالكامل، مستوفى جزئياً، وغير مستوفى.", en:"Under JCI's current system, compliance rating has three tiers: Fully Met, Partially Met, and Not Met.", a:false, expAr:"خطأ — النظام الحالي مستويان فقط: مستوفى بالكامل وغير مستوفى.", expEn:"False — the current system has only two tiers: Fully Met and Not Met."}
+    ],
+    mcq: [
+      {ar:"من الذي أدخل منهجية التتبع إلى تقييم جودة الرعاية الصحية عام 1973؟", en:"Who introduced tracing into healthcare quality assessment in 1973?",
+       optionsAr:["كسنر وكالك (Kessner & Kalk)","JCAHO","JCI","CBAHI"], optionsEn:["Kessner & Kalk","JCAHO","JCI","CBAHI"],
+       correct:0, expAr:"كسنر وكالك عام 1973.", expEn:"Kessner & Kalk in 1973."},
+      {ar:"كم عدد أنواع التتبع المعتمدة في هذه المادة؟", en:"How many tracer types does this material cover?",
+       optionsAr:["اثنان","ثلاثة","أربعة","خمسة"], optionsEn:["Two","Three","Four","Five"],
+       correct:2, expAr:"أربعة أنواع: فردي، قائم على الأنظمة، برامجي، وبيئة الرعاية.", expEn:"Four types: Individual, System-Based, Program-Specific, and Environment of Care."},
+      {ar:"أي عنصر من عناصر أداة الـ5Ps يشير إلى الأطباء والممرضين والصيادلة؟", en:"Which element of the 5 Ps tool refers to physicians, nurses, and pharmacists?",
+       optionsAr:["العمليات","السياسات","الأشخاص","الأماكن"], optionsEn:["Processes","Policies","Persons","Places"],
+       correct:2, expAr:"عنصر الأشخاص (Persons).", expEn:"The Persons element."},
+      {ar:"ما النسبة المطلوبة لتصنيف الملاحظة كـ'مستوفى بالكامل' وفق النظام الحالي؟", en:"What percentage is required to rate a finding 'Fully Met' under the current system?",
+       optionsAr:["50٪ أو أكثر","70٪ أو أكثر","80٪ أو أكثر","100٪ فقط"], optionsEn:["50% or more","70% or more","80% or more","100% only"],
+       correct:2, expAr:"80٪ أو أكثر من الملاحظات أو السجلات.", expEn:"80% or more of observations/records."},
+      {ar:"مصفوفة SAFER تقيس الملاحظات وفق بُعدين هما:", en:"The SAFER Matrix evaluates findings along two dimensions:",
+       optionsAr:["التكلفة والوقت","احتمالية الضرر ونطاق الملاحظة","عدد الموظفين والمعدات","السرعة والدقة"], optionsEn:["Cost and time","Likelihood of harm and scope","Staffing and equipment","Speed and accuracy"],
+       correct:1, expAr:"احتمالية الضرر ونطاق الملاحظة.", expEn:"Likelihood of harm and scope."},
+      {ar:"خطة التحسين الاستراتيجية (SIP) يجب تقديمها خلال كم يوماً من استلام التقرير النهائي؟", en:"A Strategic Improvement Plan (SIP) must be submitted within how many days of the final report?",
+       optionsAr:["30 يوماً","45 يوماً","60 يوماً","90 يوماً"], optionsEn:["30 days","45 days","60 days","90 days"],
+       correct:2, expAr:"خلال 60 يوماً.", expEn:"Within 60 days."}
+    ],
+    fill: [
+      {ar:"التتبع الذي يتابع مريضاً واحداً من نقطة إلى أخرى عبر رحلته العلاجية يسمى ______.", en:"The tracer that follows a single patient point-to-point across their care journey is called ______.", a:"التتبع الفردي / Individual Tracer"},
+      {ar:"أداة تجمع خمسة عناصر: العمليات، السياسات، الأوراق، الأشخاص، والأماكن تسمى ______.", en:"The tool combining five elements — Processes, Policies, Papers, Persons, and Places — is called ______.", a:"أداة الـ 5Ps"},
+      {ar:"يجب اختيار مواضيع التتبع أثناء التخطيط وفق ما يُعرف بـ ______ (PFAs).", en:"Tracer topics must be selected during planning according to what is known as ______ (PFAs).", a:"مجالات التركيز ذات الأولوية / Priority Focus Areas"},
+      {ar:"مراحل تنفيذ التتبع الأربع هي: التخطيط، التنفيذ، إعداد التقارير، و ______.", en:"The four tracer implementation phases are: Planning, Conducting, Reporting, and ______.", a:"اتخاذ الإجراءات / Acting"},
+      {ar:"الأداة البصرية التي تقيس احتمالية الضرر ونطاق الملاحظة تسمى مصفوفة ______.", en:"The visual tool measuring likelihood of harm and scope is called the ______ Matrix.", a:"SAFER"},
+      {ar:"التصنيف الحالي للامتثال لدى JCI يتكوّن من مستويين فقط هما: مستوفى بالكامل و ______.", en:"JCI's current compliance rating consists of only two tiers: Fully Met and ______.", a:"غير مستوفى / Not Met"}
+    ],
+    short: [
+      {ar:"اشرح الفرق بين الأسئلة المغلقة والأسئلة المفتوحة أثناء التتبع، ولماذا تُفضَّل الأخيرة؟", en:"Explain the difference between closed and open-ended questions during tracing, and why the latter is preferred.",
+       aAr:"الأسئلة المغلقة تستدعي إجابة نعم/لا ولا تكشف الممارسة الفعلية، بينما تتطلب الأسئلة المفتوحة وصف العملية بكلمات الموظف، فتكشف الفجوات وأوجه عدم الاتساق الحقيقية.",
+       aEn:"Closed questions invite a yes/no answer and reveal little about real practice, while open-ended questions require staff to describe the process in their own words, exposing real gaps and inconsistencies."},
+      {ar:"عدد الأنظمة الثلاثة التي يركّز عليها التتبع القائم على الأنظمة (System-Based Tracer).", en:"Name the three systems the System-Based Tracer focuses on.",
+       aAr:"إدارة الأدوية، مكافحة العدوى والوقاية منها، وإدارة البيانات (الجودة وسلامة المرضى).",
+       aEn:"Medication Management, Infection Prevention & Control, and Data Management (Quality & Patient Safety)."},
+      {ar:"ما هي المراحل الأربع لتنفيذ التتبع؟", en:"What are the four phases of tracer implementation?",
+       aAr:"التخطيط، التنفيذ، إعداد التقارير، واتخاذ الإجراءات.",
+       aEn:"Planning, Conducting, Reporting, and Acting."},
+      {ar:"اذكر ثلاثة من استراتيجيات اختيار مجالات التتبع الشائعة أثناء التخطيط.", en:"Name three common tracer-selection strategies used during planning.",
+       aAr:"مثال: أكثر خمسة تشخيصات شيوعاً، أكثر خمسة إجراءات جراحية شيوعاً، تقارير الأحداث والانحرافات (OVRs) — أو أي ثلاثة أخرى من القائمة.",
+       aEn:"Example: top-5 diagnoses, top-5 surgical procedures, Occurrence Variance Reports (OVRs) — or any three others from the list."},
+      {ar:"ما وظيفة مصفوفة SAFER، وما الذي يترتب على الملاحظات عالية الاحتمالية؟", en:"What is the function of the SAFER Matrix, and what follows from high-likelihood findings?",
+       aAr:"تحدد موقع كل ملاحظة امتثال غير كافٍ وفق احتمالية الضرر ونطاقه؛ الملاحظات عالية الاحتمالية (أو المتوسطة مع نطاق نمطي/واسع) تستوجب تقديم خطة تحسين استراتيجية خلال 60 يوماً.",
+       aEn:"It plots each insufficient-compliance finding by likelihood of harm and scope; high-likelihood findings (or moderate ones with pattern/widespread scope) require a Strategic Improvement Plan within 60 days."},
+      {ar:"لماذا تُعتبر منهجية التتبع أكثر فعالية من مراجعة الملفات وحدها وفقاً للمادة؟", en:"Why is tracer methodology considered more effective than chart review alone, per the material?",
+       aAr:"لأنها مرنة وديناميكية وتفاعلية وفعّالة وبسيطة — تجمع بين مراجعة المستندات والمقابلات والملاحظة المباشرة، وتعطي صورة حقيقية متحركة لتقديم الرعاية بدلاً من لقطة ثابتة.",
+       aEn:"Because it is flexible, dynamic, interactive, effective, and simple — combining document review, interviews, and direct observation to give a real, moving picture of care delivery rather than a static snapshot."}
+    ]
+  },
+  quizQuestions: [
+    {ar:"أدخلت هيئة JCAHO منهجية التتبع إلى اعتماد المستشفيات عام 2002.", en:"JCAHO introduced tracer methodology into hospital accreditation in 2002.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"بدأت JCI استخدام منهجية التتبع دولياً منذ عام 2007.", en:"JCI began using tracer methodology internationally since 2007.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"من صاحب فكرة استخدام التتبع في تقييم جودة الرعاية الصحية عام 1973؟", en:"Who originated the idea of using tracing in healthcare quality assessment in 1973?", optionsAr:["كسنر وكالك","JCAHO","JCI","CBAHI"], optionsEn:["Kessner & Kalk","JCAHO","JCI","CBAHI"], correct:0},
+    {ar:"كم نوعاً من التتبع تناولتها هذه المحاضرة؟", en:"How many tracer types does this lecture cover?", optionsAr:["نوعان","ثلاثة أنواع","أربعة أنواع","خمسة أنواع"], optionsEn:["Two types","Three types","Four types","Five types"], correct:2},
+    {ar:"يركّز التتبع القائم على الأنظمة حالياً على إدارة الأدوية ومكافحة العدوى وإدارة البيانات فقط.", en:"The System-Based Tracer currently focuses only on medication management, infection control, and data management.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"عنصر 'الأشخاص' ضمن أداة الـ5Ps يشير إلى:", en:"The 'Persons' element within the 5 Ps tool refers to:", optionsAr:["المستندات والنماذج","الأطباء والممرضين والصيادلة وغيرهم","الأقسام والمرافق","السياسات المعتمدة"], optionsEn:["Documents and forms","Physicians, nurses, pharmacists, and others","Departments and facilities","Approved policies"], correct:1},
+    {ar:"الأسئلة المغلقة تكشف الممارسة الفعلية للموظف بشكل أفضل من الأسئلة المفتوحة.", en:"Closed questions reveal a staff member's actual practice better than open-ended questions.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"وفق النظام الحالي لدى JCI، تُصنَّف الملاحظة 'مستوفاة بالكامل' إذا كانت نسبة الامتثال:", en:"Under JCI's current system, a finding is rated 'Fully Met' if the compliance rate is:", optionsAr:["50٪ أو أكثر","65٪ أو أكثر","80٪ أو أكثر","100٪ فقط"], optionsEn:["50% or more","65% or more","80% or more","100% only"], correct:2},
+    {ar:"خطة التحسين الاستراتيجية (SIP) الناتجة عن مصفوفة SAFER يجب تقديمها خلال:", en:"A Strategic Improvement Plan (SIP) arising from the SAFER Matrix must be submitted within:", optionsAr:["30 يوماً","45 يوماً","60 يوماً","90 يوماً"], optionsEn:["30 days","45 days","60 days","90 days"], correct:2},
+    {ar:"مصفوفة SAFER تقيس الملاحظات وفق بُعدي احتمالية الضرر ونطاق الانتشار.", en:"The SAFER Matrix measures findings along the dimensions of likelihood of harm and scope of spread.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
+  ]
+}
+
+}; // end lectureContent
 
 /* UI & LOCALIZATION */
 const UI = {
@@ -730,26 +936,19 @@ const UI = {
 };
 
 let currentLang = 'ar';
-let quizAnswers = new Array(quizQuestions.length).fill(null);
+let currentLectureIndex = 0;
+let quizAnswers = [];
 let currentStudent = {name:'', email:''};
 let currentRevType = 'tf';
 const ADMIN_PASS = 'Admin123';
-const STORAGE_KEY = 'bmc_jci_lec1_records';
+const STORAGE_KEY = 'bmc_training_records';
 
 /* ---------- CONFIGURE THIS FOR GITHUB / SELF-HOSTED USE ----------
-   1) LECTURE_ID must be UNIQUE for every lecture page on the site. It is
-      what keeps each lecture's results in its own place (its own tab in
-      the same Google Sheet) so results never mix between lectures.
-      When you build the next lecture's HTML file, just change this one
-      value (e.g. 'Lecture2_RiskManagement') — nothing else needs to change,
-      and no new Sheet or Apps Script deployment is required.
-   2) SHEET_API_URL is the SAME Google Apps Script Web App URL for every
-      lecture page on the site (deploy it once, reuse everywhere).
-      Leave it empty ('') only if you are NOT self-hosting (e.g. running
-      purely inside a published Claude artifact, which uses the db
-      capability instead).
+   SHEET_API_URL is the Google Apps Script Web App URL, deployed ONCE and
+   reused for every lecture on the site. Each lecture's own results stay
+   separated automatically via lectureContent[i].lectureId (its own tab in
+   the same Google Sheet) — no per-lecture setup needed.
 ------------------------------------------------------------------- */
-const LECTURE_ID = 'Lecture1_JCI_8th_Edition';
 const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyNwRkY8rTFCvtQGpdzUDx-sJJtgtwz3n87IcFhAhCTe_bZgOu3ntiTLHPQ8Fg4e3XdeA/exec';
 
 /* ---------- Shared results store ----------
@@ -758,9 +957,14 @@ const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbyNwRkY8rTFCvtQGp
       opened as a published Claude artifact — not on GitHub Pages).
    2) The Google Sheet backend configured above (works on GitHub Pages or
       any static host, as long as SHEET_API_URL is filled in). Every request
-      is scoped to LECTURE_ID so multiple lectures share one backend safely.
+      is scoped to the CURRENT lecture's lectureId so multiple lectures
+      share one backend safely.
    3) Local per-device storage as a last-resort fallback.
 ------------------------------------------------------------------- */
+function currentLectureId(){
+  return (lectureContent[currentLectureIndex] && lectureContent[currentLectureIndex].lectureId) || 'General';
+}
+
 let _dbPromise = null;
 function getDb(){
   if(_dbPromise) return _dbPromise;
@@ -776,9 +980,10 @@ function getDb(){
 }
 
 async function saveResultRecord(record){
+  const lectureId = currentLectureId();
   const db = await getDb();
   if(db){
-    await db.collection('results').add({...record, lecture: LECTURE_ID});
+    await db.collection('results').add({...record, lecture: lectureId});
     return;
   }
   if(SHEET_API_URL){
@@ -786,25 +991,27 @@ async function saveResultRecord(record){
       await fetch(SHEET_API_URL, {
         method: 'POST',
         headers: {'Content-Type':'text/plain;charset=utf-8'}, // avoids CORS preflight with Apps Script
-        body: JSON.stringify({...record, lecture: LECTURE_ID})
+        body: JSON.stringify({...record, lecture: lectureId})
       });
       return;
     }catch(e){ /* fall through to local storage */ }
   }
-  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const key = STORAGE_KEY + '_' + lectureId;
+  const records = JSON.parse(localStorage.getItem(key) || '[]');
   records.push(record);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  localStorage.setItem(key, JSON.stringify(records));
 }
 
 async function fetchAllResults(){
+  const lectureId = currentLectureId();
   const db = await getDb();
   if(db){
-    const snap = await db.collection('results').where('lecture','==', LECTURE_ID).orderBy('createdAt','desc').limit(1000).get();
+    const snap = await db.collection('results').where('lecture','==', lectureId).orderBy('createdAt','desc').limit(1000).get();
     return snap.docs.map(d=>d.data());
   }
   if(SHEET_API_URL){
     try{
-      const res = await fetch(SHEET_API_URL + '?lecture=' + encodeURIComponent(LECTURE_ID), {method:'GET'});
+      const res = await fetch(SHEET_API_URL + '?lecture=' + encodeURIComponent(lectureId), {method:'GET'});
       const rows = await res.json();
       return rows.map(r=>({
         name: r.name, email: r.email,
@@ -813,14 +1020,16 @@ async function fetchAllResults(){
       }));
     }catch(e){ /* fall through */ }
   }
-  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const key = STORAGE_KEY + '_' + lectureId;
+  return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
 async function emailHasResult(email){
   const target = email.trim().toLowerCase();
+  const lectureId = currentLectureId();
   const db = await getDb();
   if(db){
-    const snap = await db.collection('results').where('lecture','==', LECTURE_ID).where('emailLower','==', target).limit(1).get();
+    const snap = await db.collection('results').where('lecture','==', lectureId).where('emailLower','==', target).limit(1).get();
     return !snap.empty;
   }
   if(SHEET_API_URL){
@@ -829,7 +1038,8 @@ async function emailHasResult(email){
       return all.some(r => (r.email||'').trim().toLowerCase() === target);
     }catch(e){ /* fall through */ }
   }
-  const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const key = STORAGE_KEY + '_' + lectureId;
+  const records = JSON.parse(localStorage.getItem(key) || '[]');
   return records.some(r => (r.email || '').trim().toLowerCase() === target);
 }
 
@@ -841,6 +1051,10 @@ function setLang(lang){
   document.getElementById('btn-en').classList.toggle('active', lang==='en');
   applyStatic();
   renderLectures();
+  if(document.getElementById('view-lecture').style.display !== 'none'){
+    const lec = lectures[currentLectureIndex];
+    document.getElementById('lec-bar-title').textContent = lang==='ar' ? lec.titleAr : lec.titleEn;
+  }
   renderModules();
   renderReview(currentRevType);
   renderQuiz();
@@ -880,11 +1094,40 @@ function applyStatic(){
 
 /* VIEW SWITCHING */
 function openLecture(index){
-  if(index === 0){
-    document.getElementById('view-portal').style.display = 'none';
-    document.getElementById('view-lecture').style.display = 'block';
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  }
+  const lec = lectures[index];
+  if(!lec || lec.status !== 'available' || !lectureContent[index]) return;
+
+  currentLectureIndex = index;
+  quizAnswers = new Array(lectureContent[index].quizQuestions.length).fill(null);
+  currentStudent = {name:'', email:''};
+
+  // Reset the viewer to a clean state (explain tab, empty quiz gate, locked admin)
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-explain').classList.add('active');
+  document.querySelectorAll('.lec-page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-explain').classList.add('active');
+
+  document.getElementById('stu-name').value = '';
+  document.getElementById('stu-email').value = '';
+  document.getElementById('gate-error').textContent = '';
+  document.getElementById('quiz-gate').style.display = 'block';
+  document.getElementById('quiz-body').style.display = 'none';
+  document.getElementById('quiz-result').style.display = 'none';
+
+  document.getElementById('admin-pass').value = '';
+  document.getElementById('admin-error').textContent = '';
+  document.getElementById('admin-gate').style.display = 'block';
+  document.getElementById('admin-body').style.display = 'none';
+
+  document.getElementById('lec-bar-title').textContent = currentLang==='ar' ? lec.titleAr : lec.titleEn;
+
+  renderModules();
+  renderReview('tf');
+  renderQuiz();
+
+  document.getElementById('view-portal').style.display = 'none';
+  document.getElementById('view-lecture').style.display = 'block';
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function closeLecture(){
@@ -948,10 +1191,11 @@ function renderLectures(){
   }).join('');
 }
 
-/* LECTURE 1 LOGIC */
+/* PER-LECTURE VIEWER LOGIC */
 function renderModules(){
   const container = document.getElementById('modules-container');
   container.innerHTML = '';
+  const modules = lectureContent[currentLectureIndex].modules;
   modules.forEach((mod, mi)=>{
     const card = document.createElement('div');
     card.className = 'card';
@@ -962,7 +1206,7 @@ function renderModules(){
       }
       if(sec.table){
         const h = currentLang==='ar' ? sec.table.headers.ar : sec.table.headers.en;
-        inner = `<div style="overflow-x:auto;"><table class="doc-table"><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${
+        inner += `<div style="overflow-x:auto;"><table class="doc-table"><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${
           sec.table.rows.map(r=>{
             const row = currentLang==='ar' ? r.ar : r.en;
             return `<tr>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`;
@@ -995,7 +1239,7 @@ function renderReview(type){
   const t = UI[currentLang];
   const container = document.getElementById('review-container');
   container.innerHTML = '';
-  const items = reviewBank[type];
+  const items = lectureContent[currentLectureIndex].reviewBank[type];
 
   items.forEach((item, i)=>{
     const div = document.createElement('div');
@@ -1039,6 +1283,7 @@ document.querySelectorAll('.rev-tab').forEach(btn=>{
 function renderQuiz(){
   const container = document.getElementById('quiz-questions');
   container.innerHTML = '';
+  const quizQuestions = lectureContent[currentLectureIndex].quizQuestions;
   quizQuestions.forEach((q, qi)=>{
     const text = currentLang==='ar' ? q.ar : q.en;
     const opts = currentLang==='ar' ? q.optionsAr : q.optionsEn;
@@ -1073,13 +1318,14 @@ document.getElementById('start-quiz-btn').addEventListener('click', async ()=>{
 
   err.textContent = '';
   currentStudent = {name, email};
-  quizAnswers = new Array(quizQuestions.length).fill(null);
+  quizAnswers = new Array(lectureContent[currentLectureIndex].quizQuestions.length).fill(null);
   document.getElementById('quiz-gate').style.display = 'none';
   document.getElementById('quiz-body').style.display = 'block';
   renderQuiz();
 });
 
 document.getElementById('submit-quiz-btn').addEventListener('click', async ()=>{
+  const quizQuestions = lectureContent[currentLectureIndex].quizQuestions;
   let score = 0;
   const detail = quizQuestions.map((q, qi)=>{
     const isCorrect = quizAnswers[qi] === q.correct;
@@ -1204,7 +1450,7 @@ document.getElementById('export-btn').addEventListener('click', async ()=>{
   records.forEach(r=>{
     csv += `"${r.name}","${r.email}",${r.score},${r.total},"${r.pct}%","${r.date}"\n`;
   });
-  const filename = 'BMC_JCI_Lec1_Scores.csv';
+  const filename = 'BMC_' + currentLectureId() + '_Scores.csv';
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
 
   try{
