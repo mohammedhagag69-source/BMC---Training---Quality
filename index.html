@@ -571,11 +571,22 @@ const lectures = [
     durationAr: "ساعتان تدريبيتان", durationEn: "2 Training Hours",
     sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
     sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
+  },
+  {
+    status: "available",
+    isBuiltIn: true,
+    titleAr: "المحاضرة الثالثة: أساسيات تحليل السبب الجذري (RCA)",
+    titleEn: "Lecture 3: Root Cause Analysis (RCA) Fundamentals",
+    descAr: "وحدة متقدمة موجَّهة لأخصائيي الجودة الصحية وفرق سلامة المرضى، تغطي مفهوم RCA وتطوره، نموذج الجبن السويسري وثقافة العدالة، التمييز بين العَرَض والعامل المساهم والسبب الجذري، مخطط عظم السمكة بإطاري 5P وَ5M، تقنية الأسئلة الخمسة، وصولاً إلى خطة العمل التصحيحية والوقائية (CAPA) وقياس فعاليتها.",
+    descEn: "An advanced module for healthcare quality specialists and patient safety teams, covering RCA's concept and evolution, the Swiss Cheese Model and Just Culture, distinguishing symptoms/contributing factors/root causes, the fishbone diagram (5P & 5M), the 5 Whys technique, and building a corrective/preventive action plan (CAPA) with effectiveness measures.",
+    durationAr: "ساعتان ونصف تدريبية", durationEn: "2.5 Training Hours",
+    sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
+    sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
   }
 ];
 
-// المحاضرات من 3 إلى 25: محجوبة العناوين والمرفقات
-for(let i = 3; i <= 25; i++){
+// المحاضرات من 4 إلى 25: محجوبة العناوين والمرفقات
+for(let i = 4; i <= 25; i++){
   lectures.push({
     status: "coming",
     titleAr: "", titleEn: "", descAr: "", descEn: "",
@@ -866,6 +877,295 @@ const lectureContent = {
     {ar:"وفق النظام الحالي لدى JCI، تُصنَّف الملاحظة 'مستوفاة بالكامل' إذا كانت نسبة الامتثال:", en:"Under JCI's current system, a finding is rated 'Fully Met' if the compliance rate is:", optionsAr:["50٪ أو أكثر","65٪ أو أكثر","80٪ أو أكثر","100٪ فقط"], optionsEn:["50% or more","65% or more","80% or more","100% only"], correct:2},
     {ar:"خطة التحسين الاستراتيجية (SIP) الناتجة عن مصفوفة SAFER يجب تقديمها خلال:", en:"A Strategic Improvement Plan (SIP) arising from the SAFER Matrix must be submitted within:", optionsAr:["30 يوماً","45 يوماً","60 يوماً","90 يوماً"], optionsEn:["30 days","45 days","60 days","90 days"], correct:2},
     {ar:"مصفوفة SAFER تقيس الملاحظات وفق بُعدي احتمالية الضرر ونطاق الانتشار.", en:"The SAFER Matrix measures findings along the dimensions of likelihood of harm and scope of spread.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
+  ]
+},
+
+/* ---------------- LECTURE 3 ---------------- */
+2: {
+  lectureId: 'Lecture3_RootCauseAnalysis',
+  modules: [
+    {
+      icon:"1️⃣",
+      title:{ar:"مقدمة في تحليل السبب الجذري (RCA) في الرعاية الصحية", en:"Introduction to Root Cause Analysis (RCA) in Healthcare"},
+      sections:[
+        {icon:"🎯", heading:{ar:"التعريف والمفهوم", en:"Definition & Concept"}, points:[
+          {ar:"<b>التعريف:</b> تحليل السبب الجذري (RCA) عملية منهجية وجماعية تُستخدم لتحديد الأسباب الأساسية للأحداث العكسية (Adverse Events) أو الحوادث الوشيكة (Near Misses)، بهدف تطوير إجراءات تصحيحية تمنع تكرارها. تصفها إرشادات CMS بأنها عملية منظَّمة يقودها فريق من أكثر الناس دراية بالحدث، وتكشف الاختلالات في العمليات والنُّظُم لا في أداء الأفراد.", en:"<b>Definition:</b> Root Cause Analysis (RCA) is a systematic, team-based process used to identify the underlying causes of adverse events or near misses, to develop corrective actions preventing recurrence. CMS guidance describes it as a structured process led by those most familiar with the event, revealing flaws in processes and systems rather than individual performance."},
+          {ar:"<b>الأسئلة الثلاثة الأساسية:</b> ماذا حدث؟ (تحديد الوقائع والتسلسل الزمني) — لماذا حدث؟ (تحديد العوامل المساهمة والأسباب الجذرية) — ماذا سنفعل لنمنع تكراره؟ (خطة الإجراءات وقياس فعاليتها).", en:"<b>Three core questions:</b> What happened? (facts & timeline) — Why did it happen? (contributing factors & root causes) — What will we do to prevent recurrence? (action plan & effectiveness measurement)."},
+          {ar:"<b>جوهر العقلية:</b> الهدف ليس معرفة 'ماذا حدث؟' فحسب، بل 'لماذا حدث؟' وكيف نغيّر النظام لحماية المريض مستقبلاً. وأي تحليل ينتهي عند اسم شخص أو وصف لفعله يكون قد توقف قبل أن يبدأ التحليل الحقيقي.", en:"<b>Core mindset:</b> the goal isn't only 'what happened' but 'why', and how to change the system to protect future patients. An analysis that ends at a person's name or action has stopped before real analysis began."}
+        ]},
+        {icon:"🕰️", heading:{ar:"لمحة عن تطور الممارسة", en:"Evolution of the Practice"}, points:[
+          {ar:"<b>سياسة الأحداث الجسيمة (Sentinel Event Policy):</b> أرست The Joint Commission سياسة رسمية في منتصف التسعينيات تتطلب من المنشآت المعتمَدة إجراء 'تحليل نُظُمي شامل' (أكثر أشكاله شيوعاً هو RCA)، ثم وضع خطة عمل تصحيحية وتنفيذها ومتابعة فعاليتها.", en:"<b>Sentinel Event Policy:</b> The Joint Commission established a formal policy in the mid-1990s requiring accredited organizations to conduct a 'comprehensive systematic analysis' (most commonly RCA), then develop, implement, and monitor a corrective action plan."},
+          {ar:"<b>RCA²:</b> في عام 2015 أصدرت National Patient Safety Foundation وثيقة 'RCA²: Improving Root Cause Analyses and Actions to Prevent Harm'، مضيفةً رمز 'الأس 2' للتأكيد على أن الإجراء (Action) لا يقل أهمية عن التحليل نفسه — فتحليل بلا إجراءات منفَّذة ومقيسة يُعدّ جهداً ضائعاً. تبنّت IHI هذا الإطار ضمن Patient Safety Essentials Toolkit.", en:"<b>RCA²:</b> in 2015 the National Patient Safety Foundation published 'RCA²: Improving Root Cause Analyses and Actions to Prevent Harm', adding the '²' to emphasize that Action matters as much as analysis — analysis without implemented, measured actions is wasted effort. IHI adopted this framework in its Patient Safety Essentials Toolkit."},
+          {ar:"<b>أدوات CMS:</b> تنشر CMS ضمن برنامج QAPI دليلاً لإجراء RCA ضمن مشاريع تحسين الأداء (PIPs) يقسّم العملية إلى سبع خطوات، مع أدوات للمخطط السمكي وتقنية الأسئلة الخمسة، مع التنصيص على أن استخدام أدواتها غير إلزامي ولا يضمن بذاته الامتثال التنظيمي.", en:"<b>CMS tools:</b> under QAPI, CMS publishes a seven-step RCA guide for Performance Improvement Projects (PIPs), including fishbone and 5-Whys tools, explicitly noting that using its tools is not mandatory and doesn't by itself guarantee regulatory compliance."}
+        ]}
+      ]
+    },
+    {
+      icon:"2️⃣",
+      title:{ar:"التفكير النُّظُمي وثقافة العدالة", en:"Systems Thinking & Just Culture"},
+      sections:[
+        {icon:"🧀", heading:{ar:"نموذج الجبن السويسري (Swiss Cheese Model)", en:"The Swiss Cheese Model"}, points:[
+          {ar:"تقوم فلسفة RCA الحديثة على أن الأداء الفردي عَرَض لمشكلات نُظُمية أكبر وليس سبباً مستقلاً؛ وتذهب مواد VA التدريبية إلى أن الضعف البشري 'بالكاد يكون سبباً جذرياً' بحد ذاته.", en:"Modern RCA philosophy holds that individual performance is a symptom of larger systemic problems, not an independent cause; VA training materials note human weakness is 'hardly ever a root cause' by itself."},
+          {ar:"قدّم James Reason نموذج الجبن السويسري: يشبّه الدفاعات المتعددة في النظام (التصميم، السياسات، التدريب، الإشراف، التقنية، الحواجز الفيزيائية) بشرائح من الجبن، لكل منها ثغرات. تقع الحوادث الجسيمة حين تصطف ثغرات عدة عبر الطبقات في اللحظة نفسها فيمر الخطر إلى المريض.", en:"James Reason's Swiss Cheese Model likens a system's multiple defenses (design, policy, training, supervision, technology, physical barriers) to slices of cheese, each with holes. Sentinel events occur when several holes align across layers at once, letting harm reach the patient."},
+          {ar:"<b>الإخفاقات الفعّالة (Active Failures):</b> أفعال أو تقصيرات في 'الخط الأمامي' يظهر أثرها مباشرة. <b>الظروف الكامنة (Latent Conditions):</b> قرارات وتصاميم وسياسات وموارد تسبق الحدث بزمن وتهيّئ الظروف للخطأ. إصلاح الفعل الظاهر وحده يترك الثغرات الكامنة مفتوحة لتظهر في حادث آخر.", en:"<b>Active failures:</b> front-line acts or omissions with immediate visible effect. <b>Latent conditions:</b> decisions, designs, policies, and resources predating the event that set up the conditions for error. Fixing only the visible act leaves latent gaps open to surface in another incident."}
+        ]},
+        {icon:"⚖️", heading:{ar:"ثقافة العدالة (Just Culture)", en:"Just Culture"}, points:[
+          {ar:"لا يمكن أن ينجح RCA في بيئة تخشى الإبلاغ؛ فإذا عوقب العاملون على أخطائهم غير المقصودة أخفوا المعلومات، وخسر فريق التحليل أهم مصدر للحقيقة. يقدّم نموذج Just Culture (المرتبط باسم David Marx) إطاراً عادلاً يوازن بين مساءلة الفرد ومسؤولية النظام.", en:"RCA cannot succeed in an environment that fears reporting; punishing staff for unintentional errors drives information underground. The Just Culture model (David Marx) balances individual accountability with system responsibility."}
+        ], table:{
+          headers:{ar:["نوع السلوك","الوصف","الاستجابة التنظيمية"], en:["Behavior Type","Description","Organizational Response"]},
+          rows:[
+            {ar:["خطأ بشري (Human Error)","انحراف غير مقصود عن الأداء المتوقع.","مواساة ودعم للعامل، ومراجعة تصميم العملية التي سمحت بالخطأ."], en:["Human Error","An unintentional deviation from expected performance.","Console and support the staff member; review the process design that allowed the error."]},
+            {ar:["سلوك محفوف بالمخاطر (At-Risk)","اختيار واعٍ لتجاوز إجراء آمن مع اعتقاد خاطئ بأن الخطر ضئيل أو مبرَّر.","توجيه وتدريب (Coaching) ومعالجة الحوافز التي شجّعت الاختصار."], en:["At-Risk Behavior","A conscious choice to bypass a safe procedure, wrongly believing the risk is minor or justified.","Coaching, plus addressing the incentives that encouraged the shortcut."]},
+            {ar:["سلوك متهور (Reckless)","تجاهل واعٍ ومتعمَّد لخطر جوهري معروف.","إجراء إداري/تأديبي وفق سياسة المنشأة."], en:["Reckless Behavior","Conscious, deliberate disregard of a known substantial risk.","Administrative/disciplinary action per organizational policy."]}
+          ]
+        }},
+        {icon:"🔁", heading:{ar:"انعكاس ذلك على RCA", en:"Implications for RCA"}, points:[
+          {ar:"توصي وثائق RCA² وأداة IHI بألا تُعالَج الأحداث 'المستحقة للوم' (كالأفعال الجنائية أو المتعمَّدة غير الآمنة) عبر RCA، بل تُحال إلى مسارات الموارد البشرية؛ أما سائر الأحداث فتُحلَّل بمنظور النظام. والتصنيف الخاطئ ضرره مزدوج: معاملة الخطأ البشري كتهور تقتل ثقة الإبلاغ، ومعاملة التهور كخطأ نُظُمي يُفلت الخطر من المساءلة.", en:"RCA² and IHI guidance recommend 'blameworthy' events (criminal or deliberately unsafe acts) not be handled via RCA but referred to HR; all other events are analyzed from a systems perspective. Misclassification cuts both ways: treating human error as recklessness destroys reporting trust, while treating recklessness as a systems error lets real risk escape accountability."}
+        ]}
+      ]
+    },
+    {
+      icon:"3️⃣",
+      title:{ar:"متى نجري RCA؟ الفريق ومراحل العملية", en:"When to Conduct RCA? The Team & Process Phases"},
+      sections:[
+        {icon:"📐", heading:{ar:"التحديد القائم على الخطورة — مصفوفة SAC", en:"Risk-Based Prioritization — the SAC Matrix"}, points:[
+          {ar:"لا تُحلَّل كل الأحداث بالعمق نفسه؛ تشجّع RCA² على ترتيب الأولويات بحسب المخاطر، ومن أشهر الأدوات مصفوفة رمز تقييم السلامة (SAC) الصادرة عن VA، التي تجمع بين جسامة الحدث (كارثي/كبير/متوسط/طفيف) واحتمال تكراره (متكرر/عرضي/غير شائع/نادر).", en:"Not every event warrants the same depth of analysis; RCA² encourages risk-based prioritization. The VA's Safety Assessment Code (SAC) matrix combines event severity (catastrophic/major/moderate/minor) with likelihood of recurrence (frequent/occasional/uncommon/remote)."},
+          {ar:"الدرجة 3 (أعلى خطورة) والدرجة 2 (متوسطة) تستوجبان إجراء RCA، بينما الدرجة 1 (أدنى خطورة) تُجمَّع مع أحداث مشابهة. وفي الحوادث الوشيكة تُقدَّر الجسامة على أساس 'أسوأ سيناريو معقول' على مستوى النظام.", en:"A score of 3 (highest risk) or 2 (moderate) triggers an RCA, while a score of 1 is aggregated with similar events. For near misses, severity is estimated based on the 'worst plausible outcome' at the system level."}
+        ]},
+        {icon:"👥", heading:{ar:"فريق RCA وشروط نجاحه", en:"The RCA Team & Success Conditions"}, points:[
+          {ar:"<b>التعدد التخصصي:</b> يضم الفريق من هم أدرى بالعملية: الخط الأمامي (تمريض، أطباء، صيادلة)، والجودة وسلامة المرضى، وعند الحاجة الهندسة الطبية أو الصيانة أو تقنية المعلومات.", en:"<b>Multidisciplinary:</b> the team includes those most familiar with the process — front-line staff, Quality & Patient Safety, and, when needed, biomedical engineering, maintenance, or IT."},
+          {ar:"<b>الوقت المحمي ودعم القيادة:</b> توصي RCA² بمنح العاملين وقتاً ضمن دوامهم للمشاركة، ومشاركة القيادة العليا في دعم العملية والموافقة على الإجراءات ومراجعة فعالية عملية RCA نفسها سنوياً على الأقل.", en:"<b>Protected time & leadership support:</b> RCA² recommends dedicated time for staff participation, and senior leadership support, action sign-off, and at least annual review of RCA's own effectiveness."},
+          {ar:"<b>المقابلات والتغذية الراجعة:</b> يُوصى بأخذ إفادات المعنيين بأسلوب غير اتهامي، وتنص RCA² على إبلاغ العاملين المعنيين والمرضى أو أسرهم بنتائج التحليل.", en:"<b>Interviews & feedback:</b> statements should be taken in a non-accusatory manner; RCA² calls for informing involved staff and the patient/family of the findings."}
+        ]},
+        {icon:"🗂️", heading:{ar:"مراحل عملية RCA الأربع", en:"The Four RCA Process Phases"}, table:{
+          headers:{ar:["المرحلة","ما يُنجَز فيها","المخرَج"], en:["Phase","What Happens","Output"]},
+          rows:[
+            {ar:["1. الوقائع","جمع الوثائق والمقابلات؛ بناء تسلسل زمني بالتاريخ والوقت والمكان والوظائف (لا بالأسماء).","خط زمني/مخطط تسلسل للحدث."], en:["1. Facts","Gather documents and interviews; build a timeline by date/time/place/role (not names).","Event timeline/flow diagram."]},
+            {ar:["2. التحليل","توسيع البحث (مخطط السمكة)، ثم التعمق (الأسئلة الخمسة)، وتطبيق قواعد السببية.","عبارات سببية موثَّقة بالأدلة."], en:["2. Analysis","Widen the search (fishbone), then deepen (5 Whys), and apply causation rules.","Evidence-documented causal statements."]},
+            {ar:["3. الإجراءات","عصف ذهني للحلول، وتصنيف قوتها في هرم الإجراءات، واعتماد القيادة.","خطة عمل بمسؤول وموعد."], en:["3. Actions","Brainstorm solutions, rate their strength on the Action Hierarchy, get leadership sign-off.","Action plan with owner and due date."]},
+            {ar:["4. القياس والمتابعة","تحديد مؤشرات العملية والنتيجة، والرصد، والتعديل، ثم الإغلاق والتغذية الراجعة.","تقرير فعالية وإغلاق."], en:["4. Measurement & Follow-up","Define process/outcome indicators, monitor, adjust, then close and feed back.","Effectiveness report and closure."]}
+          ]
+        }},
+        {icon:"🏛️", heading:{ar:"الربط بمتطلبات الاعتماد", en:"Link to Accreditation Requirements"}, points:[
+          {ar:"تتوقع The Joint Commission من المنشآت المعتمَدة، عند وقوع حدث جسيم، إجراء تحليل نُظُمي شامل لتحديد السبب، ثم إعداد خطة تصحيحية وتنفيذها ومتابعة فعاليتها. وتوفّر إطاراً من 24 سؤالاً لتنظيم التحليل، يغطي العمليات والعوامل البشرية والمعدات والبيئة والعوامل التنظيمية والتوظيف والمؤهلات وخطط الطوارئ والتواصل والتقنية.", en:"The Joint Commission expects accredited organizations, upon a sentinel event, to perform a comprehensive systemic analysis, then develop, implement, and monitor a corrective plan. It offers a 24-question framework covering processes, human factors, equipment, environment, organizational factors, staffing/qualifications, contingency plans, communication, and technology."},
+          {ar:"خطة العمل تُعدّ مقبولة إذا حدّدت تغييرات قابلة للتنفيذ لخفض المخاطر (أو بيّنت مسوّغ عدم التغيير)، وذكرت من المسؤول عن التنفيذ ومتى، وكيف ستُقيَّم فعالية الإجراءات. تتباين المصادر في وصف مهلة التسليم (45 يوماً تقويمياً أو 45 يوم عمل، ومهلة 72 ساعة لبدء العملية)، فيجب الرجوع دائماً إلى النسخة السارية لسياسة جهة الاعتماد الخاصة بمنشأتك.", en:"An action plan is acceptable if it specifies implementable risk-reduction changes (or justifies no change), names who is responsible and when, and how effectiveness will be measured. Sources vary on the submission deadline (45 calendar/business days, plus a 72-hour window to begin) — always check your accrediting body's current policy."}
+        ]}
+      ]
+    },
+    {
+      icon:"4️⃣",
+      title:{ar:"العَرَض والعامل المساهم والسبب الجذري", en:"Symptom, Contributing Factor & Root Cause"},
+      sections:[
+        {icon:"🔍", heading:{ar:"لماذا يهم التمييز؟ والتعريفات الثلاثة", en:"Why the Distinction Matters — Three Definitions"}, points:[
+          {ar:"أكثر ما يُضعف RCA هو الخلط بين مستويات السببية؛ فمعاملة العَرَض كسبب أشبه بتقليم فروع الشجرة (تعود المشكلة للنمو لأن الجذر باقٍ)، ومعاملة العامل المساهم كسبب جذري يُنفق موارد على ظرف ثانوي دون منع التكرار.", en:"The biggest weakness in RCA is confusing levels of causation; treating a symptom as a cause is like pruning branches (the problem regrows since the root remains), and treating a contributing factor as the root cause spends resources on a secondary condition without preventing recurrence."}
+        ], table:{
+          headers:{ar:["المستوى","التعريف","السؤال المفتاحي"], en:["Level","Definition","Key Question"]},
+          rows:[
+            {ar:["العَرَض (Symptom)","النتيجة الظاهرة أو المشكلة السطحية؛ ما نراه أولاً.","ماذا حدث؟"], en:["Symptom","The visible outcome or surface problem — what we see first.","What happened?"]},
+            {ar:["العامل المساهم (Contributing Factor)","ظرف زاد احتمال وقوع الحدث لكنه بمفرده لم يكن ليسبّبه مباشرة؛ إزالته وحدها قد لا تمنع التكرار.","ما الذي كان يجري في تلك اللحظة فزاد احتمال وقوع الحدث؟"], en:["Contributing Factor","A condition that increased likelihood but wouldn't have directly caused it alone; removing it alone may not prevent recurrence.","What was happening at that moment that increased the likelihood?"]},
+            {ar:["السبب الجذري (Root Cause)","الخلل الأساسي في النظام أو العملية أو التصميم الذي أدّى مباشرة إلى وقوع الحدث، ولو صُحّح لمنع الحدث وما يشبهه.","لماذا وُجد هذا الظرف أصلاً ولم يمنعه النظام؟"], en:["Root Cause","The fundamental system/process/design flaw that directly led to the event — correcting it would prevent this and similar events.","Why did this condition exist and go unprevented by the system?"]}
+          ]
+        }},
+        {icon:"🥇", heading:{ar:"القاعدة الذهبية — اختبار السبب الجذري", en:"The Golden Rule — Root Cause Test"}, points:[
+          {ar:"اسأل الفريق: 'إذا صُحِّح هذا العامل أو أُزيل، هل من المحتمل أن تتكرر المشكلة؟' — إذا كانت الإجابة 'نعم' فهذا مجرد سبب مساهم؛ وإذا كانت 'لا' فهذا هو السبب الجذري الحقيقي.", en:"Ask the team: 'If this factor were corrected or removed, would the problem likely recur?' — 'Yes' means a mere contributing factor; 'No' means the true root cause."},
+          {ar:"هذا الاختبار أداة حكم مهنية (Heuristic) لا معياراً رسمياً؛ يُستحسن دعمه بالأدلة والبيانات وبتطبيق قواعد السببية الخمس. وقد يوجد أكثر من سبب جذري لحدث واحد، فيصير السؤال: هل يخفّض تصحيحه بدرجة معتبرة احتمال التكرار أو شدة أثره؟", en:"This test is a professional heuristic, not a formal standard; it should be backed by evidence and the Five Rules of Causation. More than one root cause may exist per event, so the real question becomes whether correcting it meaningfully reduces recurrence likelihood or severity."},
+          {ar:"<b>اختبار العكس المكمِّل:</b> لو أُزيل هذا العامل، هل كان الحدث سيقع رغم ذلك بسبب مشابه آخر؟ إن كانت الإجابة نعم، فلم نصل بعد إلى الجذر.", en:"<b>Complementary reverse test:</b> if this factor were removed, would the event still have occurred via another similar cause? If yes, we haven't reached the root yet."}
+        ]},
+        {icon:"📏", heading:{ar:"المعيار الرسمي: قواعد السببية الخمس", en:"The Formal Standard: Five Rules of Causation"}, points:[
+          {ar:"تعتمد RCA² قواعد السببية الخمس التي طوّرتها VA National Center for Patient Safety، مقتبسة من عمل David Marx، وصُمّمت كحدّ أدنى لجودة توثيق الأسباب استجابةً للانحيازات التي نحملها جميعاً أثناء التحقيق.", en:"RCA² adopts the Five Rules of Causation developed by the VA National Center for Patient Safety, drawn from David Marx's work, designed as a minimum documentation-quality bar against investigator bias."}
+        ], table:{
+          headers:{ar:["القاعدة","المعنى"], en:["Rule","Meaning"]},
+          rows:[
+            {ar:["1. إظهار علاقة السبب والنتيجة","يجب أن تبيّن العبارة الرابط الواضح بين السبب والنتيجة السيئة، وأن تكون كل حلقة واضحة."], en:["1. Show a clear cause-and-effect link","The statement must show a clear link between cause and bad outcome, with every link explicit."]},
+            {ar:["2. لا صفات سلبية أو غامضة","استخدم أوصافاً محددة ودقيقة بدل كلمات سلبية أو مبهمة."], en:["2. No negative or vague descriptors","Use specific, precise descriptions instead of vague or judgmental words."]},
+            {ar:["3. لكل خطأ بشري سبب سابق","يجب أن يسبق الخطأ البشري سبب نُظُمي أو عامل بشري (Human Factors) يفسّره."], en:["3. Every human error has a preceding cause","A human error must be preceded by a systemic or human-factors cause that explains it."]},
+            {ar:["4. مخالفة الإجراء ليست سبباً جذرياً","لكل مخالفة للإجراء سبب سابق يفسّرها."], en:["4. A procedural violation is not a root cause","Every procedural violation has a preceding cause that explains it."]},
+            {ar:["5. عدم التصرف سببي فقط عند وجود واجب مسبق","لا يكون التقصير سبباً إلا إذا كان هناك واجب أو معيار يُلزم بالفعل."], en:["5. Inaction is causal only where a duty existed","Failure to act is only causal if there was a pre-existing duty or standard requiring the action."]}
+          ]
+        }},
+        {icon:"📝", heading:{ar:"هيكل العبارة السببية وقائمة فحص السبب الجذري", en:"Causal Statement Structure & Root Cause Checklist"}, points:[
+          {ar:"تنص RCA² على أن تُكتب العبارة السببية بصيغة: [السبب النُّظُمي المحدد] أدّى إلى [أثر على العامل أو العملية] مما زاد احتمال [الحدث الضار]. مثال منشور: 'كثرة النشاط والضجيج في قسم الطوارئ (السبب) أدّت إلى تشتّت الطبيب المقيم عند إدخال أوامر الأدوية (الأثر) مما زاد احتمال طلب جرعة خاطئة (الحدث)'.", en:"RCA² specifies the causal statement format: [specific systemic cause] led to [effect on person/process], increasing the likelihood of [the harmful event]. Published example: 'High activity and noise in the ER (cause) distracted the resident entering medication orders (effect), increasing the likelihood of an incorrect dose order (event).'"},
+          {ar:"<b>قائمة فحص سريعة قبل اعتماد أي سبب جذري:</b> هل هو خلل نظام/عملية/تصميم لا وصف لفعل شخص؟ هل يفسّر 'لماذا' وقع الحدث دون الاكتفاء بوصف ما جرى؟ هل يُجيب اختبار 'هل ستتكرر المشكلة لو صُحِّح؟' بـ'لا'؟ هل هو محدد وقابل للتصرف؟ هل يقع ضمن قدرة المنشأة على التصحيح؟ وهل يحقق قواعد السببية الخمس وتدعمه أدلة؟", en:"<b>Quick checklist:</b> Is it a system/process/design flaw, not a person's act? Does it explain 'why' beyond describing what happened? Does the recurrence test answer 'no'? Is it specific and actionable? Is it within the organization's control? Does it satisfy the Five Rules and have evidence?"}
+        ]},
+        {icon:"⚠️", heading:{ar:"أخطاء شائعة عند تحديد السبب الجذري", en:"Common Pitfalls in Identifying Root Causes"}, points:[
+          {ar:"التوقف عند 'الخطأ البشري' كوصف نهائي بدل السؤال عمّا في النظام سمح بالخطأ أو لم يلتقطه؛ والخلط بين الملاحظة السلوكية والتفسير الحقيقي؛ والاكتفاء بسبب واحد رغم أن الأحداث الجسيمة غالباً نتاج تراكم عوامل عبر طبقات.", en:"Stopping at 'human error' as a final description instead of asking what in the system allowed or failed to catch it; confusing behavioral observation with real explanation; and settling for a single cause even though sentinel events are usually the product of layered factors."},
+          {ar:"الصياغة العامة غير المحددة (مثل 'نقص تدريب')؛ التوصية بإجراءات ضعيفة فقط دون معالجة الثغرة النُّظُمية؛ الانحياز للتفسير المبكر (Anchoring)؛ واعتبار عامل خارجي لا نملك تغييره سبباً جذرياً فنُفلت ما نستطيع إصلاحه فعلاً.", en:"Vague, non-specific wording (e.g., 'lack of training'); recommending only weak actions without fixing the systemic gap; early anchoring on the first plausible explanation; and labeling an uncontrollable external factor as the root cause, letting what we could actually fix go unaddressed."}
+        ]}
+      ]
+    },
+    {
+      icon:"5️⃣",
+      title:{ar:"مخطط عظم السمكة (Ishikawa) للعصف الذهني المنظَّم", en:"The Fishbone (Ishikawa) Diagram for Structured Brainstorming"},
+      sections:[
+        {icon:"🐟", heading:{ar:"التعريف والغرض والقيمة المضافة", en:"Definition, Purpose & Added Value"}, points:[
+          {ar:"مخطط السبب والنتيجة، المعروف بمخطط عظم السمكة أو مخطط Ishikawa نسبة إلى Kaoru Ishikawa، أداة مرئية للعصف الذهني المنظَّم؛ يُوضع الحدث عند 'رأس السمكة'، وتمثّل 'العظام الرئيسية' فئات الأسباب، وتُدوَّن الأسباب المحتملة على 'عظام فرعية' تحت كل فئة. تصفه إرشادات CMS بأنه أكثر تنظيماً من أدوات أخرى للعصف الذهني مثل الأسئلة الخمسة.", en:"The cause-and-effect diagram, known as the fishbone or Ishikawa diagram (after Kaoru Ishikawa), is a visual tool for structured brainstorming: the event sits at the 'fish head', 'main bones' represent cause categories, and possible causes are noted as 'sub-bones'. CMS guidance describes it as more organized than other brainstorming tools like 5 Whys."},
+          {ar:"<b>القيمة المضافة:</b> توسيع دائرة البحث قبل التعمق (يمنع الانحياز المبكر)، ضمان مشاركة التخصصات (لكل فئة أصحاب خبرة مختلفون)، تنظيم الأفكار في خريطة مصنَّفة، والتكامل مع الأسئلة الخمسة (تُطرح تحت الفروع المرشّحة حتى بلوغ الجذر).", en:"<b>Added value:</b> widening the search before deepening it (preventing early bias), ensuring multi-disciplinary participation, organizing scattered ideas into a categorized map, and integrating with 5 Whys under the leading branches."}
+        ]},
+        {icon:"🧭", heading:{ar:"إطار 5P (مواءمة للأنظمة الإدارية والسريرية)", en:"The 5P Framework (Clinical & Administrative)"}, table:{
+          headers:{ar:["الفئة","المعنى","أمثلة"], en:["Category","Meaning","Examples"]},
+          rows:[
+            {ar:["الأشخاص (Persons)","الأطباء والتمريض والصيادلة وسائر العاملين، وكذلك المرضى والزوار.","إرهاق بعد نوبتين متتاليتين؛ حديثو التعيين بلا توجيه."], en:["Persons","Physicians, nurses, pharmacists, other staff, and also patients/visitors.","Fatigue after two consecutive shifts; new hires without orientation."]},
+            {ar:["العمليات (Processes)","خطوات سير العمل الفعلي كما تجري في الواقع.","عملية إدارة الأدوية؛ نقل المريض؛ غياب تحقق مستقل."], en:["Processes","The actual workflow steps as they occur.","Medication management; patient transfer; lack of independent verification."]},
+            {ar:["السياسات (Policies)","القواعد والأدلة الإرشادية والبروتوكولات الرسمية.","سياسة الأوامر الشفهية؛ قائمة الأدوية عالية اليقظة القديمة."], en:["Policies","Official rules, guidelines, and protocols.","Verbal order policy; outdated high-alert medication list."]},
+            {ar:["الأوراق/السجلات (Papers)","النماذج والسجلات الطبية وأنظمة التوثيق وقوائم التحقق.","نموذج قديم لا يوافق السياسة؛ ملصقات متشابهة."], en:["Papers","Forms, records, documentation systems, checklists.","Outdated form; look-alike labels."]},
+            {ar:["الأماكن/البيئة (Places)","البيئة المادية: غرف العمليات، الإضاءة، الضوضاء.","إضاءة خافتة؛ ضجيج مرتفع؛ أرضية مبتلة."], en:["Places","Physical environment: OR, lighting, noise.","Dim lighting; loud noise; wet floor."]}
+          ]
+        }},
+        {icon:"🏭", heading:{ar:"إطار 5M (الأسلوب الصناعي المعدَّل)", en:"The 5M Framework (Adapted Industrial)"}, table:{
+          headers:{ar:["الفئة","المعنى","أمثلة"], en:["Category","Meaning","Examples"]},
+          rows:[
+            {ar:["الأفراد (Manpower)","الكادر البشري: عدده ومهاراته.","نقص كوادر؛ مهارات غير مطابقة."], en:["Manpower","Staffing headcount and skills.","Staff shortage; mismatched skills."]},
+            {ar:["الطرق والأساليب (Methods)","البروتوكولات وإجراءات العمل القياسية (SOPs).","SOP غامض؛ اختلاف الممارسة بين الأقسام."], en:["Methods","Protocols and Standard Operating Procedures.","Vague SOP; practice variation."]},
+            {ar:["المعدات (Machines)","الأجهزة الطبية وصيانتها وأعطال الأنظمة.","مضخة يصعب برمجتها؛ عطل نظام إلكتروني."], en:["Machines","Devices, maintenance, and system faults.","Hard-to-program pump; electronic fault."]},
+            {ar:["المواد (Materials)","الأدوية (LASA) والمستهلكات الطبية.","عبوتان متشابهتان بتركيزين مختلفين."], en:["Materials","Medications (LASA) and consumables.","Two look-alike containers, different strengths."]},
+            {ar:["البيئة (Milieu)","ثقافة العمل وبيئة الجناح والمشتتات.","ثقافة لوم؛ مقاطعات متكررة."], en:["Milieu","Work culture, ward environment, distractions.","Blame culture; frequent interruptions."]}
+          ]
+        }, points:[
+          {ar:"<b>متى نختار أيّهما؟</b> إطار 5P أنسب للأحداث السريرية والإدارية الغنية بالسياسات والتوثيق. إطار 5M أنسب للأحداث المرتبطة بالمعدات والمواد والصيدلة. لا يوجد إطار 'صحيح' واحد؛ المهم ثبات الإطار وشموله لزوايا الحدث دون تداخل.", en:"<b>Which to choose?</b> 5P suits clinical/administrative events rich in policy/documentation. 5M suits equipment-, materials-, and pharmacy-related events. Neither is the single 'correct' framework — consistency and comprehensive coverage matter most."}
+        ]},
+        {icon:"🪜", heading:{ar:"خطوات بناء المخطط", en:"Steps to Build the Diagram"}, points:[
+          {ar:"حدّد المشكلة بدقة بصياغة محايدة وقابلة للقياس في رأس السمكة؛ اختر الإطار (5P أو 5M) وارسم العظام الرئيسية؛ اجمع فريقاً متعدد التخصصات يضم أكثر الناس دراية بالعملية.", en:"Precisely define the problem in neutral, measurable wording at the fish head; choose the framework and draw the main bones; assemble a multidisciplinary team."},
+          {ar:"اعصف ذهنياً بسؤال 'لماذا يحدث هذا؟' لكل فئة؛ افصل التوليد عن التقييم (لا تنقد الأفكار أثناء توليدها)؛ ورتّب الأولويات لاحقاً (تقترح CMS التصويت المتعدد بتحديد كل عضو أهم ثلاثة أسباب محتملة).", en:"Brainstorm 'why does this happen?' for each category; separate idea generation from evaluation; then prioritize (CMS suggests multi-voting for each member's top three candidate causes)."},
+          {ar:"طبّق 'لماذا الخمس' على الفروع المرشّحة، ثم اختبرها بالقاعدة الذهبية وقواعد السببية، ثم وثّق المخطط ضمن تقرير RCA مع الأدلة الداعمة لكل سبب.", en:"Apply '5 Whys' to leading branches, test against the golden rule and causation rules, then document within the RCA report with supporting evidence."}
+        ]}
+      ]
+    },
+    {
+      icon:"6️⃣",
+      title:{ar:"تقنية الأسئلة الخمسة 'لماذا' (5 Whys)", en:"The Five Whys Technique"},
+      sections:[
+        {icon:"❓", heading:{ar:"التعريف والأصل وقاعدة التوقف", en:"Definition, Origin & the Stopping Rule"}, points:[
+          {ar:"أداة بسيطة وقوية للتعمق المنهجي في الأسباب، تقوم على طرح سؤال 'لماذا؟' بصورة متكررة لتجاوز الأسباب السطحية تدريجياً حتى بلوغ خلل في النظام يمكن إصلاحه. مرتبطة تاريخياً بنظام إنتاج Toyota، وأُدرجت ضمن أدوات IHI وإرشادات CMS لـ QAPI. العدد ليس ثابتاً؛ فقد يكفي ثلاثة أسئلة أو يلزم سبعة.", en:"A simple, powerful tool for systematically digging into causes by repeatedly asking 'why?' until reaching a fixable system flaw. Historically tied to Toyota's production system, included in IHI's toolkit and CMS's QAPI guidance. The count of five isn't fixed."},
+          {ar:"<b>قاعدة التوقف:</b> يجب التوقف عن السؤال عندما تتأكد أن الإجابة المكتشفة هي خلل في العملية/النظام يمكن إصلاحه، وليس عندما تصل إلى 'خطأ بشري'. عدم اتباع الموظف للسياسة ليس سبباً جذرياً؛ يجب أن نسأل: 'لماذا لم يُتّبع الإجراء؟' — وأسباب المخالفة المعتادة: غموض الإجراء، تعذّر تطبيقه، ضغط الوقت، غياب الأدوات، أو غياب التدريب المنظَّم.", en:"<b>The stopping rule:</b> stop once you've confirmed a fixable process/system flaw — not once you've reached 'human error'. Not following policy is not a root cause; ask why the procedure wasn't followed. Common reasons: ambiguity, impracticality, time pressure, missing tools, or lack of structured training."}
+        ]},
+        {icon:"✅", heading:{ar:"قواعد التطبيق الفعّال", en:"Rules for Effective Application"}, points:[
+          {ar:"ابدأ بعبارة مشكلة محددة وقابلة للقياس؛ ابنِ كل 'لماذا' على إجابة السؤال السابق وعلى أدلة لا على الافتراض؛ اختبر الترابط عكسياً بقراءة السلسلة من الجذر إلى العَرَض بعبارة 'لذلك' — إن انقطع المنطق فثمة حلقة مفقودة.", en:"Start with a specific, measurable problem statement; build each 'why' on evidence, not assumption; test the chain in reverse with 'therefore' — a broken logic flow signals a missing link."},
+          {ar:"لا تتوقف عند اسم شخص أو فعل فردي؛ اسمح بالتفرّع إن كان لسؤال واحد أكثر من جواب صحيح؛ توقف عند سبب يحقق القاعدة الذهبية (محدد، قابل للتصرف، ضمن قدرة المنشأة)؛ واعمل ضمن فريق، فقدرة الفرد على رؤية كل الحلقات محدودة.", en:"Don't stop at a person's name or single act; allow branching for multiple valid answers; stop at a cause meeting the golden rule; and work as a team since one person's view is limited."}
+        ]},
+        {icon:"⚠️", heading:{ar:"حدود التقنية وضوابط الاستخدام", en:"Limitations & Usage Safeguards"}, points:[
+          {ar:"<b>الخطية:</b> تفترض سلسلة سببية واحدة بينما الأحداث المعقدة متعددة المسارات — يُعالج بالتفرّع والجمع مع المخطط السمكي. <b>الاعتماد على المحلل:</b> قد يقود سؤالان مختلفان إلى جذرين مختلفين — يُعالج بالعمل الجماعي والتحقق العكسي.", en:"<b>Linearity:</b> assumes a single causal chain — addressed by branching and combining with the fishbone. <b>Analyst dependence:</b> two different questions may lead to two different roots — addressed via teamwork and reverse verification."},
+          {ar:"<b>العدد '5' ليس قانوناً:</b> يحدد التوقف معيار الجذر النُّظُمي لا العدد. <b>الاكتفاء بالسبب الأقرب:</b> علاجه أن تسأل 'وهل يكفي إصلاحه لمنع التكرار؟'. <b>قصور في حالات المخاطر المعقّدة:</b> لا تغني عن أدوات أخرى مثل FMEA للتحليل الاستباقي.", en:"<b>Five is a guideline, not a law.</b> <b>Settling for the nearest cause:</b> countered by asking 'is fixing this enough to prevent recurrence?'. <b>Limits in complex cases:</b> doesn't replace tools like FMEA for proactive analysis."}
+        ]}
+      ]
+    },
+    {
+      icon:"7️⃣",
+      title:{ar:"من السبب الجذري إلى خطة العمل (CAPA) وقياس النجاح", en:"From Root Cause to Action Plan (CAPA) & Measuring Success"},
+      sections:[
+        {icon:"🔧", heading:{ar:"الإجراء التصحيحي والوقائي", en:"Corrective vs. Preventive Action"}, points:[
+          {ar:"توضّح RCA² أن الغاية القصوى هي منع الأذى مستقبلاً، ولا يتحقق ذلك إلا بإجراءات تُنفَّذ وتُقاس. تتوقع The Joint Commission أن يُتبع التحليل الشامل بخطة تصحيحية تُنفَّذ وتُتابَع فعاليتها، والتحليل لا يكتمل إلا بوضع خطة عمل قوية (CAPA).", en:"RCA² clarifies the ultimate goal is preventing future harm, achievable only through implemented, measured actions. The Joint Commission expects analysis to be followed by an implemented, monitored corrective plan — analysis is incomplete without a strong CAPA."}
+        ], table:{
+          headers:{ar:["","الإجراء التصحيحي","الإجراء الوقائي"], en:["","Corrective Action","Preventive Action"]},
+          rows:[
+            {ar:["التعريف","معالجة السبب الجذري لحدث وقع فعلاً لمنع تكراره.","معالجة أسباب جذرية محتملة مماثلة في وحدات أخرى لم يقع فيها الحدث بعد."], en:["Definition","Addresses the root cause of an event that occurred, preventing recurrence.","Addresses similar potential root causes elsewhere, before the event occurs there."]},
+            {ar:["التوقيت","بعد وقوع الحدث.","استباقي، قبل وقوع حدث مماثل."], en:["Timing","After the event occurs.","Proactive, before a similar event."]},
+            {ar:["النطاق","العملية/الوحدة التي وقع فيها الحدث.","المنظومة الأوسع (أقسام، أدوية، أجهزة مشابهة)."], en:["Scope","The specific process/unit where it occurred.","The wider system (other units, drugs, similar devices)."]}
+          ]
+        }},
+        {icon:"🔗", heading:{ar:"قاعدة الربط", en:"The Linkage Rule"}, points:[
+          {ar:"يجب أن يرتبط كل إجراء ارتباطاً مباشراً وقابلاً للتتبع بسبب جذري أو عامل مساهم موثَّق؛ أي إجراء لا يمكن ربطه بسبب واضح هو على الأرجح استجابة سطحية.", en:"Every action must be directly and traceably linked to a documented root cause or contributing factor; an action that can't be tied to a clear cause is likely a superficial response."}
+        ]},
+        {icon:"🪜", heading:{ar:"هرم قوة الإجراءات (Action Hierarchy)", en:"The Action Hierarchy"}, points:[
+          {ar:"يصنّف هرم الإجراءات، المستند إلى أدوات VA NCPS والمعتمد في RCA² وأدوات IHI، الإجراءات إلى قوية ومتوسطة وضعيفة بحسب مقدار ما تتركه من عبء على ذاكرة الفرد وانتباهه. الإجراءات الضعيفة تطلب من الناس التصرف بطريقة مختلفة؛ القوية تجعل السلوك غير المرغوب أصعب أو مستحيلاً مهما بلغ إرهاق العامل.", en:"The Action Hierarchy (VA NCPS, adopted by RCA²/IHI) classifies actions as strong, intermediate, or weak based on the burden placed on human memory and attention. Weak actions ask people to behave differently; strong actions make the undesired behavior harder or impossible regardless of fatigue."}
+        ], table:{
+          headers:{ar:["المستوى","أمثلة"], en:["Level","Examples"]},
+          rows:[
+            {ar:["قوية (تقلّ فيها الحاجة لتذكّر الإنسان)","تغييرات معمارية/مادية؛ الضبط الهندسي (إجبار النظام)؛ تبسيط العملية؛ توحيد المعدات؛ مشاركة القيادة الملموسة."], en:["Strong (less reliance on human memory)","Architectural/physical changes; forcing functions; process simplification; standardizing equipment; tangible leadership engagement."]},
+            {ar:["متوسطة","التكرار (حساب مستقل)؛ زيادة التوظيف؛ تحسينات برمجية؛ قوائم التحقق؛ إزالة التشابه (LASA)؛ أدوات تواصل موحّدة (Read-back)."], en:["Intermediate","Redundancy; increased staffing; software improvements; checklists; removing LASA look-alikes; standardized read-back tools."]},
+            {ar:["ضعيفة (تزيد فيها الحاجة لتذكّر الإنسان)","التحقق المزدوج؛ التحذيرات والملصقات؛ إجراء/مذكرة/سياسة جديدة؛ التدريب."], en:["Weak (more reliance on human memory)","Double-checks; warnings/labels; new procedure/memo/policy; training."]}
+          ]
+        }},
+        {icon:"💡", heading:{ar:"لماذا لا نكتفي بإعادة التدريب؟", en:"Why Not Just Retrain Staff?"}, points:[
+          {ar:"لأنها تعتمد على الذاكرة والالتزام الفردي، ويتلاشى أثرها مع دوران العاملين وضغط العمل؛ والأفضل تصميم حلول تقوم على إجبار النظام (Forcing Functions) أو الأتمتة بحيث يصبح الطريق الصحيح هو الأسهل والخطأ هو الأصعب. توصي RCA²/IHI بتحديد إجراء واحد قوي أو متوسط على الأقل لكل سبب، مع جواز إجراء ضعيف مؤقت لحين تنفيذ الأقوى.", en:"Because it relies on memory and individual commitment, fading with staff turnover and workload; better solutions use forcing functions or automation so the correct path is easiest and error is hardest. RCA²/IHI recommend at least one strong or intermediate action per cause, with weak actions allowed only temporarily."}
+        ]},
+        {icon:"📊", heading:{ar:"مقاييس النجاح وخصائص المقياس الجيد", en:"Success Measures & Traits of a Good Metric"}, points:[
+          {ar:"تحديد مقاييس النجاح يعني وضع طريقة لقياس فعالية التغيير المنفَّذ وضمان امتثال العاملين بمرور الوقت. <b>مقياس العملية:</b> هل نُفِّذ الإجراء كما صُمِّم؟ <b>مقياس النتيجة:</b> هل انخفض تكرار الحدث أو شدته؟ <b>مقياس موازنة:</b> هل سبّب الإجراء مشكلات جانبية؟", en:"Defining success measures means gauging the implemented change's effectiveness and staff compliance over time. <b>Process measure:</b> was the action implemented as designed? <b>Outcome measure:</b> did frequency/severity drop? <b>Balancing measure:</b> did it cause side problems?"},
+          {ar:"<b>خصائص المقياس الجيد:</b> SMART (محدد، قابل للقياس، قابل للتحقيق، ذو صلة، محدد بزمن)؛ مقام وبسط واضحان وحجم عينة ومسؤول عن البيانات؛ والتغذية إلى دورة PDSA (خطّط، نفّذ، ادرس، اتخذ الإجراء).", en:"<b>Traits of a good measure:</b> SMART; a clear numerator/denominator, sample size, and data owner; feeding into a PDSA cycle (Plan, Do, Study, Act)."},
+          {ar:"<b>الإغلاق والاستدامة:</b> يُنصح بألا يُغلق ملف RCA بمجرد تنفيذ الإجراء شكلياً، بل بعد التحقق من استقرار الأداء عند المستوى المستهدف لفترة كافية متفق عليها مع لجنة الإشراف، وتوصي RCA² بأن تراجع القيادة عملية RCA نفسها سنوياً.", en:"<b>Closure & sustainability:</b> a file shouldn't close upon mere implementation, but after verifying stable performance for an agreed period; RCA² recommends leadership review RCA's own process annually."}
+        ]}
+      ]
+    },
+    {
+      icon:"8️⃣",
+      title:{ar:"ملاحظات علمية وحدود المعرفة", en:"Scientific Notes & Limits of Knowledge"},
+      sections:[
+        {icon:"🔬", heading:{ar:"ما هو مؤكَّد وما هو اجتهاد أو موضع خلاف", en:"What's Established vs. Interpretive or Debated"}, points:[
+          {ar:"'القاعدة الذهبية' أداة حكم مهنية بصيغتها البسيطة، وليست معياراً رسمياً منصوصاً عليه بحروفه في وثائق The Joint Commission أو CMS؛ المعيار الأكثر صرامة والموثَّق هو قواعد السببية الخمس وتوجيه RCA² بالتركيز على أسباب نُظُمية.", en:"The 'golden rule' in its simple form is a professional heuristic, not a formal standard spelled out verbatim by The Joint Commission or CMS; the more rigorous documented standard is the Five Rules of Causation and RCA²'s systemic-cause focus."},
+          {ar:"ما نُسب لـ The Joint Commission يتعلق أساساً بسياسة الأحداث الجسيمة وإطار الأسئلة الأربعة والعشرين؛ أما هرم قوة الإجراءات فمصدره VA NCPS/RCA² (عبر IHI)، وأدوات CMS تخص QAPI/PIPs وهي غير إلزامية بنص موادها. تتباين المصادر أيضاً في وصف مهلة التسليم، فلا يجب الاعتماد على رقم منقول دون الرجوع إلى النسخة السارية لمعايير جهة اعتماد منشأتك.", en:"What's attributed to The Joint Commission mainly concerns the Sentinel Event Policy and its 24-question framework; the Action Hierarchy comes from VA NCPS/RCA² (via IHI); CMS's QAPI/PIPs tools are explicitly non-mandatory. Sources vary on deadlines — never rely on a borrowed figure without checking your accrediting body's current policy."},
+          {ar:"تشير IHI إلى أن نتائج RCA التقليدية كانت غير متسقة، وهذا سبب تطوير RCA²؛ فاستخدام الأداة وحده لا يضمن التحسين، بل جودة الإجراءات وتنفيذها وقياسها. كذلك إطاراً 5P و5M ليسا معيارين عالميين موحدين، وتتباين تسمياتهما بين المراجع. وللتحليل الاستباقي قبل وقوع الحدث تُستخدم أدوات مثل FMEA بوصفها نظيراً استباقياً لـ RCA.", en:"IHI notes traditional RCA outcomes were inconsistent, driving RCA²'s development — the tool alone doesn't guarantee improvement; action quality, implementation, and measurement do. Likewise, 5P and 5M aren't unified global standards. For proactive analysis before an event, tools like FMEA serve as RCA's forward-looking counterpart."}
+        ]}
+      ]
+    }
+  ],
+  reviewBank: {
+    tf: [
+      {ar:"الهدف من تحليل السبب الجذري (RCA) هو تحديد المسؤول الفردي عن الحدث لمحاسبته.", en:"The goal of RCA is to identify the individual responsible for an event in order to hold them accountable.", a:false, expAr:"خطأ — الهدف كشف الاختلالات في العمليات والنُّظُم لا تقييم أداء الأفراد.", expEn:"False — the goal is revealing flaws in processes and systems, not judging individual performance."},
+      {ar:"أضافت وثيقة RCA² عام 2015 التأكيد على أن الإجراء (Action) لا يقل أهمية عن التحليل نفسه.", en:"The 2015 RCA² document emphasized that Action is as important as the analysis itself.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"نموذج الجبن السويسري لجيمس ريزون يميّز بين الإخفاقات الفعّالة والظروف الكامنة.", en:"James Reason's Swiss Cheese Model distinguishes active failures from latent conditions.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"في نموذج Just Culture، يُعامَل 'السلوك المتهور' بنفس أسلوب 'الخطأ البشري' من خلال الدعم والمواساة.", en:"In the Just Culture model, 'reckless behavior' is handled the same way as 'human error', with support and consolation.", a:false, expAr:"خطأ — السلوك المتهور يُعالج بإجراء إداري/تأديبي، بينما الخطأ البشري يُعالج بالدعم ومراجعة العملية.", expEn:"False — reckless behavior calls for administrative/disciplinary action, while human error calls for support and process review."},
+      {ar:"يجب أن تتوقف الأسئلة الخمسة 'لماذا' دائماً بعد السؤال الخامس بالضبط.", en:"The 5 Whys must always stop after exactly the fifth question.", a:false, expAr:"خطأ — العدد ليس ثابتاً؛ يحدد التوقف بلوغ خلل نُظُمي قابل للإصلاح.", expEn:"False — the count isn't fixed; stopping is determined by reaching a fixable systemic flaw."},
+      {ar:"مخالفة الموظف للإجراء تُعتبر بحد ذاتها سبباً جذرياً مقبولاً.", en:"A staff member's procedural violation is itself an acceptable root cause.", a:false, expAr:"خطأ — وفق قاعدة السببية الرابعة، تحتاج المخالفة سبباً سابقاً يفسّرها.", expEn:"False — per the fourth rule of causation, a violation needs a preceding cause that explains it."}
+    ],
+    mcq: [
+      {ar:"بحسب 'اختبار السبب الجذري'، إذا كانت الإجابة عن 'هل ستتكرر المشكلة لو صُحِّح العامل؟' هي 'نعم'، فإن هذا العامل يُصنَّف:", en:"Per the 'root cause test', if the answer to 'would the problem recur if this factor were corrected?' is 'yes', the factor is classified as:",
+       optionsAr:["سبباً جذرياً","عاملاً مساهماً","عَرَضاً فقط","لا يُصنَّف"], optionsEn:["A root cause","A contributing factor","Just a symptom","Unclassified"],
+       correct:1, expAr:"إجابة 'نعم' تعني أنه عامل مساهم فقط.", expEn:"A 'yes' answer means it is only a contributing factor."},
+      {ar:"ما الذي تجمعه مصفوفة SAC المستخدمة لتحديد أولوية إجراء RCA؟", en:"What does the SAC matrix (used to prioritize RCA) combine?",
+       optionsAr:["جسامة الحدث × احتمال تكراره","تكلفة الحدث × عدد المرضى","مدة العلاج × عدد الموظفين","نوع القسم × عدد الأسرّة"], optionsEn:["Event severity × likelihood of recurrence","Event cost × number of patients","Treatment duration × staff count","Department type × bed count"],
+       correct:0, expAr:"تجمع بين الجسامة واحتمال التكرار.", expEn:"It combines severity and likelihood of recurrence."},
+      {ar:"أي مما يلي يُصنَّف كـ'إجراء قوي' ضمن هرم قوة الإجراءات؟", en:"Which of the following is a 'strong action' under the Action Hierarchy?",
+       optionsAr:["إعادة تدريب الموظفين","التحقق المزدوج","وصلات لا تُوصَل إلا بالطريقة الصحيحة (إجبار النظام)","ملصق تحذير"], optionsEn:["Retraining staff","Double-checking","Connectors that only fit the correct way (forcing function)","A warning label"],
+       correct:2, expAr:"إجبار النظام يُصنَّف إجراءً قوياً.", expEn:"A forcing function is a strong action."},
+      {ar:"أي إطار من أطر تصنيف مخطط السمكة يخصص فئة مستقلة للسياسات والتوثيق (Papers)؟", en:"Which fishbone-categorization framework has a dedicated category for policies/documentation (Papers)?",
+       optionsAr:["5M","5P","SAC","PDSA"], optionsEn:["5M","5P","SAC","PDSA"],
+       correct:1, expAr:"إطار 5P يخصص فئتي Policies وPapers.", expEn:"The 5P framework has dedicated Policies and Papers categories."},
+      {ar:"وفق قواعد السببية الخمس، متى يكون عدم التصرف (Inaction) سببياً؟", en:"Per the Five Rules of Causation, when is inaction causal?",
+       optionsAr:["دائماً","أبداً","فقط عند وجود واجب أو معيار مسبق يُلزم بالفعل","فقط في الأحداث الجسيمة"], optionsEn:["Always","Never","Only where a pre-existing duty or standard required the action","Only in sentinel events"],
+       correct:2, expAr:"فقط عند وجود واجب مسبق.", expEn:"Only where a pre-existing duty existed."},
+      {ar:"من الذي طوّر نموذج 'الثقافة العادلة' (Just Culture)؟", en:"Who developed the 'Just Culture' model?",
+       optionsAr:["Kaoru Ishikawa","James Reason","David Marx","W. Edwards Deming"], optionsEn:["Kaoru Ishikawa","James Reason","David Marx","W. Edwards Deming"],
+       correct:2, expAr:"David Marx طوّر نموذج Just Culture.", expEn:"David Marx developed the Just Culture model."}
+    ],
+    fill: [
+      {ar:"أداة العصف الذهني المنظَّم التي تضع المشكلة عند 'رأس السمكة' تسمى مخطط ______.", en:"The structured-brainstorming tool placing the problem at the 'fish head' is called the ______ diagram.", a:"عظم السمكة / Ishikawa"},
+      {ar:"النموذج الذي يشبّه دفاعات النظام بشرائح جبن ذات ثغرات يسمى نموذج ______.", en:"The model likening system defenses to holed cheese slices is the ______ model.", a:"الجبن السويسري / Swiss Cheese"},
+      {ar:"الوثيقة الصادرة عام 2015 عن National Patient Safety Foundation والتي أضافت تأكيداً على أهمية الإجراء تسمى ______.", en:"The 2015 National Patient Safety Foundation document emphasizing the importance of action is called ______.", a:"RCA²"},
+      {ar:"الأداة التي تصنّف الإجراءات إلى قوية ومتوسطة وضعيفة تسمى ______.", en:"The tool classifying actions as strong, intermediate, or weak is called the ______.", a:"هرم قوة الإجراءات / Action Hierarchy"},
+      {ar:"عبارة السببية وفق RCA² تُكتب بصيغة: السبب أدّى إلى ______ مما زاد احتمال الحدث.", en:"The RCA² causal statement format is: cause led to ______, which increased the likelihood of the event.", a:"أثر / Effect"},
+      {ar:"الإجراء الذي يعالج سبباً جذرياً محتملاً في وحدات لم يقع فيها الحدث بعد يسمى إجراءً ______.", en:"An action addressing a potential root cause in units where the event hasn't yet occurred is called a ______ action.", a:"وقائياً / Preventive"}
+    ],
+    short: [
+      {ar:"ما الفرق بين العامل المساهم والسبب الجذري؟", en:"What is the difference between a contributing factor and a root cause?",
+       aAr:"العامل المساهم ظرف زاد احتمال وقوع الحدث لكن إزالته وحدها قد لا تمنع التكرار، بينما السبب الجذري هو الخلل الأساسي الذي لو صُحّح لمنع الحدث ومثيله.",
+       aEn:"A contributing factor increases the likelihood of an event but removing it alone may not prevent recurrence, while a root cause is the fundamental flaw that, if corrected, would prevent this and similar events."},
+      {ar:"اذكر قاعدتين من قواعد السببية الخمس.", en:"Name two of the Five Rules of Causation.",
+       aAr:"مثال: يجب إظهار علاقة السبب والنتيجة بوضوح، ولكل خطأ بشري سبب سابق يفسّره — أو أي قاعدتين أخريين من القواعد الخمس.",
+       aEn:"Example: show a clear cause-and-effect link, and every human error has a preceding cause — or any two of the five rules."},
+      {ar:"لماذا لا يُنصح بالاكتفاء بإعادة تدريب الموظفين كإجراء تصحيحي وحيد؟", en:"Why is relying solely on staff retraining as a corrective action not recommended?",
+       aAr:"لأنها تعتمد على ذاكرة الفرد والتزامه، ويتلاشى أثرها مع دوران العاملين وضغط العمل، والأفضل تصميم حلول تقوم على إجبار النظام أو الأتمتة.",
+       aEn:"Because it relies on individual memory and commitment, fading with staff turnover and workload pressure; better solutions use forcing functions or automation."},
+      {ar:"ما هي المراحل الأربع لعملية RCA؟", en:"What are the four phases of the RCA process?",
+       aAr:"الوقائع، التحليل، الإجراءات، والقياس والمتابعة.",
+       aEn:"Facts, Analysis, Actions, and Measurement & Follow-up."},
+      {ar:"متى تُعامَل الأحداث خارج مسار RCA وفق نموذج Just Culture؟", en:"When are events handled outside the RCA pathway under the Just Culture model?",
+       aAr:"عندما تكون الأحداث 'مستحقة للوم' كالأفعال الجنائية أو المتعمَّدة غير الآمنة (السلوك المتهور)، إذ تُحال إلى مسارات الموارد البشرية أو الإدارة بدلاً من RCA.",
+       aEn:"When events are 'blameworthy' — criminal or deliberately unsafe acts (reckless behavior) — they are referred to HR/management channels instead of RCA."},
+      {ar:"ما وظيفة 'اختبار السبب الجذري' (القاعدة الذهبية)؟", en:"What is the function of the 'root cause test' (golden rule)?",
+       aAr:"هو اختبار حكم مهني يسأل: إذا صُحِّح العامل أو أُزيل هل ستتكرر المشكلة؟ فإن كانت الإجابة نعم فهو سبب مساهم، وإن كانت لا فهو السبب الجذري الحقيقي.",
+       aEn:"A professional judgment test asking: if the factor were corrected or removed, would the problem recur? 'Yes' means a contributing factor; 'No' means the true root cause."}
+    ]
+  },
+  quizQuestions: [
+    {ar:"يهدف تحليل السبب الجذري (RCA) إلى كشف الاختلالات في العمليات والنُّظُم لا في أداء الأفراد.", en:"RCA aims to reveal flaws in processes and systems, not individual performance.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"أرست The Joint Commission سياسة الأحداث الجسيمة (Sentinel Event Policy) في منتصف التسعينيات.", en:"The Joint Commission established the Sentinel Event Policy in the mid-1990s.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"ماذا أضافت وثيقة RCA² (2015) إلى مفهوم تحليل السبب الجذري؟", en:"What did the RCA² document (2015) add to the RCA concept?", optionsAr:["التركيز فقط على توثيق الوقائع","التأكيد على أهمية تنفيذ وقياس الإجراءات","إلغاء الحاجة لفريق متعدد التخصصات","استبدال مخطط السمكة بالكامل"], optionsEn:["Focusing only on documenting facts","Emphasizing the importance of implementing and measuring actions","Eliminating the need for a multidisciplinary team","Fully replacing the fishbone diagram"], correct:1},
+    {ar:"في نموذج الجبن السويسري، تقع الحوادث الجسيمة حين تصطف ثغرات عدة عبر طبقات الدفاع في اللحظة نفسها.", en:"In the Swiss Cheese Model, sentinel events occur when several holes align across defense layers at the same moment.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"في نموذج Just Culture، ما الاستجابة المناسبة لـ'الخطأ البشري' (Human Error)؟", en:"In the Just Culture model, what is the appropriate response to 'Human Error'?", optionsAr:["إجراء تأديبي فوري","مواساة ودعم العامل ومراجعة تصميم العملية","تجاهل الحدث","إحالته للموارد البشرية مباشرة"], optionsEn:["Immediate disciplinary action","Console/support the staff member and review process design","Ignore the event","Refer it directly to HR"], correct:1},
+    {ar:"أي مستوى في مصفوفة SAC يستوجب إجراء RCA؟", en:"Which SAC matrix level requires an RCA?", optionsAr:["الدرجة 1 فقط","الدرجة 2 والدرجة 3","لا علاقة للمصفوفة بقرار إجراء RCA","الدرجة الأدنى فقط"], optionsEn:["Score 1 only","Scores 2 and 3","The matrix is unrelated to the RCA decision","The lowest score only"], correct:1},
+    {ar:"وفق 'القاعدة الذهبية'، إذا كانت الإجابة 'لا' على سؤال 'هل ستتكرر المشكلة لو صُحِّح العامل؟' فهذا يعني أن العامل سبب جذري.", en:"Per the 'golden rule', a 'no' answer to 'would the problem recur if the factor were corrected?' means the factor is a root cause.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"أي من التالي يُعدّ 'إجراءً ضعيفاً' ضمن هرم قوة الإجراءات؟", en:"Which of the following is a 'weak action' under the Action Hierarchy?", optionsAr:["توحيد المعدات في المنشأة","إجبار النظام (Forcing Function)","التدريب وإعادة التدريب","تبسيط العملية"], optionsEn:["Standardizing equipment","Forcing function","Training/retraining","Process simplification"], correct:2},
+    {ar:"يوصي إطار 5P بتخصيص فئة مستقلة تحت اسم 'المعدات' (Machines).", en:"The 5P framework dedicates an independent category named 'Machines'.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"ما الفرق الأساسي بين الإجراء التصحيحي والإجراء الوقائي؟", en:"What is the key difference between corrective and preventive action?", optionsAr:["لا فرق بينهما","التصحيحي يعالج حدثاً وقع فعلاً، والوقائي يعالج أسباباً مماثلة محتملة لم تقع بعد","الوقائي أضعف دائماً من التصحيحي","التصحيحي لا يحتاج إلى مقاييس متابعة"], optionsEn:["No difference","Corrective addresses an event that occurred; preventive addresses similar potential causes not yet occurred","Preventive is always weaker than corrective","Corrective needs no follow-up measures"], correct:1}
   ]
 }
 
