@@ -593,11 +593,28 @@ const lectures = [
     durationAr: "ثلاث ساعات تدريبية", durationEn: "3 Training Hours",
     sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
     sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
+  },
+  {
+    // المحاضرة الخامسة: فارغة حتى يتم تحميلها
+    status: "coming",
+    titleAr: "", titleEn: "", descAr: "", descEn: "",
+    durationAr: "—", durationEn: "—", sectionsAr: "—", sectionsEn: "—"
+  },
+  {
+    status: "available",
+    isBuiltIn: true,
+    titleAr: "المحاضرة السادسة: تقنيات التعرّف الاستباقي على المخاطر خلال الجولات اليومية",
+    titleEn: "Lecture 6: Proactive Risk Identification Techniques for Daily Rounds",
+    descAr: "وحدة تطبيقية تنتقل من العمل التفاعلي إلى الاستباقي، تغطي أنواع الجولات اليومية السبعة، المفاهيم الأساسية (الخطر، المخاطرة، الحادث الوشيك، الالتفاف، الظرف الكامن، الإشارة الضعيفة)، ثماني تقنيات للتعرّف الاستباقي على المخاطر أثناء الجولة، صياغة عبارة الخطر وتقديره عبر مصفوفة الاحتمال × الشدة، وآليات التوثيق والتصعيد وإغلاق الحلقة مع الطاقم.",
+    descEn: "A practical module moving from reactive to proactive work, covering the seven types of daily rounds, core concepts (hazard, risk, near miss, workaround, latent condition, weak signal), eight proactive risk-identification techniques during rounds, writing and scoring a hazard statement via the probability × severity matrix, and documentation, escalation, and closed-loop feedback with staff.",
+    durationAr: "ساعتان ونصف تدريبية", durationEn: "2.5 Training Hours",
+    sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
+    sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
   }
 ];
 
-// المحاضرات من 5 إلى 25: محجوبة العناوين والمرفقات
-for(let i = 5; i <= 25; i++){
+// المحاضرات من 7 إلى 25: محجوبة العناوين والمرفقات
+for(let i = 7; i <= 25; i++){
   lectures.push({
     status: "coming",
     titleAr: "", titleEn: "", descAr: "", descEn: "",
@@ -1377,6 +1394,307 @@ const lectureContent = {
     {ar:"عند اكتشاف تغيّر من النوع الخاص (Special Cause)، الاستراتيجية الصحيحة هي معاقبة الفرد المسؤول مباشرة دون البحث عن السبب الجذري.", en:"Upon detecting special-cause variation, the correct strategy is to immediately discipline the responsible individual without investigating the root cause.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
     {ar:"أي من التالي صحيح بخصوص لوحة المعلومات (Dashboard)؟", en:"Which of the following is true about a Dashboard?", optionsAr:["تُستخدم من الإدارة العليا لقرارات استراتيجية طويلة المدى","تُحدَّث لحظياً وتُستخدم من الإدارة الدنيا والوسطى لقرارات تكتيكية","تُحدَّث سنوياً فقط","لا تحتوي على رسوم بيانية"], optionsEn:["Used by senior management for long-term strategic decisions","Updated in real time and used by lower/middle management for tactical decisions","Updated only annually","Contains no charts"], correct:1},
     {ar:"في النسخة المُكيَّفة لبيئة المستشفى من بطاقة الأداء المتوازن، يُستبدل بُعد 'علاقة العميل' ببُعدي رضا المريض وسلامة المريض.", en:"In the hospital-adapted Balanced Scorecard, the 'Customer Relationship' dimension is replaced by Patient Satisfaction and Patient Safety.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
+  ]
+},
+
+/* ---------------- LECTURE 6 ---------------- */
+5: {
+  lectureId: 'Lecture6_ProactiveRiskRounds',
+  modules: [
+    {
+      icon:"1️⃣",
+      title:{ar:"من 'ننتظر الحادث' إلى 'نبحث عنه قبل أن يقع'", en:"From 'Waiting for the Incident' to 'Looking for It Before It Happens'"},
+      sections:[
+        {icon:"⚖️", heading:{ar:"العمل التفاعلي مقابل العمل الاستباقي", en:"Reactive vs. Proactive Work"}, table:{
+          headers:{ar:["","تفاعلي (Reactive)","استباقي (Proactive)"], en:["","Reactive","Proactive"]},
+          rows:[
+            {ar:["متى نتحرك؟","بعد وقوع الحدث","قبل وقوعه"], en:["When we act","After the event occurs","Before it occurs"]},
+            {ar:["مصدر المعلومة","بلاغ حادث، شكوى، وفاة","ملاحظة، سؤال، استشعار مبكر"], en:["Information source","Incident report, complaint, death","Observation, question, early sensing"]},
+            {ar:["الأدوات","تحليل السبب الجذري (RCA)","الجولات، FMEA، المؤشرات الاستباقية"], en:["Tools","Root Cause Analysis (RCA)","Rounds, FMEA, leading indicators"]},
+            {ar:["الثمن","تعلّم بعد ضرر","تعلّم دون ضرر"], en:["Cost","Learning after harm","Learning without harm"]}
+          ]
+        }, points:[
+          {ar:"مستشفى يجتمع بعد كل حدث ضار لتحليل أسبابه الجذرية يقوم بعمل ضروري ومحترم، لكن مستشفى آخر يذهب خطوة أبعد: قادته وأخصائيو الجودة فيه يمرّون كل يوم على الأقسام بعين مدرَّبة تسأل: <b>'ما الذي قد يؤذي مريضًا اليوم، ولم يؤذه بعد؟'</b> — هذا هو الفرق بين المنهجين، وهما متكاملان لا متنافسان.", en:"A hospital that convenes after every adverse event to run a root cause analysis does necessary, respectable work — but another hospital goes a step further: its leaders and quality specialists walk the units daily with a trained eye asking: <b>'What could harm a patient today, and hasn't yet?'</b> — that's the difference between the two approaches, and they are complementary, not competing."},
+          {ar:"في محاضرة RCA رأينا كيف نحلل ما وقع فعلاً. واليوم نتعلم كيف نكتشف <b>الظروف الكامنة (Latent Conditions)</b> قبل أن تصطف ثغراتها في حادث. تذكّروا نموذج الجبن السويسري: الجولة اليومية فرصة لرؤية الثغرات وهي ما زالت مجرد ثغرات، قبل أن تتراصف في خط واحد يصل إلى المريض.", en:"In the RCA lecture we saw how to analyze what has already happened. Today we learn how to detect <b>Latent Conditions</b> before their gaps line up into an incident. Recall the Swiss Cheese Model: the daily round is a chance to see the holes while they're still just holes, before they align into a single path reaching the patient."}
+        ]},
+        {icon:"❓", heading:{ar:"لماذا الجولات اليومية بالذات؟", en:"Why Daily Rounds Specifically?"}, points:[
+          {ar:"<b>الأحداث الضارة نادرة نسبيًا، أما الظروف الخطرة فيومية:</b> عبوة دواء في غير مكانها، جرس استدعاء بعيد عن المريض، إنذار موقوف — هذه موجودة اليوم وتنتظر لحظة سوء الحظ.", en:"<b>Adverse events are relatively rare, but hazardous conditions are daily:</b> a medication vial out of place, a call bell out of the patient's reach, a silenced alarm — these exist today, waiting for a moment of bad luck."},
+          {ar:"<b>المعرفة تسكن في الميدان:</b> من يعمل في الجناح يعرف أين يتعثر العمل فعلاً، وهذا لا يظهر في تقرير شهري.", en:"<b>Knowledge lives in the field:</b> whoever works on the ward knows exactly where the work stumbles, and that doesn't show up in a monthly report."},
+          {ar:"<b>الجولة رسالة ثقافية:</b> حين يرى الطاقم أن القيادة تسأل وتصغي وتتصرف، يتعلم أن الإبلاغ مجدٍ — وهذا يغذّي ثقافة الإبلاغ ذاتها التي تحدثنا عنها في RCA.", en:"<b>The round is a cultural message:</b> when staff see leadership ask, listen, and act, they learn that reporting is worthwhile — feeding the same reporting culture discussed under RCA."}
+        ]},
+        {icon:"🏛️", heading:{ar:"صلة ذلك بمنظمات الموثوقية العالية (HRO)", en:"The Link to High-Reliability Organizations (HRO)"}, points:[
+          {ar:"تصف أدبيات المنظمات عالية الموثوقية (Weick & Sutcliffe، وطُبّقت في الرعاية الصحية في أعمال Chassin & Loeb) خصائص منها: <b>الانشغال بالفشل (Preoccupation with Failure)</b> — أي الانتباه للإشارات الضعيفة قبل أن تتضخم، و<b>الحساسية للعمليات (Sensitivity to Operations)</b> — أي معرفة ما يجري فعلًا في الخط الأمامي. الجولة اليومية الجيدة ممارسة عملية لهاتين الخاصيتين.", en:"High-Reliability Organization literature (Weick & Sutcliffe, applied to healthcare by Chassin & Loeb) describes traits including: <b>Preoccupation with Failure</b> — attentiveness to weak signals before they escalate, and <b>Sensitivity to Operations</b> — genuine awareness of what's happening on the front line. A good daily round is a practical exercise of both traits."}
+        ]}
+      ]
+    },
+    {
+      icon:"2️⃣",
+      title:{ar:"أنواع الجولات اليومية", en:"Types of Daily Rounds"},
+      sections:[
+        {icon:"🗂️", heading:{ar:"سبعة أنماط شائعة ولكل منها غرضه", en:"Seven Common Types, Each With Its Own Purpose"}, table:{
+          headers:{ar:["نوع الجولة","من يقوم بها","التركيز","المخاطر التي تكشفها غالبًا"], en:["Round Type","Performed By","Focus","Risks It Typically Reveals"]},
+          rows:[
+            {ar:["جولات القيادة للسلامة (Leadership Safety WalkRounds)","قادة المنشأة مع فريق الوحدة","حوار مع الطاقم حول ما يقلقهم","مخاطر النظام والموارد والتواصل"], en:["Leadership Safety WalkRounds","Facility leaders with unit team","Dialogue with staff on their concerns","System, resource, and communication risks"]},
+            {ar:["جولات الجودة وسلامة المرضى","أخصائيو الجودة","الالتزام بالممارسات الآمنة","ثغرات الإجراءات وسلامة الأدوية ومكافحة العدوى"], en:["Quality & Patient Safety Rounds","Quality specialists","Adherence to safe practices","Procedural gaps, medication safety, infection control"]},
+            {ar:["جولات بيئة الرعاية (Environment of Care)","السلامة والصيانة والجودة","المبنى والتجهيزات والحريق والنفايات","مخاطر السقوط والحريق والأجهزة"], en:["Environment of Care Rounds","Safety, maintenance & quality staff","Building, equipment, fire, waste","Fall, fire, and equipment hazards"]},
+            {ar:["تتبّع المريض (Tracer)","مدققو الجودة","تتبّع رحلة مريض فعلي عبر الأقسام","الفجوات بين الأقسام ونقاط التسليم"], en:["Patient Tracer","Quality auditors","Tracing an actual patient's journey across departments","Gaps between departments and handoff points"]},
+            {ar:["الجولات التمريضية المقصودة (Intentional Rounding)","الممرضون","احتياجات المريض كل فترة محددة","السقوط وقرح الضغط وغياب الاستجابة"], en:["Intentional Rounding","Nurses","Patient needs at set intervals","Falls, pressure ulcers, lack of response"]},
+            {ar:["الإحاطة اليومية القصيرة (Safety Huddle)","فريق الوحدة","مخاطر اليوم المتوقعة","تنبيه جماعي قصير لما قد يسوء اليوم"], en:["Safety Huddle","Unit team","Today's anticipated risks","Brief collective alert to what could go wrong today"]},
+            {ar:["جولة 'جيمبا' (Gemba Walk)","قادة وفرق التحسين","مشاهدة العمل كما يُؤدَّى في مكانه (مفهوم من Lean)","الهدر والالتفافات وسوء تصميم العمل"], en:["Gemba Walk","Leaders & improvement teams","Watching work performed where it happens (a Lean concept)","Waste, workarounds, and poor work design"]}
+          ]
+        }, points:[
+          {ar:"أصل نموذج جولات القيادة للسلامة يعود إلى عمل Frankel وزملائه، وتبنّى معهد IHI تعميمه. أما فكرة التتبع (Tracer) فمعروفة في منهجيات الاعتماد الدولية، ومنها JCI.", en:"The Leadership Safety WalkRounds model originates with Frankel and colleagues, and IHI championed its spread. The Tracer concept is well known in international accreditation methodologies, including JCI."},
+          {ar:"<b>ملاحظة مهمة:</b> لا تحتاج كل منشأة إلى كل هذه الأنواع. المهم أن تعرف ما الغرض من كل جولة، وألا تتحول الجولة إلى 'تفتيش' يخيف الطاقم أو 'زيارة بروتوكولية' لا تكشف شيئًا.", en:"<b>Important note:</b> not every facility needs all these types. What matters is knowing the purpose of each round, and ensuring it never becomes an 'inspection' that frightens staff or a 'protocol visit' that reveals nothing."}
+        ]}
+      ]
+    },
+    {
+      icon:"3️⃣",
+      title:{ar:"مفاهيم أساسية قبل أن نمشي في الأقسام", en:"Core Concepts Before We Walk the Units"},
+      sections:[
+        {icon:"📖", heading:{ar:"لغة مشتركة: ستة مصطلحات أساسية", en:"A Shared Language: Six Core Terms"}, table:{
+          headers:{ar:["المصطلح","التعريف","مثال"], en:["Term","Definition","Example"]},
+          rows:[
+            {ar:["الخطر (Hazard)","مصدر محتمل للأذى","أرضية مبللة، عبوتان متشابهتان"], en:["Hazard","A potential source of harm","Wet floor, two look-alike vials"]},
+            {ar:["المخاطرة (Risk)","احتمال حدوث الأذى مضروبًا في شدته (تصورًا)","احتمال أن ينزلق مريض، وعواقب ذلك"], en:["Risk","Probability of harm multiplied by its severity (conceptually)","Probability a patient slips, and the consequences"]},
+            {ar:["الحادث الوشيك (Near Miss)","حدث لم يصل إلى المريض أو لم يسبب ضررًا","ممرضة لاحظت الخطأ قبل إعطاء الدواء"], en:["Near Miss","An event that didn't reach the patient or cause harm","A nurse caught the error before giving the medication"]},
+            {ar:["الالتفاف (Workaround)","طريقة غير رسمية لتجاوز عائق في العمل","تثبيت إنذار على الصمت لأنه يرن كثيرًا"], en:["Workaround","An informal way of bypassing a work obstacle","Silencing an alarm permanently because it rings too often"]},
+            {ar:["الظرف الكامن (Latent Condition)","ثغرة في النظام تسبق الحدث بزمن","تخزين دوائين متشابهين جنبًا إلى جنب"], en:["Latent Condition","A system gap that precedes the event in time","Storing two look-alike medications side by side"]},
+            {ar:["الإشارة الضعيفة (Weak Signal)","مؤشر صغير قد ينذر بمشكلة أكبر","تذمّر متكرر من نقص نوع من المستلزمات"], en:["Weak Signal","A small indicator that may warn of a bigger problem","Repeated complaints about a shortage of certain supplies"]}
+          ]
+        }},
+        {icon:"🔍", heading:{ar:"الالتفافات: كنز المخاطر", en:"Workarounds: A Treasure Trove of Risk"}, points:[
+          {ar:"أهم ما يكتشفه المراقب المدرَّب هو الالتفاف. حين يتجاوز الطاقم إجراءً، فنادرًا ما يكون ذلك تهورًا؛ غالبًا هو علامة على أن النظام لا يخدم العمل: الإجراء صعب، أو الأداة معطلة، أو الوقت لا يكفي. وهذا يتوافق مع قاعدة السببية التي درسناها في RCA: <b>لكل مخالفة للإجراء سبب سابق</b>. وجود الالتفاف يعني وجود خلل نظامي كامن، وهدف الجولة كشفه لا معاقبة من التفّ.", en:"The most important thing a trained observer discovers is the workaround. When staff bypass a procedure, it's rarely recklessness; it's usually a sign that the system isn't serving the work: the procedure is difficult, the tool is broken, or there isn't enough time. This aligns with the causality rule from RCA: <b>every procedural violation has a preceding cause</b>. A workaround's existence means a latent systemic flaw exists, and the round's goal is to uncover it — not to punish the person who worked around it."}
+        ]}
+      ]
+    },
+    {
+      icon:"4️⃣",
+      title:{ar:"ثماني تقنيات للتعرّف الاستباقي على المخاطر أثناء الجولة", en:"Eight Techniques for Proactive Risk Identification During Rounds"},
+      sections:[
+        {icon:"📋", heading:{ar:"التقنية 1: الملاحظة المنظّمة بقائمة محاور (Structured Observation)", en:"Technique 1: Structured Observation"}, table:{
+          headers:{ar:["الفئة (5P)","ما أبحث عنه أثناء الجولة"], en:["Category (5P)","What I Look For During the Round"]},
+          rows:[
+            {ar:["الأشخاص (Persons)","أعباء العمل، الإرهاق، حاجز اللغة، كفاءة الجدد، تواجد من يلزم"], en:["Persons","Workload, fatigue, language barriers, new-staff competency, required personnel present"]},
+            {ar:["العمليات (Processes)","هل تُنفَّذ الخطوات كما كُتبت؟ تحقق هوية المريض، تسليم المرضى، إعطاء الدواء"], en:["Processes","Are steps executed as written? Patient-ID verification, handoffs, medication administration"]},
+            {ar:["السياسات (Policies)","هل يعرف الطاقم السياسة ويستطيع تطبيقها؟ هل الإجراء المعلّق على الجدار هو المعتمد؟"], en:["Policies","Does staff know the policy and can apply it? Is the posted procedure the approved one?"]},
+            {ar:["الأوراق/السجلات (Papers)","اكتمال التوثيق، وضوح الملصقات، توفر النماذج وقوائم التحقق"], en:["Papers","Documentation completeness, label clarity, availability of forms and checklists"]},
+            {ar:["الأماكن (Places)","الأرضيات، الإضاءة، الازدحام، مخارج الطوارئ، تخزين الأدوية والأجهزة"], en:["Places","Floors, lighting, crowding, emergency exits, medication/equipment storage"]}
+          ]
+        }, points:[
+          {ar:"لا نمشي 'بعيون مفتوحة' فقط، بل بإطار يضمن ألا نُغفل زاوية، باستخدام فئات 5P ذاتها المستخدمة في مخطط السمكة. <b>نصيحة:</b> جهّز قائمة قصيرة (صفحة واحدة) بحسب القسم، ولا تحوّل الجولة إلى استبيان طويل يحجب الرؤية عن الأحداث غير المتوقعة.", en:"We don't just walk with 'open eyes' — we walk with a framework ensuring no angle is missed, using the same 5P categories used in the fishbone diagram. <b>Tip:</b> prepare a short (one-page) checklist tailored to the unit, and never turn the round into a long survey that blocks visibility to unexpected events."}
+        ]},
+        {icon:"💬", heading:{ar:"التقنية 2: أسئلة الطاقم (Staff Conversations)", en:"Technique 2: Staff Conversations"}, points:[
+          {ar:"أقوى ما في الجولة هو الحوار. الأسئلة المفتوحة تكشف ما لا تكشفه الملاحظة، ومنها: 'ما الذي قد يؤذي مريضًا في هذا القسم هذا الأسبوع؟'، 'متى كان آخر موقف شعرتَ فيه أن الأمور كادت تسوء؟'، 'ما الذي يبطئ عملك أو يجبرك على اختصار خطوة؟'، 'ما الشيء الذي لو تغيّر لجعل عملك أكثر أمانًا؟'، 'هل تذكر موقفًا ظننتَ فيه أن أحدًا يجب أن يعرف به ولم يُبلَّغ؟'", en:"Dialogue is the round's most powerful element. Open-ended questions reveal what observation alone cannot, such as: 'What could harm a patient in this unit this week?', 'When was the last time you felt things nearly went wrong?', 'What slows your work or forces you to shortcut a step?', 'What one change would make your work safer?', 'Do you recall a situation you felt someone should know about, but it wasn't reported?'"},
+          {ar:"<b>قواعد الحوار:</b> اسأل دون حكم مسبق، واصغِ أكثر مما تتكلم، ولا تبرّر أو تدافع أمام الملاحظة، وشكر من يتحدث.", en:"<b>Conversation rules:</b> ask without pre-judgment, listen more than you talk, don't justify or defend in front of the observation, and thank whoever speaks up."}
+        ]},
+        {icon:"🚶", heading:{ar:"التقنية 3: تتبّع رحلة المريض (Patient Tracer)", en:"Technique 3: Patient Tracer"}, points:[
+          {ar:"اختر مريضًا فعليًا وتتبّع رحلته: من القبول، إلى الأوامر الدوائية، إلى الفحوص، إلى النقل بين الأقسام، إلى الخروج. هذه التقنية تكشف الحلقات بين الأقسام حيث تتركز الثغرات: التسليم والتسلم، والمعلومة التي لم تصل، والأمر الذي لم يُنفَّذ.", en:"Pick an actual patient and trace their journey: from admission, to medication orders, to tests, to inter-department transfer, to discharge. This technique reveals the inter-departmental links where gaps concentrate: handoffs, information that never arrived, and orders that were never executed."}
+        ]},
+        {icon:"🕵️", heading:{ar:"التقنية 4: رصد الالتفافات (Workaround Hunting)", en:"Technique 4: Workaround Hunting"}, points:[
+          {ar:"ابحث عن علامات الالتفاف: ملصقات يدوية أو ورقات لاصقة تحل محل نظام رسمي؛ أجهزة معطلة أو إنذارات مقفلة؛ اختصارات 'معروفة للجميع' تخالف الإجراء؛ أدوات مخبأة أو مخزّنة بصورة غير رسمية. واسأل بفضول: 'لماذا بدأ العمل بهذه الطريقة؟' — ستجد غالبًا قصة عن عائق حقيقي.", en:"Look for workaround signs: handwritten labels or sticky notes replacing a formal system; disabled equipment or silenced alarms; shortcuts 'everyone knows about' that violate procedure; tools hidden or informally stored. Ask with curiosity: 'Why did work start being done this way?' — you'll usually find a story about a real obstacle."}
+        ]},
+        {icon:"🗣️", heading:{ar:"التقنية 5: حوار المريض والأسرة", en:"Technique 5: Patient & Family Conversations"}, points:[
+          {ar:"المريض وأسرته يرون ما لا يراه الطاقم، لأنهم موجودون طوال الوقت. أسئلة مثل: 'هل شعرتَ بالأمان هنا؟'، 'هل حدث شيء جعلك تقلق؟'، 'هل شرح لك أحدهم كيف تطلب المساعدة؟'. وهذا يربط الجولة بمفهوم تجربة المريض، ويكشف مخاطر مثل تأخر الاستجابة أو غموض المعلومات.", en:"The patient and family see what staff cannot, because they're present all the time. Questions like: 'Did you feel safe here?', 'Did anything happen that worried you?', 'Did anyone explain how to ask for help?' — this links the round to the patient experience concept, and reveals risks like delayed response or unclear information."}
+        ]},
+        {icon:"📈", heading:{ar:"التقنية 6: قراءة الإشارات المبكرة (Leading Signals)", en:"Technique 6: Reading Leading Signals"}, points:[
+          {ar:"لا تدخل القسم دون أن تعرف ما يقوله سجله. قبل الجولة، ألقِ نظرة سريعة على: بلاغات الحوادث والحوادث الوشيكة الأخيرة؛ اتجاهات المؤشرات، وخصوصًا مخططات SPC (هل ظهر تغيّر خاص؟ هل اتجاه ينحدر؟)؛ شكاوى المرضى، وتكرار نقص مستلزمات بعينها، وغياب أو دوران العاملين. هذه الأدوات تجعل الجولة <b>موجَّهة</b> بالبيانات: تذهب لترى 'لماذا' حدث ما رصدته الأرقام — وهي طريقة لدمج ما تعلمناه في محاضرة KPI وSPC.", en:"Don't enter a unit without knowing what its record says. Before the round, quickly review: recent incident and near-miss reports; indicator trends, especially SPC charts (has special-cause variation appeared? is there a declining trend?); patient complaints, recurring shortages of specific supplies, and staff absence or turnover. These tools make the round <b>data-driven</b>: you go to see 'why' something the numbers flagged happened — integrating what we learned in the KPI/SPC lecture."}
+        ]},
+        {icon:"🧠", heading:{ar:"التقنية 7: التفكير المسبق في الفشل — 'ما الذي قد يسوء اليوم؟' (Pre-mortem / Safety Huddle)", en:"Technique 7: Pre-Thinking Failure — 'What Could Go Wrong Today?' (Pre-mortem / Safety Huddle)"}, points:[
+          {ar:"يمكن استخدام تقنية التحليل المسبق (Pre-mortem) المنسوبة إلى Gary Klein في إحاطة الصباح القصيرة: تخيّل أن اليوم انتهى بحدث ضار، فما أرجح الأسباب؟ ثم تُدوَّن المخاطر المتوقعة (نقص تمريض، مريض عالي الخطورة، جهاز قيد الصيانة) ويُتفق على إجراء وقائي لكل منها. الإحاطة الجيدة قصيرة (دقائق معدودة) وثابتة الموعد.", en:"Gary Klein's Pre-mortem technique can be used in the short morning huddle: imagine today ended with an adverse event — what are the likely causes? Expected risks are then logged (nursing shortage, high-risk patient, equipment under maintenance) and a preventive action is agreed for each. A good huddle is brief (a few minutes) and happens at a fixed time."}
+        ]},
+        {icon:"✨", heading:{ar:"التقنية 8: التعلّم مما يسير جيدًا (Safety-II)", en:"Technique 8: Learning From What Goes Well (Safety-II)"}, points:[
+          {ar:"تعرض أعمال Erik Hollnagel رؤية تُعرف بـ Safety-II: ليس فقط دراسة ما يفشل، بل فهم كيف ينجح الناس في الأداء الآمن رغم الظروف المتغيرة. أثناء الجولة، اسأل: 'كيف تنجحون في التعامل مع الضغط دون أخطاء؟' — ستكتشف مرونة غير مكتوبة في الإجراءات، فقد تكون ممارسة يستحق تعميمها، وقد تكون عبئًا يجب أن يخفّفه النظام.", en:"Erik Hollnagel's work presents a view known as Safety-II: not only studying what fails, but understanding how people succeed at safe performance despite changing conditions. During the round, ask: 'How do you manage to handle the pressure without errors?' — you'll discover unwritten resilience in the procedures; it may be a practice worth spreading, or a burden the system should relieve."}
+        ]}
+      ]
+    },
+    {
+      icon:"5️⃣",
+      title:{ar:"من الملاحظة إلى خطر موثَّق ومُقيَّم", en:"From Observation to a Documented, Assessed Risk"},
+      sections:[
+        {icon:"✍️", heading:{ar:"الخطوة 1: صغ عبارة الخطر (Hazard Statement)", en:"Step 1: Write the Hazard Statement"}, table:{
+          headers:{ar:["صياغة ضعيفة","صياغة جيدة"], en:["Weak Phrasing","Good Phrasing"]},
+          rows:[
+            {ar:["'الغرفة غير مرتبة'","'تخزين تركيزين متشابهي الملصق في الدرج نفسه قد يؤدي إلى سحب الدواء الخطأ وإعطاء جرعة غير صحيحة'"], en:["\"The room is messy\"","\"Storing two look-alike-labeled concentrations in the same drawer may lead to pulling the wrong medication and giving an incorrect dose\""]},
+            {ar:["'التمريض مشغول'","'غياب ممرض ثانٍ لتحقق الأدوية عالية الخطورة في نوبة الليل قد يزيد احتمال خطأ دوائي غير ملتقَط'"], en:["\"Nursing is busy\"","\"The absence of a second nurse to verify high-risk medications on the night shift may increase the chance of an uncaught medication error\""]},
+            {ar:["'الأرضية خطرة'","'أرضية مبللة أمام الحمّام في الجناح الليلي قد تؤدي إلى سقوط مريض مسنّ وإصابته'"], en:["\"The floor is dangerous\"","\"A wet floor in front of the bathroom on the night ward may lead to an elderly patient falling and being injured\""]}
+          ]
+        }, points:[
+          {ar:"نستخدم بنية مشابهة للعبارة السببية في RCA: <b>مصدر الخطر ← ما قد يحدث ← الأذى المحتمل</b>. لاحظوا غياب أي لوم، واحتواء كل عبارة على نظام قابل للمعالجة.", en:"We use a structure similar to the causal statement in RCA: <b>hazard source ← what might happen ← potential harm</b>. Notice the absence of any blame, and that each statement points to an addressable system element."}
+        ]},
+        {icon:"🎲", heading:{ar:"الخطوة 2: قدّر الخطر — مصفوفة الاحتمال × الشدة", en:"Step 2: Score the Risk — Probability × Severity Matrix"}, table:{
+          headers:{ar:["الاحتمال / الشدة","شدة 1 (طفيف)","شدة 2","شدة 3 (متوسط)","شدة 4","شدة 5 (كارثي)"], en:["Probability / Severity","Severity 1 (Minor)","Severity 2","Severity 3 (Moderate)","Severity 4","Severity 5 (Catastrophic)"]},
+          rows:[
+            {ar:["احتمال 5 (شبه مؤكد)","5","10","15","20","25"], en:["Probability 5 (Almost Certain)","5","10","15","20","25"]},
+            {ar:["احتمال 4","4","8","12","16","20"], en:["Probability 4","4","8","12","16","20"]},
+            {ar:["احتمال 3","3","6","9","12","15"], en:["Probability 3","3","6","9","12","15"]},
+            {ar:["احتمال 2","2","4","6","8","10"], en:["Probability 2","2","4","6","8","10"]},
+            {ar:["احتمال 1 (نادر)","1","2","3","4","5"], en:["Probability 1 (Rare)","1","2","3","4","5"]}
+          ]
+        }, points:[
+          {ar:"درجة الخطر = الاحتمال × الشدة. وتُقسَّم الدرجات عادة إلى نطاقات (منخفض، متوسط، مرتفع، شديد). الحدود بين النطاقات تحددها سياسة منشأتك، وليست ثابتة عالميًا، وما ورد أعلاه مثال توضيحي فقط.", en:"Risk score = probability × severity. Scores are usually grouped into bands (low, medium, high, extreme). The boundaries between bands are set by your organization's policy, not a universal constant — the table above is illustrative only."},
+          {ar:"وللمخاطر المرتبطة بالعمليات المعقدة، يستخدم FMEA تقديرًا ثلاثيًا يضيف قابلية الاكتشاف (Detection): رقم أولوية المخاطرة (RPN) = الشدة × الحدوث × الاكتشاف — وهو ما رأيتموه في سجل المخاطر المبني بمنهج FMEA. جولات اليوم تغذّي هذا السجل بأخطار جديدة تُقيَّم لاحقًا بتعمق.", en:"For risks tied to complex processes, FMEA uses a three-factor estimate adding Detectability: Risk Priority Number (RPN) = Severity × Occurrence × Detection — as seen in the FMEA-based risk register. Today's rounds feed that register with new hazards to be assessed in depth later."}
+        ]},
+        {icon:"✅", heading:{ar:"الخطوة 3: قرّر الإجراء بحسب الدرجة", en:"Step 3: Decide the Action by Score"}, table:{
+          headers:{ar:["المستوى","القرار المقترح (توضيحي)"], en:["Level","Suggested Decision (Illustrative)"]},
+          rows:[
+            {ar:["منخفض","معالجة فورية بسيطة إن أمكن، وتسجيل"], en:["Low","Simple immediate fix if possible, and log it"]},
+            {ar:["متوسط","إجراء بمسؤول وموعد، ومتابعة في لجنة الوحدة"], en:["Medium","Action with an owner and a due date, followed up in the unit committee"]},
+            {ar:["مرتفع","تصعيد لقيادة الجودة، وإجراء مؤقت فوري، وخطة تصحيح"], en:["High","Escalate to quality leadership, immediate interim action, and a correction plan"]},
+            {ar:["شديد","إيقاف المصدر فورًا (إن أمكن)، وإبلاغ القيادة العليا، وتحليل معمّق"], en:["Extreme","Stop the source immediately (if possible), notify senior leadership, and run an in-depth analysis"]}
+          ]
+        }, points:[
+          {ar:"<b>المبدأ الأهم:</b> 'ما يمكن إصلاحه خلال الجولة يُصلَح خلال الجولة' — ثم تُسجَّل الأخطار التي تحتاج إلى قرار أعلى.", en:"<b>The most important principle:</b> \"what can be fixed during the round gets fixed during the round\" — hazards needing a higher-level decision are then logged."}
+        ]}
+      ]
+    },
+    {
+      icon:"6️⃣",
+      title:{ar:"التوثيق والتصعيد وإغلاق الحلقة", en:"Documentation, Escalation, and Closing the Loop"},
+      sections:[
+        {icon:"🗒️", heading:{ar:"سجل مخاطر الجولات (Round Risk Log)", en:"The Round Risk Log"}, table:{
+          headers:{ar:["الحقل","المحتوى"], en:["Field","Content"]},
+          rows:[
+            {ar:["التاريخ والقسم","أين ومتى"], en:["Date & Department","Where and when"]},
+            {ar:["عبارة الخطر","بالصيغة الموضحة سابقًا"], en:["Hazard Statement","In the format shown earlier"]},
+            {ar:["فئة 5P","لتحليل الأنماط لاحقًا"], en:["5P Category","For later pattern analysis"]},
+            {ar:["درجة الخطر","الاحتمال × الشدة"], en:["Risk Score","Probability × Severity"]},
+            {ar:["الإجراء الفوري","ما تم خلال الجولة"], en:["Immediate Action","What was done during the round"]},
+            {ar:["الإجراء المطلوب","ما يحتاج قرارًا"], en:["Required Action","What needs a decision"]},
+            {ar:["المسؤول (واحد)","شخص واحد (راجع قاعدة RACI)"], en:["Owner (one person)","One single person (see RACI rule)"]},
+            {ar:["الموعد","تاريخ محدد"], en:["Due Date","A specific date"]},
+            {ar:["الحالة","مفتوح / قيد التنفيذ / مغلق / مُصعَّد"], en:["Status","Open / In Progress / Closed / Escalated"]}
+          ]
+        }, points:[
+          {ar:"أكثر ما يُفقد الجولات مصداقيتها أن الطاقم يخبر بما يقلقه، ثم لا يرى شيئًا يتغير — فالجولة بلا متابعة <b>تضر</b> ولا تكتفي بأنها لا تنفع. وتُراجَع المخاطر المسجلة دوريًا في لجنة الجودة وسلامة المرضى، وتُغذّي سجل مخاطر المنشأة والتحسين المستمر.", en:"What most undermines a round's credibility is staff reporting a concern and then seeing nothing change — a round without follow-up <b>does harm</b>, it doesn't just fail to help. Logged risks are reviewed periodically in the Quality & Patient Safety committee, feeding the organization's risk register and continuous improvement."}
+        ]},
+        {icon:"📣", heading:{ar:"التواصل عند التصعيد وإغلاق الحلقة مع الطاقم", en:"Escalation Communication & Closing the Loop With Staff"}, points:[
+          {ar:"استخدم هيكل <b>SBAR</b> (الموقف، الخلفية، التقييم، التوصية) لإيصال الخطر بإيجاز: ما الموقف؟ ما خلفيته؟ كيف أقيّم خطورته؟ وما الذي أوصي به؟", en:"Use the <b>SBAR</b> structure (Situation, Background, Assessment, Recommendation) to communicate the hazard concisely: what's the situation? its background? how do I assess its severity? and what do I recommend?"},
+          {ar:"أبسط الأدوات لإغلاق الحلقة: لوحة 'قلتم وفعلنا' (You Said, We Did) في الوحدة، تُظهر ما أُبلغ به وما تم بشأنه. وحين لا يمكن إصلاح الخطر سريعًا، فقل ذلك بوضوح: 'علمنا بالمشكلة، وهذا ما نفعله، وهذا ما يمنع الحل الآن' — فالصراحة تحفظ الثقة.", en:"The simplest closed-loop tool: a 'You Said, We Did' board in the unit, showing what was reported and what was done about it. When a hazard can't be fixed quickly, say so plainly: 'We know about the issue, here's what we're doing, and here's what's currently blocking a fix' — candor preserves trust."}
+        ]},
+        {icon:"🔗", heading:{ar:"ربط الجولات ببقية نظام الجودة", en:"Linking Rounds to the Rest of the Quality System"}, table:{
+          headers:{ar:["ما تكشفه الجولة","يتحول إلى"], en:["What the Round Reveals","Becomes"]},
+          rows:[
+            {ar:["خطر بسيط قابل للإصلاح","إجراء فوري وتوثيق"], en:["A simple, fixable hazard","Immediate action and documentation"]},
+            {ar:["خطر متكرر أو ذو درجة مرتفعة","بند في سجل المخاطر وإجراء CAPA"], en:["A recurring or high-scoring hazard","An item in the risk register and a CAPA action"]},
+            {ar:["نمط يتكرر في أقسام متعددة","تحليل FMEA لعملية كاملة"], en:["A pattern recurring across multiple units","An FMEA analysis of a whole process"]},
+            {ar:["حدث وشيك أو ضرر فعلي","بلاغ حادث، وربما RCA"], en:["A near miss or actual harm","An incident report, and possibly an RCA"]},
+            {ar:["تغيّر في سلوك مؤشر","مراجعة مخطط SPC، وبحث عن سبب خاص"], en:["A change in an indicator's behavior","Reviewing the SPC chart and searching for a special cause"]}
+          ]
+        }, points:[
+          {ar:"ولا يكتمل برنامج الجولات دون تنويع التوقيت: نوبات الليل والعطل تكشف مخاطر لا تظهر نهارًا، والاعتماد على الحوار لا الملاحظة البصرية وحدها ضروري في تلك الأوقات الأقل ازدحامًا بصريًا وأكثر هدوءًا.", en:"A rounding program isn't complete without varying the timing: night shifts and holidays reveal risks invisible by day, and relying on dialogue — not visual observation alone — is essential during those quieter, less visually busy hours."}
+        ]}
+      ]
+    },
+    {
+      icon:"7️⃣",
+      title:{ar:"كيف نقيس نجاح برنامج الجولات؟", en:"How Do We Measure a Rounding Program's Success?"},
+      sections:[
+        {icon:"📏", heading:{ar:"سبعة مؤشرات لفعالية البرنامج", en:"Seven Indicators of Program Effectiveness"}, table:{
+          headers:{ar:["المؤشر","ما يعكسه"], en:["Indicator","What It Reflects"]},
+          rows:[
+            {ar:["عدد الجولات المنفذة مقابل المخطط","الالتزام بالبرنامج"], en:["Rounds performed vs. planned","Program adherence"]},
+            {ar:["عدد المخاطر المسجلة لكل جولة","حساسية الجولة وثقة الطاقم"], en:["Hazards logged per round","Round sensitivity and staff trust"]},
+            {ar:["نسبة المخاطر المغلقة خلال المدة المتفق عليها","فعالية المتابعة"], en:["% of hazards closed within the agreed timeframe","Follow-up effectiveness"]},
+            {ar:["زمن إغلاق المخاطر المرتفعة","سرعة الاستجابة للأخطر"], en:["Closure time for high-level hazards","Speed of response to the most severe risks"]},
+            {ar:["استطلاع قصير للطاقم: 'هل ترى أن الجولات تنتج تغييرًا؟'","الثقة والجدوى"], en:["Short staff survey: 'Do you see rounds producing change?'","Trust and perceived value"]},
+            {ar:["بلاغات الحوادث الوشيكة","ازدياد ثقافة الإبلاغ (زيادتها مبدئيًا علامة صحة)"], en:["Near-miss reports","A growing reporting culture (an initial rise is a sign of health)"]},
+            {ar:["الاتجاه في الأحداث الضارة ذات الصلة","الأثر النهائي (بعد فترة كافية)"], en:["Trend in related adverse events","The ultimate impact (after a sufficient period)"]}
+          ]
+        }, points:[
+          {ar:"لا تقيس نجاح الجولات بقلة المخاطر المكتشفة — فقد يعني قلة الاكتشاف أن الطاقم لا يتكلم. أهداف هذه المؤشرات (مثل 'نسبة الإغلاق المستهدفة') يضعها كل مستشفى بحسب موارده وسياساته، ولا يوجد رقم عالمي صحيح. وبهذا نطبق ما تعلمناه في إدارة المؤشرات: بطاقة تعريف واضحة، وبسط ومقام، ومسؤول، وتقرير دوري.", en:"Don't measure round success by how few hazards are found — fewer discoveries may simply mean staff aren't speaking up. Targets for these indicators (such as a 'target closure rate') are set by each hospital per its resources and policies; there's no universally correct number. This applies what we learned in indicator management: a clear identification card, numerator/denominator, an owner, and periodic reporting."}
+        ]}
+      ]
+    },
+    {
+      icon:"8️⃣",
+      title:{ar:"أخطاء شائعة في الجولات", en:"Common Mistakes in Rounds"},
+      sections:[
+        {icon:"⚠️", heading:{ar:"ثمانية أخطاء وعلاجها", en:"Eight Mistakes and Their Remedy"}, table:{
+          headers:{ar:["الخطأ","النتيجة","العلاج"], en:["Mistake","Result","Remedy"]},
+          rows:[
+            {ar:["جولة بروتوكولية دون أسئلة","لا مخاطر تُكتشف","اعتمد أسئلة مفتوحة مخطط لها"], en:["A rote protocol round with no questions","No hazards are discovered","Adopt pre-planned open-ended questions"]},
+            {ar:["تحويل الجولة إلى تفتيش ولوم","صمت الطاقم وإخفاء المشكلات","مبدأ الأمان النفسي وفصل الجولة عن التأديب"], en:["Turning the round into inspection and blame","Staff silence and hidden problems","Psychological-safety principle; separate the round from discipline"]},
+            {ar:["جمع ملاحظات دون متابعة","فقدان المصداقية","سجل ومسؤول وموعد و'قلتم وفعلنا'"], en:["Collecting observations without follow-up","Loss of credibility","A log, an owner, a due date, and a 'You Said, We Did' board"]},
+            {ar:["التركيز على النهار وأيام العمل فقط","غياب رؤية الليل والعطل","جولات متنوعة التوقيت"], en:["Focusing only on daytime weekdays","No visibility into nights and holidays","Vary the rounding schedule's timing"]},
+            {ar:["معاقبة من يُبلغ عن التفاف","اختباء الالتفافات","اسأل 'لماذا؟' عن العائق"], en:["Punishing whoever reports a workaround","Workarounds go into hiding","Ask 'why?' about the obstacle instead"]},
+            {ar:["قائمة تحقق طويلة جدًا","ضياع الملاحظة الحرة","قائمة قصيرة مخصصة للقسم"], en:["An overly long checklist","Free observation gets lost","A short list tailored to the unit"]},
+            {ar:["الاكتفاء بما يخص القسم المزار","تفويت مشكلات الحدود بين الأقسام","استخدم التتبع (Tracer)"], en:["Limiting attention to the visited unit alone","Missing boundary issues between departments","Use the Tracer technique"]},
+            {ar:["عدم ربط الجولة بالبيانات","جولات عشوائية","ابدأ بمؤشرات الوحدة ومخاطرها"], en:["Not linking the round to data","Random, unfocused rounds","Start from the unit's own indicators and risks"]}
+          ]
+        }}
+      ]
+    }
+  ],
+  reviewBank: {
+    tf: [
+      {ar:"العمل الاستباقي يعني الانتظار حتى وقوع الحادث ثم تحليل أسبابه الجذرية.", en:"Proactive work means waiting for an incident to occur, then analyzing its root causes.", a:false, expAr:"خطأ — هذا وصف العمل التفاعلي؛ الاستباقي يبحث عن المخاطر قبل وقوع الحادث عبر الجولات والمؤشرات الاستباقية.", expEn:"False — that describes reactive work; proactive work searches for hazards before an incident, via rounds and leading indicators."},
+      {ar:"خاصية 'الانشغال بالفشل' في منظمات الموثوقية العالية (HRO) تعني الانتباه للإشارات الضعيفة قبل أن تتضخم.", en:"The HRO trait 'Preoccupation with Failure' means attentiveness to weak signals before they escalate.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"الالتفاف (Workaround) غالبًا علامة على تهوّر الطاقم ولا صلة له بتصميم النظام.", en:"A workaround is usually a sign of staff recklessness and unrelated to system design.", a:false, expAr:"خطأ — الالتفاف غالبًا علامة على أن النظام لا يخدم العمل (إجراء صعب، أداة معطلة، وقت غير كافٍ)، لا تهورًا فرديًا.", expEn:"False — a workaround is usually a sign the system fails to serve the work (a difficult procedure, broken tool, insufficient time), not individual recklessness."},
+      {ar:"عبارة الخطر الجيدة تتضمن مصدر الخطر وما قد يحدث والأذى المحتمل، دون توجيه لوم لشخص بعينه.", en:"A good hazard statement includes the hazard source, what might happen, and potential harm, without blaming a specific person.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"درجة الخطر في مصفوفة الاحتمال × الشدة ثابتة عالميًا ولا تختلف بين المنشآت.", en:"The risk score bands in the probability × severity matrix are universally fixed and don't vary between organizations.", a:false, expAr:"خطأ — الحدود بين نطاقات الخطورة (منخفض، متوسط، مرتفع، شديد) تحددها سياسة كل منشأة، وليست ثابتة عالميًا.", expEn:"False — the boundaries between risk bands (low, medium, high, extreme) are set by each organization's own policy, not a universal constant."},
+      {ar:"نجاح برنامج الجولات يُقاس بانخفاض عدد المخاطر المكتشفة في كل جولة.", en:"A rounding program's success is measured by a drop in the number of hazards discovered per round.", a:false, expAr:"خطأ — قلة الاكتشاف قد تعني أن الطاقم لا يتكلم؛ النجاح يُقاس بمؤشرات مثل نسبة الإغلاق وزمن الاستجابة وثقة الطاقم، لا بعدد المخاطر وحده.", expEn:"False — fewer discoveries may mean staff aren't speaking up; success is measured by closure rate, response time, and staff trust, not hazard count alone."}
+    ],
+    mcq: [
+      {ar:"ما الفرق الجوهري بين العمل التفاعلي والاستباقي من حيث مصدر المعلومة؟", en:"What is the key difference between reactive and proactive work in terms of information source?",
+       optionsAr:["التفاعلي يعتمد على الملاحظة المبكرة، والاستباقي على بلاغ الحادث","التفاعلي يعتمد على بلاغ الحادث أو الشكوى، والاستباقي على الملاحظة والاستشعار المبكر","لا فرق بينهما في مصدر المعلومة","كلاهما يعتمد على تحليل السبب الجذري فقط"], optionsEn:["Reactive relies on early observation, proactive on incident reports","Reactive relies on incident/complaint reports, proactive on observation and early sensing","No difference in information source","Both rely solely on root cause analysis"],
+       correct:1, expAr:"التفاعلي يتحرك بعد بلاغ حادث أو شكوى، والاستباقي يعتمد على ملاحظة واستشعار مبكر قبل وقوع الحدث.", expEn:"Reactive acts after an incident/complaint report; proactive relies on observation and early sensing before the event occurs."},
+      {ar:"أي نوع من الجولات يركّز على 'تتبّع رحلة مريض فعلي عبر الأقسام'؟", en:"Which round type focuses on 'tracing an actual patient's journey across departments'?",
+       optionsAr:["الإحاطة اليومية القصيرة (Safety Huddle)","تتبّع المريض (Tracer)","جولة جيمبا (Gemba Walk)","الجولات التمريضية المقصودة"], optionsEn:["Safety Huddle","Patient Tracer","Gemba Walk","Intentional Rounding"],
+       correct:1, expAr:"تتبّع المريض (Tracer) يتابع رحلة مريض فعلي عبر الأقسام ويكشف الفجوات بين الأقسام ونقاط التسليم.", expEn:"The Patient Tracer follows an actual patient's journey across departments, revealing gaps and handoff points between them."},
+      {ar:"وفق التعريفات الأساسية، ما الفرق بين 'الخطر (Hazard)' و'المخاطرة (Risk)'؟", en:"Per the core definitions, what is the difference between 'Hazard' and 'Risk'?",
+       optionsAr:["لا فرق، وهما مصطلح واحد","الخطر مصدر محتمل للأذى، والمخاطرة احتمال حدوث الأذى مضروبًا في شدته","الخطر يخص المريض فقط، والمخاطرة تخص الطاقم فقط","المخاطرة مصطلح قانوني لا علاقة له بالجودة"], optionsEn:["No difference; they're the same term","Hazard is a potential source of harm; Risk is the probability of harm multiplied by its severity","Hazard concerns only the patient; Risk concerns only staff","Risk is a legal term unrelated to quality"],
+       correct:1, expAr:"الخطر (Hazard) مصدر محتمل للأذى، والمخاطرة (Risk) تصوّر لاحتمال حدوث الأذى مضروبًا في شدته.", expEn:"Hazard is a potential source of harm; Risk is a conceptual estimate of the probability of harm multiplied by its severity."},
+      {ar:"ما التقنية التي تستخدم سؤال 'ما الذي قد يسوء اليوم؟' في إحاطة الصباح القصيرة؟", en:"Which technique uses the question 'What could go wrong today?' in the short morning huddle?",
+       optionsAr:["رصد الالتفافات (Workaround Hunting)","التفكير المسبق في الفشل (Pre-mortem)","تتبّع رحلة المريض","قراءة الإشارات المبكرة"], optionsEn:["Workaround Hunting","Pre-mortem","Patient Tracer","Reading Leading Signals"],
+       correct:1, expAr:"تقنية التحليل المسبق (Pre-mortem)، المنسوبة إلى Gary Klein، تتخيل أن اليوم انتهى بحدث ضار لتحديد أرجح الأسباب مسبقًا.", expEn:"The Pre-mortem technique, attributed to Gary Klein, imagines the day ending in an adverse event to pre-identify likely causes."},
+      {ar:"ما وظيفة 'بطاقة قلتم وفعلنا' (You Said, We Did) في برنامج الجولات؟", en:"What is the function of a 'You Said, We Did' board in a rounding program?",
+       optionsAr:["تحديد درجة الخطر رياضيًا","إغلاق الحلقة مع الطاقم بإظهار ما أُبلغ به وما تم بشأنه","استبدال الحاجة لسجل مخاطر الجولات","تصنيف المؤشرات وفق نموذج Donabedian"], optionsEn:["Mathematically scoring the risk","Closing the loop with staff by showing what was reported and what was done","Replacing the need for a round risk log","Classifying indicators per the Donabedian model"],
+       correct:1, expAr:"اللوحة تُغلق الحلقة مع الطاقم وتُظهر ما أُبلغ به وما تم بشأنه، فتحافظ على مصداقية البرنامج.", expEn:"The board closes the loop with staff, showing what was reported and what was done, preserving the program's credibility."},
+      {ar:"ما المؤشر الذي قد يكون ارتفاعه المبدئي 'علامة صحة' لا ضعف في برنامج الجولات؟", en:"Which indicator's initial rise may be a 'sign of health' rather than program weakness?",
+       optionsAr:["زمن إغلاق المخاطر المرتفعة","نسبة المخاطر المغلقة","بلاغات الحوادث الوشيكة","عدد الجولات المنفذة مقابل المخطط"], optionsEn:["Closure time for high-level hazards","Percentage of hazards closed","Near-miss reports","Rounds performed vs. planned"],
+       correct:2, expAr:"ازدياد بلاغات الحوادث الوشيكة مبدئيًا يعكس تحسّن ثقافة الإبلاغ، وهو علامة صحة لا ضعف.", expEn:"An initial rise in near-miss reports reflects an improving reporting culture — a sign of health, not weakness."}
+    ],
+    fill: [
+      {ar:"خاصيتا 'الانشغال بالفشل' و'الحساسية للعمليات' هما من خصائص منظمات ______.", en:"'Preoccupation with Failure' and 'Sensitivity to Operations' are traits of ______ organizations.", a:"الموثوقية العالية / High-Reliability Organizations (HRO)"},
+      {ar:"حدث لم يصل إلى المريض أو لم يسبب ضررًا يُسمى ______.", en:"An event that didn't reach the patient or cause harm is called a ______.", a:"الحادث الوشيك / Near Miss"},
+      {ar:"ثغرة في النظام تسبق الحدث بزمن، مثل تخزين دوائين متشابهين جنبًا إلى جنب، تُسمى ______.", en:"A system gap that precedes the event in time, such as storing two look-alike medications side by side, is called a ______.", a:"الظرف الكامن / Latent Condition"},
+      {ar:"بنية عبارة الخطر الجيدة هي: مصدر الخطر ← ما قد يحدث ← ______.", en:"The structure of a good hazard statement is: hazard source ← what might happen ← ______.", a:"الأذى المحتمل / potential harm"},
+      {ar:"هيكل الاتصال المستخدم في التصعيد، وحروفه تعني الموقف والخلفية والتقييم والتوصية، يُسمى ______.", en:"The communication structure used in escalation, whose letters stand for Situation, Background, Assessment, and Recommendation, is called ______.", a:"SBAR"},
+      {ar:"الرؤية التي تدعو لفهم كيف ينجح الناس في الأداء الآمن رغم الظروف المتغيرة، عرضها Erik Hollnagel، تُسمى ______.", en:"The view calling for understanding how people succeed at safe performance despite changing conditions, presented by Erik Hollnagel, is called ______.", a:"Safety-II"}
+    ],
+    short: [
+      {ar:"اذكر الفرق بين العمل التفاعلي والاستباقي من حيث التوقيت والأدوات، مع مثال على أداة لكل منهما.", en:"Explain the difference between reactive and proactive work in terms of timing and tools, with an example tool for each.",
+       aAr:"التفاعلي يتحرك بعد وقوع الحدث بأدوات مثل تحليل السبب الجذري (RCA)؛ الاستباقي يتحرك قبل وقوعه بأدوات مثل الجولات وFMEA والمؤشرات الاستباقية.",
+       aEn:"Reactive acts after the event using tools like Root Cause Analysis (RCA); proactive acts before it using tools like rounds, FMEA, and leading indicators."},
+      {ar:"اذكر ثلاثة أنواع من الجولات اليومية مع من يقوم بكل منها.", en:"Name three types of daily rounds along with who performs each.",
+       aAr:"مثال: جولات القيادة للسلامة (قادة المنشأة مع فريق الوحدة)، جولات الجودة وسلامة المرضى (أخصائيو الجودة)، تتبّع المريض (مدققو الجودة) — أو أي ثلاثة أنواع أخرى من السبعة.",
+       aEn:"Example: Leadership Safety WalkRounds (facility leaders with unit team), Quality & Patient Safety Rounds (quality specialists), Patient Tracer (quality auditors) — or any three of the seven types."},
+      {ar:"لماذا يُعدّ الالتفاف (Workaround) 'كنز مخاطر' بالنسبة للمراقب المدرَّب، وكيف ينبغي التعامل مع من يستخدمه؟", en:"Why is a workaround a 'treasure trove of risk' for a trained observer, and how should the person using it be treated?",
+       aAr:"لأن الالتفاف غالبًا علامة على خلل نظامي كامن (إجراء صعب، أداة معطلة، وقت غير كافٍ)، لا تهورًا فرديًا؛ وهدف الجولة كشف الخلل لا معاقبة من التفّ، بل سؤاله بفضول عن سبب العائق.",
+       aEn:"Because a workaround is usually a sign of a hidden systemic flaw (a difficult procedure, broken tool, insufficient time), not individual recklessness; the round's goal is to uncover the flaw, not punish the person — instead, ask with curiosity about the underlying obstacle."},
+      {ar:"صِغ مثالاً على عبارة خطر جيدة (Hazard Statement) باستخدام البنية الثلاثية المطلوبة.", en:"Write an example of a good hazard statement using the required three-part structure.",
+       aAr:"مثال: 'غياب ممرض ثانٍ لتحقق الأدوية عالية الخطورة في نوبة الليل قد يزيد احتمال خطأ دوائي غير ملتقَط' — تتضمن مصدر الخطر، ما قد يحدث، والأذى المحتمل، دون لوم شخص بعينه.",
+       aEn:"Example: 'The absence of a second nurse to verify high-risk medications on the night shift may increase the chance of an uncaught medication error' — includes the hazard source, what might happen, and potential harm, without blaming anyone specifically."},
+      {ar:"ما الإجراء المقترح عند اكتشاف خطر بدرجة 'شديدة' وفق مصفوفة الاحتمال × الشدة؟", en:"What is the suggested action when a hazard is scored 'Extreme' per the probability × severity matrix?",
+       aAr:"إيقاف المصدر فورًا إن أمكن، وإبلاغ القيادة العليا، وإجراء تحليل معمّق للمخاطر — بخلاف المستويات المنخفضة أو المتوسطة التي تُعالَج بإجراء فوري بسيط أو إجراء بمسؤول وموعد.",
+       aEn:"Stop the source immediately if possible, notify senior leadership, and run an in-depth analysis — unlike low or medium levels, which are handled with a simple immediate fix or an action with an owner and due date."},
+      {ar:"لماذا لا يُعدّ 'انخفاض عدد المخاطر المكتشفة في الجولة' مؤشر نجاح جيداً لبرنامج الجولات، وما المؤشرات الأفضل بديلاً؟", en:"Why is 'a drop in hazards discovered per round' not a good success indicator for a rounding program, and what are better alternatives?",
+       aAr:"لأن قلة الاكتشاف قد تعني أن الطاقم لا يتكلم لا أن المخاطر قلّت فعلاً؛ المؤشرات الأفضل: نسبة المخاطر المغلقة، زمن إغلاق المخاطر المرتفعة، استطلاع ثقة الطاقم، واتجاه بلاغات الحوادث الوشيكة.",
+       aEn:"Because fewer discoveries may mean staff aren't speaking up rather than hazards truly decreasing; better indicators: hazard closure rate, closure time for high-level hazards, a staff-trust survey, and the trend in near-miss reports."}
+    ]
+  },
+  quizQuestions: [
+    {ar:"العمل الاستباقي يعتمد على الملاحظة والاستشعار المبكر قبل وقوع الحادث، بخلاف العمل التفاعلي الذي يتحرك بعد الحدث.", en:"Proactive work relies on observation and early sensing before an incident occurs, unlike reactive work which acts after the event.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"خاصية 'الحساسية للعمليات' في منظمات الموثوقية العالية (HRO) تعني معرفة ما يجري فعلًا في الخط الأمامي.", en:"The HRO trait 'Sensitivity to Operations' means genuinely knowing what's happening on the front line.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"أي نوع من الجولات يركّز على 'مشاهدة العمل كما يُؤدَّى في مكانه' وفق مفهوم Lean؟", en:"Which round type focuses on 'watching work as performed in its place', per the Lean concept?", optionsAr:["الإحاطة اليومية القصيرة","جولة جيمبا (Gemba Walk)","الجولات التمريضية المقصودة","جولات بيئة الرعاية"], optionsEn:["Safety Huddle","Gemba Walk","Intentional Rounding","Environment of Care Rounds"], correct:1},
+    {ar:"الالتفاف (Workaround) هو طريقة غير رسمية لتجاوز عائق في العمل، وهو غالبًا علامة على خلل نظامي كامن.", en:"A workaround is an informal way of bypassing a work obstacle, and is usually a sign of a hidden systemic flaw.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"ما العنصر الذي تضيفه منهجية FMEA على مصفوفة الاحتمال × الشدة الأساسية؟", en:"What element does FMEA add to the basic probability × severity matrix?", optionsAr:["قابلية الاكتشاف (Detection)","عدد الطاقم المتاح","تاريخ الحادث السابق","نوع القسم"], optionsEn:["Detectability","Number of available staff","Date of the previous incident","Department type"], correct:0},
+    {ar:"عند اكتشاف خطر بدرجة 'شديدة'، الإجراء المقترح هو معالجة فورية بسيطة فقط دون تصعيد.", en:"Upon discovering an 'extreme'-level hazard, the suggested action is only a simple immediate fix without escalation.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"هيكل SBAR المستخدم في التصعيد يشمل: الموقف، الخلفية، التقييم، و______.", en:"The SBAR structure used in escalation includes: Situation, Background, Assessment, and ______.", optionsAr:["التوصية (Recommendation)","التصنيف (Classification)","التكرار (Frequency)","التكلفة (Cost)"], optionsEn:["Recommendation","Classification","Frequency","Cost"], correct:0},
+    {ar:"حين يُبلغ موظف عن التفاف ثم يُعاقَب على ذلك، فإن النتيجة المرجّحة هي أن تتكرر الجولات دون أي مخاطر مكتشفة لاحقًا.", en:"When an employee reports a workaround and is then punished for it, the likely result is that future rounds find no hazards reported at all.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"نجاح برنامج الجولات يُقاس بشكل أساسي عبر عدد المخاطر المكتشفة في كل جولة فقط.", en:"A rounding program's success is primarily measured solely by the number of hazards discovered per round.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"لوحة 'قلتم وفعلنا' (You Said, We Did) تهدف إلى إغلاق الحلقة مع الطاقم والحفاظ على مصداقية برنامج الجولات.", en:"The 'You Said, We Did' board aims to close the loop with staff and preserve the rounding program's credibility.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
   ]
 }
 
