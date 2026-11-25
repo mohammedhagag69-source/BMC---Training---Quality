@@ -610,11 +610,28 @@ const lectures = [
     durationAr: "ساعتان ونصف تدريبية", durationEn: "2.5 Training Hours",
     sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
     sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
+  },
+  {
+    // المحاضرة السابعة: فارغة حتى يتم تحميلها
+    status: "coming",
+    titleAr: "", titleEn: "", descAr: "", descEn: "",
+    durationAr: "—", durationEn: "—", sectionsAr: "—", sectionsEn: "—"
+  },
+  {
+    status: "available",
+    isBuiltIn: true,
+    titleAr: "المحاضرة الثامنة: تصميم لوحات مؤشرات الأداء والتواصل البصري بالبيانات",
+    titleEn: "Lecture 8: KPI Dashboard Design and Visual Communication",
+    descAr: "وحدة تطبيقية تغطي تصميم اللوحة كأداة قرار لا معرض أرقام، المستويات الثلاثة للوحات (تنفيذي/تشغيلي/تحليلي)، قاعدة الخمس ثوانٍ وتسلسل الأهمية، السياقات الأربعة للرقم (الهدف، الاتجاه، المقارنة، الحجم) والرسم الشريطي مقابل الهدف، اختيار الرسم المناسب لكل سؤال وكشف الرسوم المضللة، اللون والتنبيه بنظام الإشارة، مبدأ نسبة الحبر إلى البيانات لـ Tufte، خصائص اللوحة العربية (RTL)، مبادئ التفاعل والتنقيب، وقائمة فحص كاملة قبل إطلاق اللوحة.",
+    descEn: "A practical module covering the dashboard as a decision tool rather than a number gallery, the three dashboard tiers (executive/operational/analytical), the five-second rule and visual hierarchy, the four contexts a number needs (target, trend, comparison, magnitude) and the Bullet Graph, choosing the right chart per question and spotting misleading charts, color and alerting via the red/yellow/green system, Tufte's data-ink ratio principle, Arabic (RTL) dashboard characteristics, interactivity/drill-down principles, and a full pre-launch checklist.",
+    durationAr: "ثلاث ساعات تدريبية", durationEn: "3 Training Hours",
+    sectionsAr: "شرح + مراجعة بـ 4 أنماط + اختبار مقيّم + لوحة تحكم",
+    sectionsEn: "Full explanation + 4 review types + quiz + dashboard"
   }
 ];
 
-// المحاضرات من 7 إلى 25: محجوبة العناوين والمرفقات
-for(let i = 7; i <= 25; i++){
+// المحاضرات من 9 إلى 25: محجوبة العناوين والمرفقات
+for(let i = 9; i <= 25; i++){
   lectures.push({
     status: "coming",
     titleAr: "", titleEn: "", descAr: "", descEn: "",
@@ -1695,6 +1712,291 @@ const lectureContent = {
     {ar:"حين يُبلغ موظف عن التفاف ثم يُعاقَب على ذلك، فإن النتيجة المرجّحة هي أن تتكرر الجولات دون أي مخاطر مكتشفة لاحقًا.", en:"When an employee reports a workaround and is then punished for it, the likely result is that future rounds find no hazards reported at all.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
     {ar:"نجاح برنامج الجولات يُقاس بشكل أساسي عبر عدد المخاطر المكتشفة في كل جولة فقط.", en:"A rounding program's success is primarily measured solely by the number of hazards discovered per round.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
     {ar:"لوحة 'قلتم وفعلنا' (You Said, We Did) تهدف إلى إغلاق الحلقة مع الطاقم والحفاظ على مصداقية برنامج الجولات.", en:"The 'You Said, We Did' board aims to close the loop with staff and preserve the rounding program's credibility.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0}
+  ]
+},
+
+/* ---------------- LECTURE 8 ---------------- */
+7: {
+  lectureId: 'Lecture8_KPI_Dashboard_Design',
+  modules: [
+    {
+      icon:"1️⃣",
+      title:{ar:"اللوحة أداة قرار لا معرض أرقام", en:"A Dashboard is a Decision Tool, Not a Number Gallery"},
+      sections:[
+        {icon:"❓", heading:{ar:"الخطأ الأشيع وخمسة أسئلة قبل التصميم", en:"The Most Common Mistake & Five Questions Before Designing"}, table:{
+          headers:{ar:["السؤال","لماذا؟"], en:["Question","Why?"]},
+          rows:[
+            {ar:["من القارئ؟ (إدارة عليا، رئيس قسم، فريق جودة)","يختلف مستوى التفصيل والمفردات"], en:["Who is the reader? (senior leadership, dept head, quality team)","Detail level and vocabulary differ"]},
+            {ar:["ما القرار أو الفعل الذي ستدعمه اللوحة؟","يحدد ما يظهر وما يُحذف"], en:["What decision or action will the dashboard support?","Determines what's shown and what's cut"]},
+            {ar:["كم مرة تُقرأ؟ (يوميًا، شهريًا)","يحدد التحديث والعمق"], en:["How often is it read? (daily, monthly)","Determines update frequency and depth"]},
+            {ar:["أين تُقرأ؟ (شاشة اجتماع، حاسوب، هاتف، ورقة)","يحدد الحجم والتبسيط"], en:["Where is it read? (meeting screen, computer, phone, paper)","Determines size and simplification"]},
+            {ar:["ما مستوى إلمام القارئ بالبيانات؟","يحدد الشروح والمصطلحات"], en:["How data-literate is the reader?","Determines explanations and terminology"]}
+          ]
+        }, points:[
+          {ar:"الخطأ الأشيع في تصميم اللوحات أن نبدأ بما تتيحه البيانات، لا بما يحتاجه القارئ. التصميم الجيد يبدأ دائمًا من الجمهور والقرار، لا من جدول البيانات المتاح.", en:"The most common dashboard-design mistake is starting from what the data allows, not what the reader needs. Good design always starts from the audience and the decision, never from the available data table."}
+        ]},
+        {icon:"🏗️", heading:{ar:"ثلاثة مستويات للوحات (تصنيف مقترح)", en:"Three Dashboard Tiers (A Suggested Classification)"}, table:{
+          headers:{ar:["المستوى","الجمهور","المحتوى"], en:["Tier","Audience","Content"]},
+          rows:[
+            {ar:["تنفيذي (Executive)","الإدارة العليا","6 إلى 10 مؤشرات رئيسية: الحالة والاتجاه والهدف"], en:["Executive","Senior management","6-10 key indicators: status, trend, and target"]},
+            {ar:["تشغيلي (Operational)","رؤساء الأقسام","مؤشرات القسم مع تفكيك الوردية والوحدة"], en:["Operational","Department heads","Department indicators broken down by shift and unit"]},
+            {ar:["تحليلي (Analytical)","فريق الجودة","تفاصيل أعمق وفلاتر وتنقيب في البيانات"], en:["Analytical","Quality team","Deeper detail, filters, and data drill-down"]}
+          ]
+        }, points:[
+          {ar:"<b>القاعدة الذهبية:</b> اللوحة الواحدة التي تحاول خدمة الجميع تخدم أحدًا منهم بصعوبة. اختيار المستوى المناسب هو القرار التصميمي الأول، وينبع مباشرة من الإجابة على 'من القارئ؟'.", en:"<b>The golden rule:</b> a single dashboard trying to serve everyone serves no one well. Choosing the right tier is the first design decision, flowing directly from the answer to 'who is the reader?'."}
+        ]}
+      ]
+    },
+    {
+      icon:"2️⃣",
+      title:{ar:"قاعدة الخمس ثوانٍ وتسلسل الأهمية", en:"The Five-Second Rule & Visual Hierarchy"},
+      sections:[
+        {icon:"⏱️", heading:{ar:"اختبار الخمس ثوانٍ", en:"The Five-Second Test"}, points:[
+          {ar:"اختبار عملي بسيط: يحدّق شخص في اللوحة خمس ثوانٍ ثم تُغطّى، ونسأله: ما الذي تذكّره؟ وما أهم رسالة؟ إن لم يعرف أين المشكلة، فاللوحة تحتاج إعادة تصميم. هذا الاختبار هو أسرع طريقة عملية للتحقق من أن اللوحة تنقل رسالتها الأساسية دون جهد تفسيري من القارئ.", en:"A simple practical test: a person stares at the dashboard for five seconds, then it's covered, and we ask: what do you remember? What's the most important message? If they don't know where the problem is, the dashboard needs redesigning. This is the fastest practical way to verify the dashboard conveys its core message without requiring the reader to interpret it."}
+        ]},
+        {icon:"🧭", heading:{ar:"ترتيب العناصر على الصفحة", en:"Arranging Elements on the Page"}, points:[
+          {ar:"العين تبدأ عادة من أعلى الصفحة، وفي العربية من اليمين (تعميم شائع في أنماط القراءة، وتختلف التفاصيل بحسب التصميم). لذلك يوضع الأهم في أعلى اليمين وبحجم أكبر (أهم 3 إلى 5 مؤشرات).", en:"The eye typically starts from the top of the page, and in Arabic from the right (a common generalization in reading patterns, though details vary by design). So the most important element goes top-right and at a larger size (the top 3-5 indicators)."},
+          {ar:"نجمّع المؤشرات المرتبطة معًا ونفصلها بمسافة بيضاء لا بخطوط ثقيلة. ونتجنب أن تتجاوز اللوحة التنفيذية شاشة واحدة، فالتمرير (Scrolling) يشتت الانتباه ويكسر قاعدة الخمس ثوانٍ.", en:"We group related indicators together and separate them with white space, not heavy dividing lines. We avoid letting an executive dashboard exceed one screen, since scrolling scatters attention and breaks the five-second rule."},
+          {ar:"<b>حدّ الكثافة:</b> لا يوجد رقم سحري لعدد العناصر، لكن القاعدة أن كل عنصر يجب أن يجيب عن سؤال، وما لا يجيب عن سؤال يُحذف. نبدأ بأقل عدد ممكن ونضيف عند الحاجة، لا العكس.", en:"<b>The density limit:</b> there's no magic number of elements, but the rule is every element must answer a question, and whatever doesn't gets removed. We start with the fewest possible elements and add only when needed — never the reverse."}
+        ]}
+      ]
+    },
+    {
+      icon:"3️⃣",
+      title:{ar:"السياق يصنع المعنى", en:"Context Creates Meaning"},
+      sections:[
+        {icon:"🔢", heading:{ar:"أربعة سياقات يحتاجها كل رقم", en:"Four Contexts Every Number Needs"}, table:{
+          headers:{ar:["السياق","الشكل المناسب"], en:["Context","Appropriate Form"]},
+          rows:[
+            {ar:["الهدف (Target)","خط أو علامة هدف على الرسم"], en:["Target","A line or target mark on the chart"]},
+            {ar:["الاتجاه عبر الزمن (Trend)","رسم خطي صغير (Sparkline) بجانب الرقم"], en:["Trend Over Time","A small line chart (Sparkline) next to the number"]},
+            {ar:["المقارنة (Comparison)","مع الشهر السابق أو الشهر نفسه من العام الماضي أو قسم مماثل"], en:["Comparison","Against the prior month, the same month last year, or a peer department"]},
+            {ar:["الحجم (Magnitude)","البسط والمقام أو العدد، خصوصًا للنسب"], en:["Magnitude","The numerator and denominator, or the count, especially for percentages"]}
+          ]
+        }, points:[
+          {ar:"رقم منفرد مثل '87%' لا يخبرنا شيئًا بمفرده. هل هذا جيد أم سيء؟ هل يتحسن أم يتراجع؟ مقارنةً بماذا؟ من كم حالة؟ دون هذه السياقات الأربعة، الرقم مجرد زخرفة لا معلومة.", en:"A standalone number like '87%' tells us nothing by itself. Is it good or bad? Improving or declining? Compared to what? Out of how many cases? Without these four contexts, the number is mere decoration, not information."},
+          {ar:"<b>بطاقة المؤشر النموذجية:</b> اسم المؤشر، ثم القيمة الحالية بخط كبير، ثم علامة الهدف (✓/✗ أو شريط)، ثم رسم صغير للاتجاه، ثم المقام بخط صغير. هذا الترتيب يُلبي السياقات الأربعة في مساحة بصرية واحدة مدمجة.", en:"<b>The standard indicator card:</b> indicator name, then the current value in large type, then a target mark (✓/✗ or a bar), then a small trend chart, then the denominator in small type. This layout satisfies all four contexts in one compact visual space."}
+        ]},
+        {icon:"📶", heading:{ar:"الرسم الشريطي مقابل الهدف (Bullet Graph)", en:"The Bullet Graph"}, points:[
+          {ar:"اقترحه Stephen Few بديلًا عن العدادات (Gauges) التي تهدر المساحة: شريط واحد يعرض القيمة الفعلية وعلامة الهدف ونطاقات الأداء خلفه، فيمكن عرض مؤشرات كثيرة في حيز صغير بوضوح — وهو أكفأ بصريًا من العداد الدائري الذي يستهلك مساحة كبيرة لعرض قيمة واحدة فقط.", en:"Proposed by Stephen Few as an alternative to space-wasting Gauges: a single bar shows the actual value, a target mark, and performance bands behind it, so many indicators can be shown clearly in a small space — far more visually efficient than a circular gauge that consumes large space to show just one value."}
+        ]}
+      ]
+    },
+    {
+      icon:"4️⃣",
+      title:{ar:"اختيار الرسم المناسب وكشف التضليل", en:"Choosing the Right Chart & Spotting Misleading Ones"},
+      sections:[
+        {icon:"🎯", heading:{ar:"اختيار الرسم بحسب السؤال", en:"Choosing a Chart by the Question It Answers"}, table:{
+          headers:{ar:["السؤال","الرسم الأنسب"], en:["Question","Best-Fit Chart"]},
+          rows:[
+            {ar:["كيف تغيّر الشيء عبر الزمن؟","خطي (Line) أو أعمدة زمنية"], en:["How did something change over time?","Line chart or time-series bars"]},
+            {ar:["ما ترتيب الفئات؟","أشرطة أفقية مرتبة"], en:["What's the ranking of categories?","Sorted horizontal bars"]},
+            {ar:["ما نصيب كل جزء من الكل؟","أشرطة مجمّعة أو مكدّسة (وبحذر الدائري)"], en:["What share does each part hold of the whole?","Grouped or stacked bars (use pie charts cautiously)"]},
+            {ar:["كيف يرتبط متغيران؟","مخطط انتشار (Scatter)"], en:["How do two variables relate?","Scatter plot"]},
+            {ar:["أين الأسباب الأكبر؟","باريتو"], en:["Where are the biggest contributing causes?","Pareto chart"]},
+            {ar:["كيف تتوزع القيم؟","مدرج تكراري"], en:["How are values distributed?","Histogram"]},
+            {ar:["كيف القيمة مقابل الهدف؟","رسم شريطي مقابل الهدف"], en:["How does the value compare to target?","Bullet graph"]}
+          ]
+        }},
+        {icon:"👁️", heading:{ar:"لماذا لا نحب بعض الرسوم؟ — إدراك الطول مقابل الزاوية", en:"Why We Avoid Certain Charts — Length vs. Angle Perception"}, table:{
+          headers:{ar:["الرسم","مشكلته","البديل"], en:["Chart","Its Problem","Alternative"]},
+          rows:[
+            {ar:["الدائري بشرائح كثيرة","صعوبة مقارنة الزوايا","شريط أفقي مرتب"], en:["Pie chart with many slices","Difficulty comparing angles","Sorted horizontal bar"]},
+            {ar:["ثلاثي الأبعاد","يشوّه الأطوال","ثنائي الأبعاد"], en:["3D charts","Distorts lengths","2D charts"]},
+            {ar:["العداد (Gauge)","يستهلك مساحة ويعرض قيمة واحدة","رسم شريطي مقابل الهدف"], en:["Gauge","Consumes space, shows only one value","Bullet graph"]},
+            {ar:["محوران رأسيان مختلفان","يوهم بعلاقة","رسمان متجاوران"], en:["Two different vertical axes","Implies a false relationship","Two side-by-side charts"]},
+            {ar:["خريطة حرارية بلا قيم","ألوان بلا أرقام","إظهار القيم وأسطورة واضحة"], en:["Heatmap with no values","Colors without numbers","Show values and a clear legend"]}
+          ]
+        }, points:[
+          {ar:"بحسب أبحاث الإدراك البصري (Cleveland وMcGill)، يقارن الناس الأطوال على خط مشترك بدقة أعلى من الزوايا والمساحات، ولذلك تُفضَّل الأشرطة على الدوائر والأعمدة ثلاثية الأبعاد في المقارنة الدقيقة.", en:"Per visual-perception research (Cleveland & McGill), people compare lengths on a common scale more accurately than angles and areas, which is why bars are preferred over pies and 3D columns for precise comparison."}
+        ]},
+        {icon:"⚠️", heading:{ar:"الرسوم المضللة", en:"Misleading Charts"}, points:[
+          {ar:"<b>محور مقتطع (Truncated Axis):</b> عمودان بقيمتي 91% و93%. إن بدأ المحور من 90%، فارتفاعاهما 1 و3 وحدات، فيبدو الثاني ثلاثة أضعاف الأول، والفرق الحقيقي نقطتان فقط. <b>القاعدة:</b> أعمدة الأشرطة تبدأ دائمًا من الصفر. أما الخطوط فيجوز قطع محورها لإظهار التغيّر إن أُعلن ذلك وناسب السياق.", en:"<b>Truncated Axis:</b> two bars at 91% and 93%. If the axis starts at 90%, their heights become 1 and 3 units, making the second look three times the first, while the real difference is only two points. <b>Rule:</b> bar charts always start from zero. Line charts may truncate their axis to show change, if disclosed and contextually appropriate."},
+          {ar:"<b>تفاوت المقياس (Inconsistent Scale):</b> مقارنة رسمين بمقياسين مختلفين لتبدو الفروق أصغر أو أكبر مما هي عليه فعليًا.", en:"<b>Inconsistent Scale:</b> comparing two charts on different scales to make differences look smaller or larger than they really are."},
+          {ar:"<b>النسبة بلا مقام:</b> 100% من حالتين ليست 100% من 200 حالة — فالنسبة المجردة دون مقامها تُضلّل حول حجم الدلالة الفعلية.", en:"<b>A Percentage Without Its Denominator:</b> 100% of two cases isn't the same as 100% of 200 cases — a bare percentage without its denominator misleads about the actual significance of the number."}
+        ]}
+      ]
+    },
+    {
+      icon:"5️⃣",
+      title:{ar:"اللون والتنبيه", en:"Color & Alerting"},
+      sections:[
+        {icon:"🚦", heading:{ar:"نظام الإشارة (أحمر/أصفر/أخضر) ومشكلاته", en:"The Red/Yellow/Green System & Its Pitfalls"}, table:{
+          headers:{ar:["المشكلة","التفصيل"], en:["Problem","Detail"]},
+          rows:[
+            {ar:["عمى الألوان","قد لا يميّز بعض القراء الأحمر عن الأخضر، فلا نعتمد على اللون وحده"], en:["Color blindness","Some readers can't distinguish red from green, so color alone is unreliable"]},
+            {ar:["الحدود التعسفية","مؤشر 89.9% أحمر و90% أخضر رغم أن الفرق وهمي"], en:["Arbitrary thresholds","An indicator at 89.9% is red and at 90% is green, even though the difference is illusory"]},
+            {ar:["الإفراط في التلوين","إن كان كل شيء ملونًا فلا شيء بارز"], en:["Over-coloring","If everything is colored, nothing stands out"]},
+            {ar:["اللون ليس تحليلًا","اللون بحسب الهدف لا يميّز التذبذب العادي عن التغيّر الحقيقي"], en:["Color is not analysis","Target-based coloring doesn't distinguish normal fluctuation from real change"]}
+          ]
+        }, points:[
+          {ar:"<b>ملاحظة مهمة:</b> نقطة 'اللون ليس تحليلًا' تربط مباشرة بمحاضرة SPC — فمؤشر يتذبذب ضمن تغيّر عام (Common Cause) قد يتلوّن أحمر وأخضر بالتناوب دون أي معنى حقيقي، بينما الأداة الصحيحة لمعرفة وجود تغيّر حقيقي هي مخطط التشغيل (Run Chart) لا لون العتبة وحده.", en:"<b>Important note:</b> the 'color is not analysis' point links directly to the SPC lecture — an indicator oscillating within common-cause variation may flash red and green alternately with no real meaning, while the correct tool for detecting genuine change is the Run Chart, not threshold color alone."}
+        ]},
+        {icon:"✅", heading:{ar:"الممارسة الأفضل وقواعد عامة للون", en:"Best Practice & General Color Rules"}, points:[
+          {ar:"اللون للاستثناء فقط: الرمادي للمعتاد، واللون لما يحتاج انتباهًا. نضيف رمزًا أو نصًا مع اللون (▲ ▼ ✓ ✗ أو كلمة) حتى لا نعتمد على اللون وحده. نستخدم عتبتين أو ثلاثًا (حد أدنى مقبول، وهدف، وطموح اختياري) بدل عتبة واحدة، فيتدرج الحكم بدل 'نجح/فشل' الثنائي.", en:"Color is for exceptions only: gray for the usual, color for what needs attention. We add a symbol or text alongside color (▲ ▼ ✓ ✗ or a word) so color is never the sole signal. We use two or three thresholds (a minimum acceptable level, a target, and an optional stretch goal) instead of one, so judgment is graded rather than a binary 'pass/fail'."},
+          {ar:"نختار لوحة ألوان ملائمة لعمى الألوان (كالأزرق والبرتقالي بدل الأحمر والأخضر)، ونحافظ على تباين كافٍ بين النص والخلفية.", en:"We choose a color-blind-friendly palette (such as blue and orange instead of red and green), and maintain sufficient text/background contrast."},
+          {ar:"<b>القواعد العامة:</b> لون واحد للمعنى الواحد في اللوحة كلها (الأزرق دائمًا للفعلي مثلًا)؛ ألوان هادئة للخلفيات والخطوط، وقوية للتنبيه فقط؛ ونختبر اللوحة بالأبيض والأسود (أو بمحاكاة عمى الألوان) للتأكد من بقاء المعنى واضحًا دون الاعتماد على اللون.", en:"<b>General rules:</b> one color per single meaning across the whole dashboard (blue always for actuals, say); muted colors for backgrounds/lines, strong colors reserved for alerts only; and test the dashboard in black and white (or with color-blindness simulation) to confirm meaning survives without relying on color."}
+        ]}
+      ]
+    },
+    {
+      icon:"6️⃣",
+      title:{ar:"نسبة الحبر إلى البيانات والتنظيف البصري", en:"The Data-Ink Ratio & Visual Decluttering"},
+      sections:[
+        {icon:"🧹", heading:{ar:"مبدأ Edward Tufte: كل حبر يجب أن يخدم المعلومة", en:"Edward Tufte's Principle: Every Mark of Ink Must Serve the Information"}, table:{
+          headers:{ar:["نزيله","بدلًا منه"], en:["Remove This","Replace With"]},
+          rows:[
+            {ar:["خطوط الشبكة الثقيلة","خطوط خفيفة جدًا أو بلا شبكة مع تسميات مباشرة"], en:["Heavy gridlines","Very light gridlines, or none, with direct labeling"]},
+            {ar:["إطارات وظلال وتدرجات زخرفية","خلفية بسيطة"], en:["Decorative borders, shadows, and gradients","A simple background"]},
+            {ar:["أسطورة (Legend) بعيدة","وسم مباشر على الخط أو الشريط"], en:["A legend placed far from the chart","Direct labeling on the line or bar itself"]},
+            {ar:["عناوين غامضة ('نظرة عامة')","عنوان يقول الرسالة: 'التزام المسائية انخفض منذ مارس'"], en:["Vague titles ('Overview')","A title that states the message: 'Evening-shift compliance has dropped since March'"]},
+            {ar:["قيم عشرية زائدة","دقة مناسبة (نسبة بلا كسور ما لم يلزم)"], en:["Excessive decimal places","Appropriate precision (whole-number percentages unless decimals are necessary)"]}
+          ]
+        }, points:[
+          {ar:"مبدأ نسبة الحبر إلى البيانات (Data-Ink Ratio) لإدوارد تافتي ينص على أن كل عنصر بصري في الرسم (خط، لون، ظل، إطار) يجب أن يحمل معلومة فعلية؛ وما لا يحمل معلومة هو 'حبر زائد' يُشتت الانتباه عن الرسالة الحقيقية ويجب حذفه.", en:"Edward Tufte's Data-Ink Ratio principle holds that every visual element in a chart (a line, color, shadow, border) must carry actual information; whatever carries no information is 'excess ink' that distracts from the real message and should be removed."},
+          {ar:"العنوان الذي يروي الرسالة ('التزام المسائية انخفض 12 نقطة منذ مارس') أفضل عادة من العنوان الوصفي المجرد ('نسبة الالتزام بحسب الوردية')، لأنه يختصر على القارئ عملية التفسير ويحقق جزءاً من هدف اختبار الخمس ثوانٍ مسبقًا.", en:"A title that tells the message ('Evening-shift compliance dropped 12 points since March') is usually better than a bare descriptive title ('Compliance rate by shift'), because it saves the reader the interpretation step and partly pre-satisfies the five-second test."}
+        ]}
+      ]
+    },
+    {
+      icon:"7️⃣",
+      title:{ar:"خصائص اللوحة العربية", en:"Characteristics of an Arabic Dashboard"},
+      sections:[
+        {icon:"🔤", heading:{ar:"ستة اعتبارات خاصة بالتصميم العربي", en:"Six Design Considerations Specific to Arabic"}, table:{
+          headers:{ar:["الجانب","الممارسة"], en:["Aspect","Practice"]},
+          rows:[
+            {ar:["اتجاه التخطيط","من اليمين إلى اليسار (RTL)، والأهم في أعلى اليمين"], en:["Layout direction","Right-to-left (RTL), with the most important element top-right"]},
+            {ar:["اتجاه الزمن في الرسوم","كثير من القراء العرب معتادون على الزمن من اليسار إلى اليمين بسبب الرسوم الغربية. نختار اتجاهًا واحدًا ونثبّته في اللوحة كلها ونختبره مع المستخدمين"], en:["Time direction in charts","Many Arabic readers are used to time flowing left-to-right due to Western-style charts. We pick one direction, keep it consistent across the whole dashboard, and test it with users"]},
+            {ar:["الأرقام","نثبّت نوعها (هندية أو غربية) على مستوى المنشأة"], en:["Numerals","We fix the numeral style (Eastern Arabic or Western) organization-wide"]},
+            {ar:["الخط","عربي واضح بحجم كافٍ ودون زخرفة"], en:["Font","Clear Arabic typeface, adequately sized, without ornamentation"]},
+            {ar:["النصوص المختلطة","المصطلحات الإنجليزية (KPI وPDSA) داخل الجمل العربية تحتاج فحصًا للاتجاه"], en:["Mixed-direction text","English terms (KPI, PDSA) inside Arabic sentences need direction checking"]},
+            {ar:["التسميات","قصيرة، فالنص العربي يتمدد في الأعمدة الضيقة"], en:["Labels","Keep them short — Arabic text expands in narrow columns"]}
+          ]
+        }, points:[
+          {ar:"هذه الاعتبارات ليست تفاصيل ثانوية؛ فلوحة مصممة أصلاً بمنطق إنجليزي (LTR) ثم 'مُعرَّبة' سطحيًا غالبًا ما تحمل تناقضًا بصريًا بين اتجاه التخطيط العام واتجاه الزمن داخل الرسوم — وهذا التناقض وحده كافٍ لإرباك القارئ وإبطال قاعدة الخمس ثوانٍ.", en:"These considerations aren't minor details; a dashboard originally designed with English (LTR) logic and then superficially 'Arabized' often carries a visual contradiction between the overall layout direction and the time direction inside its charts — that contradiction alone is enough to confuse the reader and defeat the five-second rule."}
+        ]}
+      ]
+    },
+    {
+      icon:"8️⃣",
+      title:{ar:"التفاعل: الفلاتر والتنقيب", en:"Interactivity: Filters & Drill-Down"},
+      sections:[
+        {icon:"🖱️", heading:{ar:"سبعة مبادئ للوحات الرقمية التفاعلية", en:"Seven Principles for Interactive Digital Dashboards"}, table:{
+          headers:{ar:["المبدأ","التفصيل"], en:["Principle","Detail"]},
+          rows:[
+            {ar:["الإجمالي أولًا ثم التفصيل","نبدأ بالصورة العامة ثم ننزل بالضغط إلى الوحدة والوردية (Drill-down)"], en:["Overview First, Then Detail","We start with the big picture, then click down (drill-down) into unit and shift level"]},
+            {ar:["فلاتر قليلة وواضحة","الفترة والقسم غالبًا تكفي، والكثير يُربك"], en:["Few, Clear Filters","Period and department are usually enough; too many filters confuse"]},
+            {ar:["حالة الفلتر ظاهرة","يعرف القارئ ماذا يرى حاليًا"], en:["Visible Filter State","The reader knows exactly what they're currently viewing"]},
+            {ar:["قيم ابتدائية معقولة","تفتح اللوحة على آخر شهر مكتمل لا على كل البيانات"], en:["Sensible Default Values","The dashboard opens on the last complete month, not the entire dataset"]},
+            {ar:["تاريخ آخر تحديث","ظاهر دائمًا"], en:["Last-Updated Date","Always visible"]},
+            {ar:["المقام والتعريف","يتاحان بنقرة (Tooltip)"], en:["Denominator & Definition","Available on hover/click (Tooltip)"]},
+            {ar:["صفحات متعددة","صفحة لكل محور مع تنقل واضح بدل لوحة مزدحمة"], en:["Multiple Pages","One page per theme with clear navigation, instead of one crowded dashboard"]}
+          ]
+        }, points:[
+          {ar:"هذه المبادئ تنطبق مباشرة على أدوات مثل Power BI: التفاعل لا يعني إغراق القارئ بكل خيار ممكن، بل توفير طريق واضح ومتدرج من النظرة العامة إلى التفصيل الذي يحتاجه القرار المحدد.", en:"These principles apply directly to tools like Power BI: interactivity doesn't mean flooding the reader with every possible option, but providing a clear, graduated path from the overview to the detail a specific decision requires."}
+        ]}
+      ]
+    },
+    {
+      icon:"9️⃣",
+      title:{ar:"الاختبار والتحسين وقائمة الفحص النهائية", en:"Testing, Refinement & the Final Checklist"},
+      sections:[
+        {icon:"🧪", heading:{ar:"ست خطوات للاختبار والتحسين المستمر", en:"Six Steps for Testing & Continuous Refinement"}, points:[
+          {ar:"<b>1. مسودة ورقية قبل الأداة:</b> نرسم الترتيب باليد ونراجعه مع المستخدم، قبل استثمار أي وقت في البرمجة أو التصميم النهائي.", en:"<b>1. A paper sketch before the tool:</b> we hand-draw the layout and review it with the user, before investing any time in coding or final design."},
+          {ar:"<b>2. اختبار الخمس ثوانٍ</b> مع 3 إلى 5 مستخدمين فعليين من الجمهور المستهدف.", en:"<b>2. The five-second test</b> with 3-5 actual users from the target audience."},
+          {ar:"<b>3. مهام اختبارية:</b> 'اعثر على المؤشر الذي يحتاج تدخلًا'، ونقيس الزمن والدقة التي يستغرقها المستخدم لإيجاده.", en:"<b>3. Task-based testing:</b> 'find the indicator that needs intervention', measuring the time and accuracy it takes the user to find it."},
+          {ar:"<b>4. ملاحظة المستخدمين</b> وهم يستخدمونها بلا تدخل منا، لرصد أين يتعثرون فعلاً لا أين نتوقع أن يتعثروا.", en:"<b>4. Observing users</b> as they use it without our intervention, to see where they actually struggle rather than where we expect them to."},
+          {ar:"<b>5. قائمة الفحص</b> قبل الإطلاق (أدناه).", en:"<b>5. The checklist</b> before launch (below)."},
+          {ar:"<b>6. مراجعة دورية</b> كل ربع سنة تقريبًا (اقتراح): ما العناصر التي لم يستخدمها أحد؟ نحذفها — فاللوحة الجيدة تتقلّص بمرور الوقت لا تتضخم.", en:"<b>6. Periodic review</b>, roughly every quarter (suggestion): which elements has no one used? We remove them — a good dashboard shrinks over time rather than growing."}
+        ]},
+        {icon:"📝", heading:{ar:"قائمة فحص كاملة قبل إطلاق اللوحة", en:"Full Pre-Launch Checklist"}, table:{
+          headers:{ar:["البند","✓"], en:["Item","✓"]},
+          rows:[
+            {ar:["الجمهور والقرار محددان ومكتوبان","☐"], en:["Audience and decision are defined and documented","☐"]},
+            {ar:["أهم المؤشرات في أعلى اليمين وبحجم أكبر","☐"], en:["The most important indicators are top-right and larger","☐"]},
+            {ar:["لكل مؤشر هدف واتجاه ومقام","☐"], en:["Every indicator has a target, a trend, and a denominator","☐"]},
+            {ar:["الرسم مناسب للسؤال، والأعمدة من الصفر","☐"], en:["The chart fits the question, and bars start from zero","☐"]},
+            {ar:["اللون للاستثناء ومعه رمز أو نص","☐"], en:["Color is used for exceptions only, paired with a symbol or text","☐"]},
+            {ar:["العناوين تروي الرسالة","☐"], en:["Titles state the message","☐"]},
+            {ar:["لا عناصر زائدة (شبكة ثقيلة، ظلال، عدادات مكررة)","☐"], en:["No excess elements (heavy gridlines, shadows, redundant gauges)","☐"]},
+            {ar:["اتجاه الزمن والأرقام والخط ثابتة ومختبرة بالعربية","☐"], en:["Time direction, numeral style, and font are fixed and tested in Arabic","☐"]},
+            {ar:["تاريخ آخر تحديث ظاهر","☐"], en:["Last-updated date is visible","☐"]},
+            {ar:["اختبار الخمس ثوانٍ مع مستخدمين حقيقيين","☐"], en:["The five-second test was run with real users","☐"]},
+            {ar:["جرّبت اللوحة بالأبيض والأسود","☐"], en:["The dashboard was tested in black and white","☐"]}
+          ]
+        }}
+      ]
+    }
+  ],
+  reviewBank: {
+    tf: [
+      {ar:"التصميم الجيد للوحة يبدأ من البيانات المتاحة أولاً ثم يُبنى حولها الجمهور والقرار.", en:"Good dashboard design starts from the available data first, then builds the audience and decision around it.", a:false, expAr:"خطأ — الخطأ الأشيع هو البدء بما تتيحه البيانات؛ التصميم الجيد يبدأ من الجمهور والقرار الذي ستدعمه اللوحة.", expEn:"False — the common mistake is starting from available data; good design starts from the audience and the decision the dashboard will support."},
+      {ar:"اللوحة التنفيذية المثالية تحتوي عادة على 6 إلى 10 مؤشرات رئيسية مع الحالة والاتجاه والهدف.", en:"An ideal executive dashboard typically contains 6-10 key indicators with status, trend, and target.", a:true, expAr:"صحيح.", expEn:"True."},
+      {ar:"أعمدة الرسم الشريطي يجوز أن تبدأ من أي قيمة غير الصفر لإبراز الفروق بوضوح أكبر.", en:"Bar chart axes may start from any non-zero value to highlight differences more clearly.", a:false, expAr:"خطأ — أعمدة الأشرطة يجب أن تبدأ من الصفر دائمًا؛ البدء من قيمة أخرى (محور مقتطع) يضلل حول حجم الفرق الحقيقي.", expEn:"False — bar chart axes must always start from zero; starting elsewhere (a truncated axis) misleads about the true magnitude of difference."},
+      {ar:"وفق أبحاث الإدراك البصري، يقارن الناس الزوايا والمساحات بدقة أعلى من الأطوال على خط مشترك.", en:"Per visual-perception research, people compare angles and areas more accurately than lengths on a common scale.", a:false, expAr:"خطأ — الصحيح العكس: الناس يقارنون الأطوال على خط مشترك بدقة أعلى من الزوايا والمساحات، ولهذا تُفضَّل الأشرطة على الدوائر.", expEn:"False — the opposite is true: people compare lengths on a common scale more accurately than angles and areas, which is why bars are preferred over pies."},
+      {ar:"يكفي الاعتماد على اللون الأحمر والأخضر وحدهما للإشارة إلى حالة المؤشر دون أي رمز أو نص إضافي.", en:"Relying on red and green alone, with no additional symbol or text, is enough to signal an indicator's status.", a:false, expAr:"خطأ — بعض القراء لا يميزون الأحمر عن الأخضر (عمى الألوان)، فيجب دائمًا إضافة رمز أو نص (▲ ▼ ✓ ✗) مع اللون.", expEn:"False — some readers can't distinguish red from green (color blindness), so a symbol or text (▲ ▼ ✓ ✗) must always accompany color."},
+      {ar:"مبدأ نسبة الحبر إلى البيانات لإدوارد تافتي يدعو إلى إضافة إطارات وظلال وتدرجات زخرفية لتحسين المظهر العام للوحة.", en:"Edward Tufte's data-ink ratio principle calls for adding decorative borders, shadows, and gradients to improve the dashboard's overall look.", a:false, expAr:"خطأ — المبدأ يدعو إلى حذف كل ما لا يحمل معلومة فعلية، ومنها الإطارات والظلال والتدرجات الزخرفية.", expEn:"False — the principle calls for removing everything that carries no actual information, including decorative borders, shadows, and gradients."}
+    ],
+    mcq: [
+      {ar:"ما الهدف من 'اختبار الخمس ثوانٍ'؟", en:"What is the purpose of the 'five-second test'?",
+       optionsAr:["قياس سرعة الشاشة أو الحاسوب","معرفة ما تبلغه اللوحة للقارئ سريعًا وأهم رسالة يتذكرها","اختبار سرعة الإنترنت المستخدم في عرض اللوحة","إحصاء عدد الألوان المستخدمة في اللوحة"], optionsEn:["Measuring screen or computer speed","Checking what the dashboard conveys to the reader quickly, and the key message they recall","Testing the internet speed used to display the dashboard","Counting the number of colors used in the dashboard"],
+       correct:1, expAr:"اختبار الخمس ثوانٍ يقيس ما يتذكره القارئ وأهم رسالة بعد نظرة سريعة، للتأكد من وضوح اللوحة.", expEn:"The five-second test measures what the reader recalls and the key message after a quick glance, confirming the dashboard's clarity."},
+      {ar:"ما أفضل رسم بياني لمقارنة دقيقة بين فئات مرتبة (مثل ترتيب أقسام حسب زمن الانتظار)؟", en:"What is the best chart for a precise comparison between ranked categories (e.g., ranking departments by wait time)?",
+       optionsAr:["الدائري (Pie)","أشرطة أفقية مرتبة","ثلاثي الأبعاد","العداد (Gauge)"], optionsEn:["Pie chart","Sorted horizontal bars","3D chart","Gauge"],
+       correct:1, expAr:"الأشرطة الأفقية المرتبة هي الأنسب لمقارنة ترتيب الفئات بدقة، استنادًا إلى دقة مقارنة الأطوال على خط مشترك.", expEn:"Sorted horizontal bars are best for precisely comparing ranked categories, relying on the accuracy of comparing lengths on a common scale."},
+      {ar:"عمودان بقيمتي 91% و93% ومحور يبدأ من 90% — ما المشكلة الأساسية في هذا الرسم؟", en:"Two bars at 91% and 93% with an axis starting at 90% — what is the core problem with this chart?",
+       optionsAr:["لا توجد مشكلة، فالفرق واضح","محور مقتطع يجعل الفرق يبدو أكبر بكثير من حقيقته (ثلاثة أضعاف بدل نقطتين)","الألوان غير مناسبة لعمى الألوان","الرسم يفتقر إلى أسطورة (Legend)"], optionsEn:["No problem; the difference is clear","A truncated axis makes the difference look far larger than it really is (threefold vs. two points)","The colors aren't color-blind-friendly","The chart lacks a legend"],
+       correct:1, expAr:"المحور المقتطع (البادئ من 90% بدل الصفر) يجعل ارتفاع العمودين 1 و3 وحدات، فيبدو الفرق ثلاثة أضعاف بينما الفرق الحقيقي نقطتان مئويتان فقط.", expEn:"The truncated axis (starting at 90% instead of zero) makes the bar heights 1 and 3 units, making the difference look threefold while the real difference is only two percentage points."},
+      {ar:"ما المستوى من اللوحات الذي يخدم 'رؤساء الأقسام' بمؤشرات القسم مع تفكيك الوردية والوحدة؟", en:"Which dashboard tier serves 'department heads' with department indicators broken down by shift and unit?",
+       optionsAr:["تنفيذي (Executive)","تشغيلي (Operational)","تحليلي (Analytical)","لا يوجد مستوى محدد لذلك"], optionsEn:["Executive","Operational","Analytical","No specific tier for that"],
+       correct:1, expAr:"المستوى التشغيلي موجَّه لرؤساء الأقسام، ويعرض مؤشرات القسم مع تفكيك الوردية والوحدة.", expEn:"The Operational tier targets department heads, showing department indicators broken down by shift and unit."},
+      {ar:"وفق مبادئ التفاعل في اللوحات الرقمية، ما الترتيب الصحيح للتنقل بين البيانات؟", en:"Per interactivity principles in digital dashboards, what is the correct navigation order through the data?",
+       optionsAr:["التفصيل الدقيق أولًا ثم الإجمالي","الإجمالي أولًا ثم التفصيل (Drill-down)","عرض كل التفاصيل دفعة واحدة دون تدرج","لا يوجد ترتيب مهم"], optionsEn:["Fine detail first, then the overview","Overview first, then drill-down into detail","Show all details at once with no gradation","Order doesn't matter"],
+       correct:1, expAr:"المبدأ الصحيح هو البدء بالصورة العامة (الإجمالي) ثم النزول بالضغط إلى التفصيل (الوحدة والوردية).", expEn:"The correct principle is starting with the overview, then clicking down (drill-down) into unit- and shift-level detail."},
+      {ar:"ما الممارسة الموصى بها لجعل اللوحة قابلة للاستخدام من القراء الذين يعانون عمى الألوان؟", en:"What practice is recommended to make a dashboard usable for color-blind readers?",
+       optionsAr:["استخدام الأحمر والأخضر فقط بتدرجات أدق","إضافة رمز أو نص مع اللون، واستخدام لوحة ألوان ملائمة لعمى الألوان","تجاهل المشكلة لأنها نادرة الحدوث","استخدام الألوان الزاهية فقط لجميع العناصر"], optionsEn:["Using only red and green in finer gradients","Adding a symbol or text alongside color, and using a color-blind-friendly palette","Ignoring the issue since it's rare","Using only vivid colors for all elements"],
+       correct:1, expAr:"الممارسة الصحيحة تضيف رمزًا أو نصًا مع اللون (▲ ▼ ✓ ✗) وتستخدم لوحة ألوان ملائمة لعمى الألوان كالأزرق والبرتقالي.", expEn:"Correct practice adds a symbol or text alongside color (▲ ▼ ✓ ✗) and uses a color-blind-friendly palette such as blue and orange."}
+    ],
+    fill: [
+      {ar:"أداة التحقق السريعة التي يُحدّق فيها شخص باللوحة ثم تُغطّى ونسأله عما يتذكره تُسمى اختبار ______.", en:"The quick verification tool where a person stares at the dashboard, it's covered, and we ask what they recall, is called the ______ test.", a:"الخمس ثوانٍ / Five-Second"},
+      {ar:"الباحثان اللذان أثبتا أن الناس يقارنون الأطوال بدقة أعلى من الزوايا والمساحات هما Cleveland و______.", en:"The researchers who established that people compare lengths more accurately than angles and areas are Cleveland and ______.", a:"McGill"},
+      {ar:"الرسم الذي اقترحه Stephen Few بديلًا عن العدادات (Gauges) المستهلكة للمساحة يُسمى الرسم ______.", en:"The chart proposed by Stephen Few as a space-efficient alternative to Gauges is called the ______ Graph.", a:"الشريطي مقابل الهدف / Bullet"},
+      {ar:"مبدأ تافتي الذي ينص على أن كل عنصر بصري في الرسم يجب أن يحمل معلومة فعلية يُسمى نسبة ______.", en:"Tufte's principle stating every visual element in a chart must carry actual information is called the ______ ratio.", a:"الحبر إلى البيانات / Data-Ink"},
+      {ar:"في اللوحة العربية، يبدأ ترتيب العناصر عادة من ______ الصفحة وفي العربية من ______.", en:"In an Arabic dashboard, element layout typically starts from the ______ of the page and in Arabic from the ______.", a:"أعلى / اليمين — top / right"},
+      {ar:"المبدأ التفاعلي الذي يدعو إلى البدء بالصورة العامة قبل النزول بالضغط إلى الوحدة والوردية يُسمى ______.", en:"The interactivity principle calling for starting with the overview before clicking down into unit and shift level is called ______.", a:"الإجمالي أولًا ثم التفصيل (Drill-down) / Overview First, Then Detail"}
+    ],
+    short: [
+      {ar:"اذكر ثلاثة من الأسئلة الخمسة التي يجب طرحها قبل تصميم أي لوحة مؤشرات.", en:"Name three of the five questions that must be asked before designing any dashboard.",
+       aAr:"مثال: من القارئ؟ ما القرار الذي ستدعمه اللوحة؟ كم مرة تُقرأ؟ أين تُقرأ؟ ما مستوى إلمام القارئ بالبيانات؟ — أو أي ثلاثة أسئلة أخرى من الخمسة.",
+       aEn:"Example: who is the reader? what decision will it support? how often is it read? where is it read? how data-literate is the reader? — or any three of the five."},
+      {ar:"ما السياقات الأربعة التي يحتاجها أي رقم منفرد في لوحة المؤشرات حتى يصبح ذا معنى؟", en:"What are the four contexts a standalone number in a dashboard needs to become meaningful?",
+       aAr:"الهدف (خط أو علامة هدف)، الاتجاه عبر الزمن (Sparkline)، المقارنة (بالشهر السابق أو قسم مماثل)، والحجم (البسط والمقام).",
+       aEn:"Target (a line or target mark), trend over time (Sparkline), comparison (to the prior month or a peer department), and magnitude (numerator and denominator)."},
+      {ar:"اشرح مشكلة 'المحور المقتطع' بمثال، وما القاعدة الصحيحة لتفاديها في أعمدة الأشرطة؟", en:"Explain the 'truncated axis' problem with an example, and what is the correct rule to avoid it in bar charts?",
+       aAr:"عمودان بقيمتي 91% و93% مع محور يبدأ من 90% يجعلان الفرق يبدو ثلاثة أضعاف حقيقته؛ القاعدة الصحيحة أن أعمدة الأشرطة تبدأ دائمًا من الصفر.",
+       aEn:"Two bars at 91% and 93% with an axis starting at 90% make the difference look threefold its real size; the correct rule is that bar chart axes always start from zero."},
+      {ar:"ما المشكلات الأربع الرئيسية لنظام الإشارة اللوني (أحمر/أصفر/أخضر) في لوحات المؤشرات؟", en:"What are the four main problems with the red/yellow/green alert-color system in dashboards?",
+       aAr:"عمى الألوان (لا يميز البعض الأحمر عن الأخضر)، الحدود التعسفية (89.9% أحمر و90% أخضر)، الإفراط في التلوين (فلا شيء يبرز)، واللون ليس تحليلًا (لا يميز التذبذب العادي عن التغيّر الحقيقي).",
+       aEn:"Color blindness (some can't distinguish red from green), arbitrary thresholds (89.9% red vs. 90% green), over-coloring (nothing stands out), and color is not analysis (doesn't distinguish normal fluctuation from real change)."},
+      {ar:"اذكر ثلاثة اعتبارات خاصة بتصميم اللوحات العربية تختلف عن التصميم الإنجليزي الافتراضي.", en:"Name three design considerations specific to Arabic dashboards that differ from default English design.",
+       aAr:"اتجاه التخطيط من اليمين إلى اليسار (RTL)؛ اتجاه الزمن في الرسوم يحتاج قرارًا واختبارًا لأن كثيرًا من القراء معتادون على اتجاه غربي؛ ونوع الأرقام (هندية أو غربية) يُثبَّت على مستوى المنشأة — أو أي ثلاثة اعتبارات أخرى من الستة.",
+       aEn:"RTL layout direction; chart time-direction needs a deliberate decision and testing since many readers are used to Western direction; and numeral style (Eastern or Western Arabic) fixed organization-wide — or any three of the six."},
+      {ar:"لماذا يُفضَّل العنوان الذي 'يروي الرسالة' على العنوان الوصفي المجرد؟ أعطِ مثالاً لكل منهما.", en:"Why is a message-telling title preferred over a bare descriptive title? Give an example of each.",
+       aAr:"لأنه يختصر على القارئ عملية التفسير وينقل الرسالة الأساسية فورًا. وصفي: 'نسبة الالتزام بحسب الوردية'؛ يروي الرسالة: 'التزام المسائية انخفض 12 نقطة منذ مارس'.",
+       aEn:"Because it saves the reader the interpretation step and conveys the core message immediately. Descriptive: 'Compliance rate by shift'; message-telling: 'Evening-shift compliance dropped 12 points since March'."}
+    ]
+  },
+  quizQuestions: [
+    {ar:"التصميم الجيد للوحة المؤشرات يبدأ من الجمهور والقرار الذي ستدعمه، لا من البيانات المتاحة فقط.", en:"Good dashboard design starts from the audience and the decision it will support, not just from available data.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"اللوحة التنفيذية المثالية يُفضَّل أن تحتوي على كل المؤشرات المتاحة لتغطية كل الاحتمالات.", en:"An ideal executive dashboard should preferably include every available indicator to cover all possibilities.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"ما الهدف من اختبار الخمس ثوانٍ عند تقييم تصميم اللوحة؟", en:"What is the goal of the five-second test when evaluating dashboard design?", optionsAr:["قياس سرعة تحميل الصفحة","معرفة ما يتذكره القارئ وأهم رسالة بعد نظرة سريعة","عدّ عدد الألوان المستخدمة","قياس دقة الطباعة"], optionsEn:["Measuring page load speed","Checking what the reader recalls and the key message after a quick glance","Counting the colors used","Measuring print resolution"], correct:1},
+    {ar:"أعمدة الرسم الشريطي (Bar Chart) يجب أن تبدأ دائمًا من الصفر لتجنب تضخيم الفروق بصريًا.", en:"Bar chart axes must always start from zero to avoid visually inflating differences.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"ما أفضل رسم بياني لإظهار العلاقة بين متغيرين، مثل عدد المرضى لكل ممرض ومعدل السقوط؟", en:"What is the best chart to show the relationship between two variables, such as patients-per-nurse and fall rate?", optionsAr:["مخطط انتشار (Scatter)","دائري (Pie)","مدرج تكراري","عداد (Gauge)"], optionsEn:["Scatter plot","Pie chart","Histogram","Gauge"], correct:0},
+    {ar:"الاعتماد على اللون الأحمر والأخضر فقط دون رمز أو نص إضافي هو ممارسة موصى بها لعرض حالة المؤشر.", en:"Relying on red and green alone with no additional symbol or text is a recommended practice for showing indicator status.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"مبدأ نسبة الحبر إلى البيانات لإدوارد تافتي يدعو إلى حذف كل عنصر بصري لا يحمل معلومة فعلية.", en:"Edward Tufte's data-ink ratio principle calls for removing every visual element that carries no actual information.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"في اللوحة العربية، يُفضَّل أن يبدأ ترتيب أهم العناصر من أعلى اليسار بدلاً من أعلى اليمين.", en:"In an Arabic dashboard, the most important elements should preferably start from the top-left instead of the top-right.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1},
+    {ar:"المبدأ الصحيح في اللوحات التفاعلية هو عرض الإجمالي أولًا ثم السماح بالنزول بالضغط إلى التفصيل (Drill-down).", en:"The correct principle in interactive dashboards is showing the overview first, then allowing drill-down into detail.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:0},
+    {ar:"عمودان بقيمتي 91% و93% مع محور يبدأ من 90% يُظهران الفرق الحقيقي بدقة دون أي تضليل بصري.", en:"Two bars at 91% and 93% with an axis starting at 90% show the true difference accurately with no visual distortion.", optionsAr:["صواب","خطأ"], optionsEn:["True","False"], correct:1}
   ]
 }
 
